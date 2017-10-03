@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Frameset//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-frameset.dtd">
+<html  xmlns="http://www.w3.org/1999/xhtml"
+	   xmlns:h="http://java.sun.com/jsf/html"
+	   xmlns:ui="http://java.sun.com/jsf/facelets"
+       xmlns:p="http://primefaces.org/ui">
+       
+    <ui:composition template="/WEB-INF/templates/template.xhtml">
+       
+              
+       <ui:define name="content"> 
+              
+              
+             	<h:form method="post">
+			<h2>Almacen y Deposito</h2>
+			<p><h:messages /></p>
+		
+			<p>
+				<h:panelGroup rendered="#{empty request.userPrincipal}">
+					<h:commandButton value="Login" action="login" />
+				</h:panelGroup>
+				<h:panelGroup  rendered="#{not empty request.userPrincipal}">
+					Usuario : <h:outputText value="#{request.getUserPrincipal()}" />
+					<h:commandButton value="Logout" action="#{authentication.logout}" />
+				</h:panelGroup>
+				<br/>
+				<h:commandButton value="Usuarios" action="admin/usuario?faces-redirect=true"  /><br/>
+				<!--  <h:commandButton value="Materias Primas" action="admin/materiaPrima?faces-redirect=true"  /><BR />
+				<h:commandButton value="Productos" action="admin/producto?faces-redirect=true"  /><BR />-->
+				<!--  <h:commandButton value="Movimiento de Entrada" action="movimiento/m_entrada?faces-redirect=true" /><br/> -->
+			</p>
+			
+		</h:form>
+               
+       </ui:define>
+             
+    </ui:composition>
+    
+    
+</html>

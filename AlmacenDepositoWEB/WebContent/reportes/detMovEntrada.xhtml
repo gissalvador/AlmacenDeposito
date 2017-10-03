@@ -1,0 +1,172 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Frameset//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-frameset.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	   xmlns:h="http://java.sun.com/jsf/html"
+	   xmlns:ui="http://java.sun.com/jsf/facelets"
+       xmlns:p="http://primefaces.org/ui"
+       xmlns:f="http://java.sun.com/jsf/core">
+       
+    <ui:composition template="/WEB-INF/templates/template.xhtml">
+       
+              
+       <ui:define name="content"> 
+              
+              
+              <h:form method="post" id='form'>
+				
+				<h2>Movimiento de Entrada</h2>
+				
+				
+				<h:panelGrid columns="5" columnClasses="rightalign,leftalign,leftalign">	
+				
+					<h:outputText style="font-weight:bold" value="Código del Movimiento: " />
+					<h:outputText value="#{detMovEntrada.movEntrada.id}" />	
+					<h:outputText value="&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;" />		
+					<p:graphicImage value="#{barcodeBean.createBarcodeByCode()}"  
+					                style="max-width: 7.5cm; padding: 10px; margin: 10px;" >
+					                <f:param name="id" value="#{detMovEntrada.movEntrada.id}" ></f:param>
+					</p:graphicImage>						
+				    <h:outputText />
+					
+							
+					<h:outputText style="font-weight:bold" value="Fecha de Ingreso: " />
+					<h:outputText value="#{detMovEntrada.movEntrada.fechaIngreso}" />
+					<h:outputText value="&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;" />		
+					<h:outputText />
+					<h:outputText  />	
+					
+					
+					
+					<h:outputText style="font-weight:bold" value="Almacen: " />
+					<h:outputText value="#{detMovEntrada.movEntrada.almString}" />
+					<h:outputText value="&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;" />								
+					<h:outputText style="font-weight:bold" value="Movimiento de Origen: " />
+					<h:outputText value="#{detMovEntrada.movEntrada.nomComprobante}" />
+					
+					
+					<h:outputText style="font-weight:bold" value="Centro: " />
+					<h:outputText value="#{detMovEntrada.movEntrada.cenString}" />
+					<h:outputText value="&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;" />								
+					<h:outputText style="font-weight:bold" value="Nro. Movimiento de Origen" />
+					<h:outputText value="#{detMovEntrada.movEntrada.nroComprobante}" />
+					
+					<h:outputText style="font-weight:bold" value="Actividad: " />
+					<h:outputText value="#{detMovEntrada.movEntrada.actividad}" />
+					<h:outputText value="&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;" />								
+					<h:outputText style="font-weight:bold" value="Fecha del Comprobante: " />
+					<h:outputText value="#{detMovEntrada.movEntrada.fechaMO}" />
+					
+					<h:outputText style="font-weight:bold" value="Nombre Actividad: " />
+					<h:outputText value="#{detMovEntrada.movEntrada.actString}" />
+					<h:outputText value="&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;" />								
+					<h:outputText style="font-weight:bold" value="Numero de Solicitud: " />
+					<h:outputText value="#{detMovEntrada.movEntrada.nroSolicitud}" />
+					
+					<h:outputText style="font-weight:bold" value="Legajo/CUIT:  " />
+					<h:outputText value="#{detMovEntrada.movEntrada.cuitlegajo}" />
+					<h:outputText value="&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;" />								
+					<h:outputText style="font-weight:bold" value="Usuario: " />
+					<h:outputText value="#{detMovEntrada.movEntrada.usuario}" />
+					
+					
+					<h:outputText style="font-weight:bold" value="#{detMovEntrada.movEntrada.perPro} " />
+					<h:outputText value="#{detMovEntrada.movEntrada.nomPerPro}" />
+					<h:outputText value="&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;" />								
+					<h:outputText value="" />
+					<h:outputText value="" />
+					
+			    </h:panelGrid>
+			     <br />  <br />  <br />  <br /> 
+			     
+			    <p:dataTable var="lde" value="#{detMovEntrada.listDetalleDTO}"  styleClass="abm">
+						    
+						    <p:column width="15%" headerText="Lote" >
+						        <h:outputText value="#{lde.lote}" />
+						    </p:column>
+						    
+						    <p:column headerText="ID Articulo">
+						        <h:outputText value="#{lde.codArticulo}" />
+						    </p:column>
+						    
+						    <p:column headerText="Articulo">
+						        <h:outputText value="#{lde.nomArticulo}" />
+						    </p:column>
+						    
+						    <p:column headerText="Cantidad">
+						        <h:outputText value="#{lde.cantidad}" />
+						    </p:column>
+						    
+						    <p:column headerText="Nro. Serie Proveedor">
+						        <h:outputText value="#{lde.nroSerie_Proveedor}" />
+						    </p:column>
+						    
+						    <p:column headerText="Marca">
+						        <h:outputText value="#{lde.marString}" />
+						    </p:column>
+						    
+						    <p:column headerText="Modelo">
+						        <h:outputText value="#{lde.modString}" />
+						    </p:column>
+						    
+						    <p:column  width="10%" headerText="Precio Unitario">
+						        <h:outputText value="#{lde.importeUnitario}" />
+						    </p:column>
+						    
+						    <p:column headerText="Sub total" width="20%">
+						        <h:outputText value="#{lde.uniTotal}" />
+						    </p:column>
+						    
+						    						    						    				   
+						</p:dataTable>
+						
+						
+						<p:dataTable var="me" value="#{detMovEntrada.movEntrada}"  styleClass="abm">
+						    
+						    
+						    <p:column width="15%">
+						        <h:outputText style="font-weight:bold" value="Observaciones:" />
+						    </p:column>
+						    
+						    <p:column width="55%">
+						        <h:outputText value="#{me.observaciones}" />
+						    </p:column>
+						    
+						    <p:column width="10%">
+						        <h:outputText style="font-weight:bold" value="TOTAL:" />
+						    </p:column>
+						    
+						    <p:column width="20%" >
+						        <h:outputText style="font-weight:bold" value="#{me.total}" />
+						    </p:column>
+						    
+						 						    						    				   
+						</p:dataTable>
+					
+			    	<br />
+			<h:link outcome="/reportes/movEntrada.xhtml" value="Movimientos de Entrada" />
+			<br />
+			<br />
+
+
+			<br />
+			<br />
+			<h:commandButton value="Volver a Indice" action="/index.xhtml"
+				immediate="true" />
+			<br />
+			<br />
+					
+					<br />
+					
+			</h:form>
+		             
+						
+						
+						
+				              
+       </ui:define>
+             
+    </ui:composition>
+    
+    
+
+</html>

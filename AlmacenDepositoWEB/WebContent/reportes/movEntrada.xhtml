@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Frameset//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-frameset.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	   xmlns:h="http://java.sun.com/jsf/html"
+	   xmlns:ui="http://java.sun.com/jsf/facelets"
+       xmlns:p="http://primefaces.org/ui"
+       xmlns:f="http://java.sun.com/jsf/core">
+       
+    <ui:composition template="/WEB-INF/templates/template.xhtml">
+       
+              
+       <ui:define name="content"> 
+              
+              
+             	<h:form method="post">
+					<h2>Movimientos de Entrada</h2>
+					
+					
+					<p:dataTable var="me" value="#{movEntradaForm.movEntradas}"  styleClass="abm">
+						    <p:column headerText="Código de Movimiento">
+						        <h:outputText value="#{me.id}" />
+						    </p:column>
+						    
+						     <p:column headerText="Fecha de Ingreso">
+						        <h:outputText value="#{me.fechaIngreso}" >
+						        <f:convertDateTime pattern="dd/MM/yyyy" type="date" />
+						        </h:outputText>
+						    </p:column>
+						    
+						    <p:column headerText="Almacen">
+						        <h:outputText value="#{me.almString}" />
+						    </p:column>	
+						    
+						    <p:column headerText="Centro">
+						        <h:outputText value="#{me.cenString}" />
+						    </p:column>					 
+						 
+						    <p:column headerText="Actividad">
+						        <h:outputText value="#{me.actividad}" />
+						    </p:column>
+						 
+						    <p:column headerText="Tipo Comprobante">
+						        <h:outputText value="#{me.nomComprobante}" />
+						    </p:column>
+						    
+						    <p:column headerText="Numero Comprobante">
+						        <h:outputText value="#{me.nroComprobante}" />
+						    </p:column>
+						    
+						    <p:column headerText="Fecha Comprobante">
+						        <h:outputText value="#{me.fechaMO}" >
+						        <f:convertDateTime pattern="dd/MM/yyyy" type="date" />
+						        </h:outputText>
+						    </p:column>
+						    
+						    <p:column headerText="Número de Solicitud">
+						        <h:outputText value="#{me.nroSolicitud}" />
+						    </p:column>
+						    
+						    <p:column headerText="Persona o Proveedor">
+						        <h:outputText value="#{me.cuitlegajo}" />
+						    </p:column>
+						    
+						    <p:column headerText="Importe Total">
+						        <h:outputText value="#{me.importeTotal}" />
+						    </p:column>
+						    
+						    <p:column headerText="Observaciones">
+						        <h:outputText value="#{me.observaciones}" />
+						    </p:column>
+						    
+						    <p:column headerText="Detalles">
+						    	   <p:commandButton  icon="ui-icon-search" action="/reportes/detMovEntrada">
+						    	      <f:param name="id" value="#{me.id}"></f:param>
+						    		
+						       </p:commandButton>
+						    					    
+						    </p:column>
+						   					   
+						</p:dataTable>
+					
+						
+						 <br />  
+						 
+												 
+						 <br /> 
+				
+				
+					 <h:commandButton value="Descargar" />
+					
+			        <br />         
+				</h:form>
+               
+       </ui:define>
+             
+    </ui:composition>
+    
+    
+
+</html>

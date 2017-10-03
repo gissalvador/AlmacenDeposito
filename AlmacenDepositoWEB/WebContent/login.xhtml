@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Frameset//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-frameset.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	   xmlns:h="http://java.sun.com/jsf/html"
+	   xmlns:ui="http://java.sun.com/jsf/facelets"
+       xmlns:p="http://primefaces.org/ui"
+       >
+       
+    <ui:composition template="/WEB-INF/templates/template.xhtml">
+       
+              
+       <ui:define name="content"> 
+              
+              
+            <h:panelGroup  rendered="#{empty request.userPrincipal}">
+				<h:form method="post">
+					<h2>Identificación de Usuario</h2>
+					<h:panelGrid columns="2">
+						<h:outputText value="Username" />
+						<h:inputText id="j_username" value="#{authentication.username}" />
+						
+						<h:outputText value="Password" />
+						<h:inputSecret id="j_password" value="#{authentication.password}" />
+					</h:panelGrid>
+					    <h:messages />
+					<h:panelGrid columns="2">
+						<h:commandButton value="Login" action="#{authentication.login}" />
+						<h:commandButton value="Volver" action="/index.xhtml" />
+					</h:panelGrid>
+				</h:form>
+			</h:panelGroup>
+			<h:panelGroup  rendered="#{not empty request.userPrincipal}">
+				<h:form method="post">
+					Usuario : <h:outputText value="#{request.getUserPrincipal()}" />
+					<h:commandButton value="Logout" action="#{authentication.logout}" />
+				</h:form>
+			</h:panelGroup>
+
+               
+       </ui:define>
+             
+    </ui:composition>
+    
+    
+
+</html>

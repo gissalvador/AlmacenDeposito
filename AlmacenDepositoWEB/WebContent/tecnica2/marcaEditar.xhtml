@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Frameset//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-frameset.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	   xmlns:h="http://java.sun.com/jsf/html"
+	   xmlns:ui="http://java.sun.com/jsf/facelets"
+       xmlns:p="http://primefaces.org/ui"
+       xmlns:f="http://java.sun.com/jsf/core">
+       
+    <ui:composition template="/WEB-INF/templates/template.xhtml">
+       
+              
+       <ui:define name="content"> 
+              
+              
+              <h:form method="post" id='form'>
+				<h2>Editar Marca</h2>
+				<h:panelGrid columns="3" columnClasses="rightalign,leftalign,leftalign">				
+				    <h:outputText value="Código Marca:" />
+					<h:outputText value="#{confMarca.marca.codMarca}" />
+					<br />
+		
+					<h:outputText value="Nombre Marca:" />
+					<h:outputText value="#{confMarca.marca.nomMarca}" />
+					<br />
+					
+					</h:panelGrid>
+				
+					<h:panelGroup  rendered="#{ not confMarca.nuevo}">
+					<br />
+					<h2>Modelos</h2>
+					
+					
+					<h:commandButton value="Agregar Modelo"  action="conf-modelo"> 
+								 	<f:param name="id" value="#{confMarca.marca.codMarca}"></f:param>
+					</h:commandButton> 
+							
+						<br />  <br />
+							
+						<p:dataTable style="width:50px;" value="#{confMarca.modelos}" var="o" styleClass="abm" >
+							
+						<p:column>
+							<f:facet name="header"  headerText="Código de Modelo">Producto</f:facet>
+							#{o.codModelo}
+						</p:column>
+						<p:column>
+							<f:facet name="header" headerText="Nombre de Modelo">Producto</f:facet>
+							#{o.nomModelo}
+						</p:column>
+			
+																	 
+						 
+					</p:dataTable>
+					
+					
+					
+				</h:panelGroup>
+				<br />  <br />
+				
+				<h:panelGrid columns="2">
+					<h:commandButton value="Guardar" action="#{confMarca.save}" />
+					<h:commandButton value="Volver" action="/general/marca.xhtml" immediate="true" />
+				</h:panelGrid>
+				
+				
+			</h:form>
+		             
+						
+						 <br />  <br /> 
+						
+				              
+       </ui:define>
+             
+    </ui:composition>
+    
+    
+
+</html>

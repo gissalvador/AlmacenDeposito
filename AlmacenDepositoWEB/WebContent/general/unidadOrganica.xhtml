@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Frameset//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-frameset.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:f="http://java.sun.com/jsf/core">
+
+<ui:composition template="/WEB-INF/templates/template.xhtml">
+
+
+	<ui:define name="content">
+
+
+		<h:form method="post">
+			<h2>UnidadOrganica</h2>
+
+
+			<p:dataTable style="width:95%;" var="uo"
+				value="#{unidadOrganicaForm.unidadOrganicas}" styleClass="abm">
+
+
+				<p:column headerText="Código de Unidad Organica">
+					<h:outputText value="#{uo.codUnidadOrganica}" />
+				</p:column>
+
+				<p:column headerText="Número Unidad Organica:">
+					<h:outputText value="#{uo.nroDependencia}" />
+				</p:column>
+
+
+				<p:column headerText="Nombre Unidad Organica">
+					<h:outputText value="#{uo.nomUnidaOrganica}" />
+				</p:column>
+
+				<p:column headerText="Nombre Responsable">
+					<h:outputText value="#{uo.nomPersona}" />
+				</p:column>
+
+
+				<p:column headerText="Unidad Organica Predecesor">
+					<h:outputText value="#{uo.nomDepende}" />
+				</p:column>
+
+			</p:dataTable>
+
+
+			<br />
+			<br />
+			<h:link outcome="/administracion/conf-uorganica.xhtml"
+				value="Nuevo UnidadOrganica" />
+			<br />
+			<br />
+
+
+			<br />
+			<br />
+			<h:commandButton value="Volver a Indice" action="/index.xhtml"
+				immediate="true" />
+			<br />
+			<br />
+			<br />
+			<br />
+
+
+			<br />
+		</h:form>
+
+	</ui:define>
+
+</ui:composition>
+
+
+
+</html>

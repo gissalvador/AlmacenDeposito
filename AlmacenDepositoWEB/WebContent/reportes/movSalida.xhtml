@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Frameset//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-frameset.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	   xmlns:h="http://java.sun.com/jsf/html"
+	   xmlns:ui="http://java.sun.com/jsf/facelets"
+       xmlns:p="http://primefaces.org/ui"
+       xmlns:f="http://java.sun.com/jsf/core">
+       
+    <ui:composition template="/WEB-INF/templates/template.xhtml">
+       
+              
+       <ui:define name="content"> 
+              
+              
+             	<h:form method="post">
+					<h2>Movimientos de Salida</h2>
+					
+					
+					<p:dataTable var="ms" value="#{movSalidaForm.movSalidas}"  styleClass="abm">
+						    <p:column headerText="Código de Movimiento">
+						        <h:outputText value="#{ms.id}" />
+						    </p:column>
+						    
+						     <p:column headerText="Fecha de Salida">
+						        <h:outputText value="#{ms.fechaSalida}" >
+						        <f:convertDateTime pattern="dd/MM/yyyy" type="date" />
+						        </h:outputText>
+						    </p:column>
+						    
+						    <p:column headerText="Almacen">
+						        <h:outputText value="#{ms.nomAlmacen}" />
+						    </p:column>	
+						    
+						    <p:column headerText="Centro">
+						        <h:outputText value="#{ms.cenString}" />
+						    </p:column>					 
+						 
+						    <p:column headerText="Actividad">
+						        <h:outputText value="#{ms.actividad}" />
+						    </p:column>
+						 
+						    <p:column headerText="Tipo Movimiento de Origen">
+						        <h:outputText value="#{ms.nomComprobante}" />
+						    </p:column>
+						    						    						    
+						    <p:column headerText="Persona">
+						        <h:outputText value="#{ms.legajo}" />
+						    </p:column>
+						    
+						    <p:column headerText="Importe Total">
+						        <h:outputText value="#{ms.importeTotal}" />
+						    </p:column>
+						    
+						    <p:column headerText="Observaciones">
+						        <h:outputText value="#{ms.observaciones}" />
+						    </p:column>
+						    
+						    <p:column headerText="Detalles">
+						    	   <p:commandButton  icon="ui-icon-search" action="/reportes/detMovSalida">
+						    	      <f:param name="id" value="#{ms.id}"></f:param>
+						    		
+						       </p:commandButton>
+						    					    
+						    </p:column>
+						    
+						    						   					   
+						</p:dataTable>
+					
+						
+						 <br />  
+						 
+												 
+						 <br /> 
+				
+				
+					 <h:commandButton value="Descargar" />
+					
+			        <br />         
+				</h:form>
+               
+       </ui:define>
+             
+    </ui:composition>
+    
+    
+
+</html>

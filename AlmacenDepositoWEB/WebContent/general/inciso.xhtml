@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Frameset//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-frameset.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:f="http://java.sun.com/jsf/core">
+
+	<ui:composition template="/WEB-INF/templates/template.xhtml">
+		<ui:define name="content">
+			<h:form method="post">
+				<h2>Manual de Clasificación Presupuestaria</h2>
+				<!--  <p:dataTable var="i" value="#{incisoNewForm.incisos}" styleClass="abm">
+					<p:subTable var="pprs" value="#{i.listPPrincipalDTO}">
+						<f:facet name="header">
+							<p:column><h:outputText value="#{i.nroInciso}" />&nbsp;</p:column>
+							<p:column><h:outputText value="#{i.nomInciso}" /></p:column>
+						</f:facet>
+						
+					</p:subTable>
+				</p:dataTable>
+				-->
+				<p:dataTable var="i" value="#{incisoNewForm.incisos}"
+				styleClass="abm">
+
+
+				<p:subTable var="pprs" value="#{i.listPPrincipalDTO}">
+
+
+
+						<f:facet name="header">
+							<p:column>
+								<h:outputText value="#{i.nroInciso}" />
+							</p:column>
+							&nbsp;
+							<p:column>
+								<h:outputText value="#{i.nomInciso}" />
+							
+							</p:column>
+						</f:facet>
+						
+					<p:column></p:column>
+				
+
+					<p:column>
+
+						<p:subTable var="ppas" value="#{pprs.listPParcialDTO}">
+
+							<f:facet name="header">
+
+								<p:column>
+									<h:outputText value="#{pprs.nroPPrincipal}" />
+								</p:column>
+								&nbsp;
+								<p:column>
+									<h:outputText value="#{pprs.nomPPrincipal}" />
+								</p:column>
+
+							</f:facet>
+
+
+							<p:column>
+								<h:outputText value="#{ppas.nroPParcial}" />
+							</p:column>
+							<p:column>
+								<h:outputText value="#{ppas.nomClasificacion}" />
+							</p:column>
+
+						</p:subTable>
+
+					</p:column>
+
+				</p:subTable>
+
+
+			</p:dataTable>
+			</h:form>
+		</ui:define>
+	</ui:composition>
+	
+	<!-- <style type="text/css">
+         .solorpa {
+	    bgcolor: #3151e2;
+        } -->
+</html>

@@ -1,0 +1,169 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Frameset//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-frameset.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:c="http://java.sun.com/jsp/jstl/core">
+
+<ui:composition template="/WEB-INF/templates/template.xhtml">
+
+
+	<ui:define name="content">
+
+		<c:forEach begin="1" end="10">
+			<div>content</div>
+		</c:forEach>
+
+		<h:form method="post">
+			<h2>Manual de Clasificación Presupuestaria</h2>
+
+
+			<p:dataTable var="team" value="#{dtSubTableView.teams}">
+				<f:facet name="header">
+            NBA Teams
+        </f:facet>
+
+				<p:columnGroup type="header">
+					<p:row>
+						<p:column rowspan="2" headerText="Team" />
+						<p:column colspan="2" headerText="Stats" />
+					</p:row>
+					<p:row>
+						<p:column headerText="Wins" />
+						<p:column headerText="Losses" />
+					</p:row>
+				</p:columnGroup>
+
+				<p:subTable var="stats" value="#{team.stats}">
+					<f:facet name="header">
+						<h:outputText value="#{team.name}" />
+					</f:facet>
+					<p:column>
+						<h:outputText value="#{stats.season}" />
+					</p:column>
+					<p:column>
+						<h:outputText value="#{stats.win}" />
+					</p:column>
+					<p:column>
+						<h:outputText value="#{stats.loss}" />
+					</p:column>
+					<p:columnGroup type="footer">
+						<p:row>
+							<p:column footerText="Totals: " style="text-align:right" />
+							<p:column footerText="#{team.allWins}" />
+							<p:column footerText="#{team.allLosses}" />
+						</p:row>
+					</p:columnGroup>
+				</p:subTable>
+			</p:dataTable>
+
+
+			<p:dataTable var="i" value="#{incisoNewForm.incisos}"
+				styleClass="abm">
+				
+				<p:subTable var="pprs" value="#{i.listPPrincipalDTO}">
+					<f:facet name="header">
+						<p:column>
+							<h:outputText value="#{i.nroInciso}" />
+						</p:column>
+						<p:column>
+							<h:outputText value="#{i.nomInciso}" />
+						</p:column>
+					</f:facet>
+
+					<p:column>
+						<h:outputText value="#{pprs.nroPPrincipal}" />
+					</p:column>
+					<p:column>
+						<h:outputText value="#{pprs.nomPPrincipal}" />
+					</p:column>
+
+					<p:subTable var="ppas" value="#{pprs.listPParcialDTO}">
+
+						<p:column>
+							<h:outputText value="#{ppas.nroPParcial}" />
+						</p:column>
+						<p:column>
+							<h:outputText value="#{ppas.nomClasificacion}" />
+						</p:column>
+
+					</p:subTable>
+
+				</p:subTable>
+
+
+			</p:dataTable>
+			
+					<br />
+			<br />
+
+			<br />
+
+			<p:dataTable var="i" value="#{incisoNewForm.incisos}"
+				styleClass="abm">
+
+
+				<p:subTable var="pprs" value="#{i.listPPrincipalDTO}">
+
+
+
+						<f:facet name="header">
+							<p:column>
+								<h:outputText value="#{i.nroInciso}" />
+							</p:column>
+							<p:column>
+								<h:outputText value="#{i.nomInciso}" />
+								<h:outputText value="CacaBella" />
+							</p:column>
+						</f:facet>
+						
+					<p:column>Esta es la columna vsfdñkasjflasjkf</p:column>
+				
+
+					<p:column>
+
+						<p:subTable var="ppas" value="#{pprs.listPParcialDTO}">
+
+							<f:facet name="header">
+
+								<p:column>
+									<h:outputText value="#{pprs.nroPPrincipal}" />
+								</p:column>
+								<p:column>
+									<h:outputText value="#{pprs.nomPPrincipal}" />
+								</p:column>
+
+							</f:facet>
+
+
+							<p:column>
+								<h:outputText value="#{ppas.nroPParcial}" />
+							</p:column>
+							<p:column>
+								<h:outputText value="#{ppas.nomClasificacion}" />
+							</p:column>
+
+						</p:subTable>
+
+					</p:column>
+
+				</p:subTable>
+
+
+			</p:dataTable>
+
+			<br />
+			<br />
+
+			<br />
+		</h:form>
+
+	</ui:define>
+
+</ui:composition>
+
+
+
+</html>

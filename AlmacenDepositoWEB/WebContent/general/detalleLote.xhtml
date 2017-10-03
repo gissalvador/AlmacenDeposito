@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Frameset//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-frameset.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	   xmlns:h="http://java.sun.com/jsf/html"
+	   xmlns:ui="http://java.sun.com/jsf/facelets"
+       xmlns:p="http://primefaces.org/ui"
+       xmlns:f="http://java.sun.com/jsf/core">
+       
+    <ui:composition template="/WEB-INF/templates/template.xhtml">
+       
+              
+       <ui:define name="content"> 
+              
+              
+              <h:form method="post" id='form'>
+				
+				<h2>Lote</h2>
+				
+				
+				<h:panelGrid columns="5" columnClasses="rightalign,leftalign,leftalign">	
+				
+					<h:outputText style="font-weight:bold" value="Código del Lote: " />
+					<h:outputText value="#{detalleLote.lote.codLote}" />	
+					<h:outputText value="&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;" />								
+				   	<p:graphicImage value="#{barcodeBean.createBarcodeByCode()}"  
+					                style="max-width: 7.5cm; padding: 10px; margin: 10px;" >
+					                <f:param name="id" value="#{detalleLote.lote.codLote}" ></f:param>
+					</p:graphicImage>
+					<h:outputText />
+					
+		
+					<h:outputText style="font-weight:bold" value="Id Articulo: " />
+					<h:outputText value="#{detalleLote.lote.articuloID}" />					
+					<h:outputText value="&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;" />								
+					<h:outputText style="font-weight:bold" value="Fecha creado: " />
+					<h:outputText value="#{detalleLote.lote.fechaCreado}" >
+					<f:convertDateTime pattern="dd/MM/yyyy" type="date" />
+					</h:outputText>
+					
+					
+					<h:outputText style="font-weight:bold" value="Articulo: " />
+					<h:outputText value="#{detalleLote.lote.articulo}" />
+					<h:outputText value="&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;" />								
+					<h:outputText style="font-weight:bold" value="Fecha Vencimiento: " />
+					<h:outputText value="#{detalleLote.lote.fechaVto}" >
+					<f:convertDateTime pattern="dd/MM/yyyy" type="date" />
+					</h:outputText>
+					
+					<h:outputText style="font-weight:bold" value="Marca: " />
+					<h:outputText value="#{detalleLote.lote.marString}" />
+					<h:outputText value="&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;" />								
+					<h:outputText style="font-weight:bold" value="Stock Inicial: " />
+					<h:outputText value="#{detalleLote.lote.stockInicial}" />
+					
+					<h:outputText style="font-weight:bold" value="Modelo: " />
+					<h:outputText value="#{detalleLote.lote.modString}" />
+					<h:outputText value="&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;" />								
+					<h:outputText style="font-weight:bold" value="Stock Actual: " />
+					<h:outputText value="#{detalleLote.lote.stockActual}" />
+					
+					
+					
+			    </h:panelGrid>
+			     <br />  <br />  <br />  <br /> 
+			     
+			    <p:dataTable var="la" value="#{detalleLote.loteAlmacen}"  styleClass="abm">
+						    
+						    <p:column width="15%" headerText="Id Almacen" >
+						        <h:outputText value="#{la.almacenId}" />
+						    </p:column>
+						    
+						    <p:column headerText="Almacen">
+						        <h:outputText value="#{la.almacen}" />
+						    </p:column>
+						    
+						    <p:column headerText="Ubicación">
+						        <h:outputText value="#{la.ubicacion}" />
+						    </p:column>
+						    
+						    <p:column headerText="Cantidad">
+						        <h:outputText value="#{la.cantidad}" />
+						    </p:column>
+						   			   
+						 						    						    				   
+						</p:dataTable>
+					
+			    	
+					
+					<br />
+					
+			</h:form>
+		             
+						
+						
+						
+				              
+       </ui:define>
+             
+    </ui:composition>
+    
+    
+
+</html>

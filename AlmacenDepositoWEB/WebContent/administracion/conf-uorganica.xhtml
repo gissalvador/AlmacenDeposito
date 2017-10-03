@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Frameset//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-frameset.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:f="http://java.sun.com/jsf/core">
+
+<ui:composition template="/WEB-INF/templates/template.xhtml">
+
+	<ui:define name="content">
+
+		<h:form>
+			<h:panelGrid columns="1" style="width: 90%">
+				<p:wizard>
+
+					<p:tab title="Nuevo Unidad Organica" id="newUnidadOrganica"
+						update="display">
+						<br />
+						<br />
+
+
+
+						<h:panelGrid columns="4" width="100%"
+							columnClasses="rightalign,leftalign,leftalign">
+
+
+							<h:outputText value="Número Unidad Organica: " />
+							<h:inputText id="nroUnidadOrganica"
+								label="Número Unidad Organica:" required="true"
+								value="#{confUnidadOrganica.unidadOrganicaDTO.nroDependencia}" />
+							<h:outputLabel />
+							<h:message for="nroUnidadOrganica" />
+
+
+							<h:outputLabel value="Nombre Unidad Organica:"
+								for="nomUnidadOrganica" />
+							<h:inputText id="nomUnidadOrganica"
+								label="Nombre Unidad Organica:" required="true"
+								value="#{confUnidadOrganica.unidadOrganicaDTO.nomUnidaOrganica}"
+								onblur="value=value.toUpperCase()" />
+							<h:outputLabel />
+							<h:message for="nomUnidadOrganica" />
+
+
+							<h:outputLabel value="Legajo Responsable:" for="legajo" />
+							<h:inputText id="legajo" label="Legajo Responsable:"
+								value="#{confUnidadOrganica.unidadOrganicaDTO.legajo}" />
+							<h:outputLabel />
+							<h:message for="legajo" />
+
+
+							<p:outputLabel value="Unidad Organica Predecesora:"
+								for="uorganica" />
+							<p:selectOneMenu id="uorganica"
+								value="#{confUnidadOrganica.unidadOrganicaDTO.nroDepende}" >
+								<f:selectItem itemLabel="Selecionar una opción" itemValue="" />
+								<f:selectItems value="#{confUnidadOrganica.options}" style="width:80px" />
+							</p:selectOneMenu>
+							<h:outputLabel />
+							<h:message for="uorganica" />
+
+
+
+						</h:panelGrid>
+						<br />
+						<br />
+						<h:commandButton value="Mostrar UnidadOrganicaes"
+							action="/general/unidadOrganica.xhtml" immediate="true" />
+						<br />
+						<br />
+
+						<h:commandButton value="Volver a Indice" action="/index.xhtml"
+							immediate="true" />
+						<br />
+
+					</p:tab>
+
+					<p:tab title="Confirmar" id="confirmar">
+						<br />
+						<p:messages id="msgs" showDetail="true" />
+						<h:panelGrid columns="2" columnClasses="rightalign-bold,normal">
+
+							<h:outputLabel value="Número Unidad Organica: " />
+							<h:outputText
+								value="#{confUnidadOrganica.unidadOrganicaDTO.nroDependencia}" />
+
+							<h:outputLabel value="Nombre UnidadOrganica: " />
+							<h:outputText style="text-transform:capitalize"
+								value="#{confUnidadOrganica.unidadOrganicaDTO.nomUnidaOrganica}" />
+
+							<h:outputLabel value="Legajo Responsable: " />
+							<h:outputText
+								value="#{confUnidadOrganica.unidadOrganicaDTO.legajo}" />
+
+
+
+						</h:panelGrid>
+
+
+						<br />
+
+						<br />
+
+						<h:commandButton value="Guardar"
+							action="#{confUnidadOrganica.guardarUnidadOrganica}"
+							update="msgs" />
+						<br />
+
+						<br />
+
+						<h:commandButton value="Volver a Indice" action="/index.xhtml"
+							immediate="true" />
+
+						<br />
+
+						<br />
+					</p:tab>
+				</p:wizard>
+
+			</h:panelGrid>
+			<br />
+		</h:form>
+
+
+	</ui:define>
+
+</ui:composition>
+
+
+
+</html>

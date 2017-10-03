@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Frameset//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-frameset.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	   xmlns:h="http://java.sun.com/jsf/html"
+	   xmlns:ui="http://java.sun.com/jsf/facelets"
+       xmlns:p="http://primefaces.org/ui">
+       
+       <h:head>
+		 <style type="text/css">
+         .solorpa {
+	    bgcolor: #A1D0F1;
+        }
+        
+       	
+
+       </style>	
+       
+      
+       </h:head>
+	   
+	   <h:body>
+	   		
+	  
+			<p:layout fullPage="true">
+		 
+				    <p:layoutUnit position="north" effect ="backBoth" size="auto" resizable="true" closable="true">
+				   		<div align="left" style="background-color: #A1D0F1 !important;">
+				   		
+				   		<img src="/AlmacenDepositoWEB/resources/images/banner-intranet.png" border="0" height="80%" width="80%"  /> </div>		   		
+				          
+				    </p:layoutUnit>
+				 
+				    <p:layoutUnit position="south" size="auto" >
+				        <h:outputText value="South unit content." />
+				    </p:layoutUnit>
+				 
+				    <p:layoutUnit position="west" size="200" resizable="true" closable="true" collapsible="true">
+							     <p:accordionPanel>
+			                        <p:tab title="Consultas">
+			                        	  <h:link outcome="/general/articulo.xhtml" value="Articulo"/><br/><br/>
+			                              <h:link outcome="/general/almacen.xhtml" value="Almacen"/><br/><br/>
+			                              <h:link outcome="/general/lote.xhtml" value="Lote"/><br/><br/>
+			                              <h:link outcome="/general/inciso.xhtml" value="Partida Presupuestaria"/><br/><br/>
+			                              <h:link outcome="/general/proveedor.xhtml" value="Proveedor"/><br/><br/>
+			                              <h:link outcome="/general/marca.xhtml" value="Marca"/><br/><br/>
+			                           
+			                        </p:tab>
+			
+			                        <p:tab title="Configuracion">
+			                             <h:link outcome="/tecnica/conf-articulo-new.xhtml" value="Articulo"/><br/><br/>
+			                             <h:link outcome="/tecnica/grupo.xhtml" value="Grupo"/><br/><br/>
+			                             <h:link outcome="/admin/material.xhtml" value="Material"/><br/><br/>
+			                             <h:link outcome="/tecnica2/conf-marca.xhtml" value="Marca"/><br/><br/>
+			                             <h:link outcome="/tecnica/proveedor.xhtml" value="Proveedor"/><br/><br/>
+			                             <h:link outcome="/administracion/conf-actividad.xhtml" value="Actividad"/><br/><br/>
+			                             <h:link outcome="/admin/conf-centro.xhtml" value="Centro"/><br/><br/>
+			                             <h:link outcome="/tecnica/conf-almacen.xhtml" value="Almacen"/><br/><br/>
+			                             <h:link outcome="/admin/conf-TMOrigen.xhtml" value="Tipo Movimiento Origen"/><br/><br/>
+			                                         
+			                             
+			                        </p:tab>
+			
+			                        <p:tab title="Movimientos">
+			                            <h:link outcome="/movimiento/m_entrada.xhtml" value="Entrada"/><br/><br/>
+			                            <h:link outcome="/movimiento/m_salida.xhtml" value="Salida"/><br/><br/>
+			                             <h:link outcome="/movimiento/m_baja.xhtml" value="Baja"/>
+			                        </p:tab>
+			                        
+			                         <p:tab title="Reportes">
+			                         
+			                            <h:link outcome="/reportes/movEntrada.xhtml" value="Movimientos de Entrada"/><br/><br/>
+			                            <h:link outcome="/reportes/movSalida.xhtml" value="Movimientos de Salida"/>
+			                            
+			                        </p:tab>
+			                    </p:accordionPanel>
+				    </p:layoutUnit>
+				 
+				    	 
+				    <p:layoutUnit position="center">
+				         <ui:insert name="content">
+					        
+					     </ui:insert>
+			   		
+				    </p:layoutUnit>
+		 
+		</p:layout>
+	   		
+	   			
+	   
+	   
+	   </h:body>
+	   
+	   
+	   
+</html>
+

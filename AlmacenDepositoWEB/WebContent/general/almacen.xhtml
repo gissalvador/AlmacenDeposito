@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Frameset//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-frameset.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:f="http://java.sun.com/jsf/core">
+
+<ui:composition template="/WEB-INF/templates/template.xhtml">
+
+
+	<ui:define name="content">
+
+
+		<h:form method="post">
+			<h2>Almacen</h2>
+
+			<p:dataTable style="width:50%;" value="#{almacenForm.almacenes}" var="a"
+				styleClass="abm">
+				<p:column headerText="Código de Almacen">
+					<h:outputText value="#{a.codAlmacen}"></h:outputText>
+				</p:column>
+
+				<p:column headerText="Nombre">
+					<h:outputText value="#{a.nomAlmacen}"></h:outputText>
+				</p:column>
+
+				<p:column headerText="Centro">
+					<h:outputText value="#{a.nomCentro}"></h:outputText>
+				</p:column>
+
+			</p:dataTable>
+
+			<br />
+			<br />
+			<h:link outcome="/tecnica/conf-almacen.xhtml" value="Nuevo Almacen" />
+			<br />
+			<br />
+
+
+			<br />
+			<br />
+			<h:commandButton value="Volver a Indice" action="/index.xhtml"
+				immediate="true" />
+			<br />
+			<br />
+		</h:form>
+
+	</ui:define>
+
+</ui:composition>
+
+
+
+</html>

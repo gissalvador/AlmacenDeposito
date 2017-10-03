@@ -1,0 +1,155 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://java.sun.com/xml/ns/javaee" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd" id="WebApp_ID" version="3.0">
+  <display-name>AlmacenDepositoWEB</display-name>
+  <welcome-file-list>
+    <welcome-file>index.xhtml</welcome-file>
+  </welcome-file-list>
+  <servlet>
+    <servlet-name>Faces Servlet</servlet-name>
+    <servlet-class>javax.faces.webapp.FacesServlet</servlet-class>
+    <load-on-startup>1</load-on-startup>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>Faces Servlet</servlet-name>
+    <url-pattern>/faces/*</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+		<servlet-name>Faces Servlet</servlet-name>
+		<url-pattern>*.xhtml</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>Faces Servlet</servlet-name>
+		<url-pattern>*.jsf</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>Faces Servlet</servlet-name>
+		<url-pattern>*.faces</url-pattern>
+	</servlet-mapping>
+  <context-param>
+    <description>State saving method: 'client' or 'server' (=default). See JSF Specification 2.5.2</description>
+    <param-name>javax.faces.STATE_SAVING_METHOD</param-name>
+    <param-value>client</param-value>
+  </context-param>
+  <context-param>
+    <param-name>javax.servlet.jsp.jstl.fmt.localizationContext</param-name>
+    <param-value>resources.application</param-value>
+  </context-param>
+  <listener>
+    <listener-class>com.sun.faces.config.ConfigureListener</listener-class>
+  </listener>
+    <context-param>
+    <param-name>primefaces.THEME</param-name>
+    <param-value>bluesky</param-value>
+  </context-param>
+   <!-- Configuracion de Acceso a Paginas -->
+	<security-constraint>
+		<web-resource-collection>
+			<web-resource-name>Accesos ADMIN</web-resource-name>
+			<url-pattern>/movimiento/*</url-pattern>
+			<url-pattern>/tecnica/*</url-pattern>
+			<url-pattern>/tecnica2/*</url-pattern>
+			<url-pattern>/admin/*</url-pattern>
+			<url-pattern>/reportes/*</url-pattern>
+			<url-pattern>/administracion/*</url-pattern>
+		</web-resource-collection>
+		<auth-constraint>
+			<role-name>ADMIN</role-name>
+		</auth-constraint>
+	</security-constraint>
+	
+	<security-constraint>
+		<web-resource-collection>
+			<web-resource-name>Accesos ENC</web-resource-name>
+			<url-pattern>/movimiento/*</url-pattern>
+			<url-pattern>/admin/*</url-pattern>
+			<url-pattern>/reportes/*</url-pattern>
+			<url-pattern>/tecnica2/*</url-pattern>
+		</web-resource-collection>
+		<auth-constraint>
+			<role-name>ENC</role-name>
+		</auth-constraint>
+	</security-constraint>
+	
+	<security-constraint>
+		<web-resource-collection>
+			<web-resource-name>Accesos TEC</web-resource-name>
+			<url-pattern>/tecnica/*</url-pattern>
+			<url-pattern>/tecnica2/*</url-pattern>
+			<url-pattern>/admin/*</url-pattern>
+			<url-pattern>/reportes/*</url-pattern>
+		</web-resource-collection>
+		<auth-constraint>
+			<role-name>TEC</role-name>
+		</auth-constraint>
+	</security-constraint>
+	
+	<security-constraint>
+		<web-resource-collection>
+			<web-resource-name>Accesos ADMINISTRATIVO</web-resource-name>
+			<url-pattern>/administracion/*</url-pattern>
+			<url-pattern>/admin/*</url-pattern>
+			
+		</web-resource-collection>
+		<auth-constraint>
+			<role-name>ADMINISTRATIVO</role-name>
+		</auth-constraint>
+	</security-constraint>
+	<security-constraint>
+		<web-resource-collection>
+			<web-resource-name>Accesos JEFES</web-resource-name>
+			<url-pattern>/reportes/*</url-pattern>
+			<url-pattern>/admin/*</url-pattern>
+			
+		</web-resource-collection>
+		<auth-constraint>
+			<role-name>JEFES</role-name>
+		</auth-constraint>
+	</security-constraint>
+	
+	<security-constraint>
+		<web-resource-collection>
+			<web-resource-name>Compartidos ADMIN y USER</web-resource-name>
+			<url-pattern>/common/*</url-pattern>
+		</web-resource-collection>
+		<auth-constraint>
+			<role-name>ADMIN</role-name>
+			<role-name>USER</role-name>
+			<role-name>TEC</role-name>
+			<role-name>ENC</role-name>
+			<role-name>JEFES</role-name>
+		</auth-constraint>
+	</security-constraint>
+
+	<!-- La configuracion de las paginas que corresponden para login y error de login -->
+	<login-config>
+		<auth-method>FORM</auth-method>
+		<form-login-config>
+			<form-login-page>/login.xhtml</form-login-page>
+			<form-error-page>/login.xhtml</form-error-page>
+		</form-login-config>
+	</login-config>
+
+	<!-- Los roles del sistema -->
+	<security-role>
+		<role-name>ADMIN</role-name>
+	</security-role>
+	<security-role>
+		<role-name>TEC</role-name>
+	</security-role>
+	<security-role>
+		<role-name>ENC</role-name>
+	</security-role>
+	<security-role>
+		<role-name>USER</role-name>
+	</security-role>
+	<security-role>
+		<role-name>ADMINISTRATIVO</role-name>
+	</security-role>
+	<security-role>
+		<role-name>JEFES</role-name>
+	</security-role>
+	
+  
+  
+  
+</web-app>

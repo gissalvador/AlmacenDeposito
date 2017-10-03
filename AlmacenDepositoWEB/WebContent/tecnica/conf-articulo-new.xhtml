@@ -1,0 +1,235 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Frameset//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-frameset.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:f="http://java.sun.com/jsf/core">
+
+<ui:composition template="/WEB-INF/templates/template.xhtml">
+
+
+	<ui:define name="content">
+
+
+		<h:form>
+			<h:panelGrid columns="1" style="width: 90%">
+				<p:wizard>
+
+					<p:tab title="Nuevo Articulo" id="newArticulo" update="display">
+						<br />
+						<br />
+
+						<h:panelGrid columns="4" width="100%"
+							columnClasses="rightalign,leftalign,leftalign">
+
+							<h:outputLabel value="Nombre: " for="nomArticulo" />
+							<h:inputText style="text-transform:capitalize" id="nomArticulo"
+								label="Nombre" required="true"
+								value="#{confArticuloNew.articuloDTO.nomArticulo}" />
+							<h:outputLabel />
+							<h:message for="nomArticulo" />
+
+							<h:outputLabel value="Material: " for="material" />
+							<h:inputText id="material" label="Material" required="true"
+								value="#{confArticuloNew.articuloDTO.materialId}" />
+							<h:commandButton value="Buscar"
+								onclick="window.open('/AlmacenDepositoWEB/general/material.xhtml')" />
+							<h:message for="material" />
+
+							<h:outputLabel value="Tipo Articulo: " for="tipo" />
+							<h:inputText id="tipo" label="Tipo" required="true"
+								value="#{confArticuloNew.articuloDTO.tipoArticuloId}" />
+							<h:commandButton value="Buscar"
+								onclick="window.open('/AlmacenDepositoWEB/general/tipoArticulo.xhtml')" />
+							<h:message for="tipo" />
+
+							<h:outputLabel value="Grupo: " for="grupo" />
+							<h:inputText id="grupo" label="Grupo" required="true"
+								value="#{confArticuloNew.articuloDTO.grupoId}" />
+							<h:commandButton value="Buscar"
+								onclick="window.open('/AlmacenDepositoWEB/general/grupo.xhtml')" />
+							<h:message for="grupo" />
+
+							<h:outputLabel value="Unidad de Medida: " for="unidad" />
+							<h:inputText id="unidad" label="Unidad" required="true"
+								value="#{confArticuloNew.articuloDTO.medidaU}" />
+							<h:commandButton value="Buscar"
+								onclick="window.open('/AlmacenDepositoWEB/general/unidadMedida.xhtml')" />
+							<h:message for="unidad" />
+
+							<h:outputText value="Posee número de serie: " />
+							<p:selectOneRadio id="nroSerie" label="Nro. de serie"
+								value="#{confArticuloNew.articuloDTO.nroSerie}" required="true">
+								<f:selectItem itemLabel="Si" itemValue="True" />
+								<f:selectItem itemLabel="No" itemValue="False" />
+							</p:selectOneRadio>
+							<h:outputLabel />
+							<h:message for="nroSerie" />
+
+
+							<h:outputText value="Posee fecha vencimiento: " />
+							<p:selectOneRadio id="fechaVto" label="Fecha vencimiento"
+								value="#{confArticuloNew.articuloDTO.vto}" required="true">
+								<f:selectItem itemLabel="Si" itemValue="True" />
+								<f:selectItem itemLabel="No" itemValue="False" />
+							</p:selectOneRadio>
+							<h:outputLabel />
+							<h:message for="fechaVto" />
+							
+							
+							<h:outputText value="Salida por Proyecto de Inversión: " />
+							<p:selectOneRadio id="salidaAct" label="Salida por Proyecto de Inversión:"
+								value="#{confArticuloNew.articuloDTO.act}" required="true" >
+								<f:selectItem itemLabel="Si" itemValue="True" />
+								<f:selectItem itemLabel="No" itemValue="False" />
+							</p:selectOneRadio>
+							<h:outputLabel />
+							<h:message for="salidaAct" />
+
+
+							<h:outputLabel value="Peso: " for="peso" />
+							<h:inputText id="peso" label="Peso" required="true"
+								value="#{confArticuloNew.articuloDTO.peso}" />
+							<h:outputLabel />
+							<h:message for="peso" />
+
+							<h:outputLabel value="Unidad Peso" for="unidadPeso" />
+							<h:inputText id="unidadPeso" label="Unidad Peso" required="true"
+								value="#{confArticuloNew.articuloDTO.pesoUId}" />
+							<h:commandButton value="Buscar"
+								onclick="window.open('/AlmacenDepositoWEB/general/unidadMedida.xhtml')" />
+							<h:message for="unidadPeso" />
+
+							<h:outputLabel value="Descripcion" for="descArt" />
+							<h:inputTextarea id="descArt" label="Descripcion"
+								value="#{confArticuloNew.articuloDTO.descArticulo}" />
+							<h:outputLabel />
+							<h:message for="descArt" />
+
+							<h:outputLabel value="Partida Parcial" for="partidaParcial" />
+							<h:inputText id="partidaParcial" label="Partida Parcial"
+								required="true"
+								value="#{confArticuloNew.articuloDTO.partidaParcialId}" />
+							<h:commandButton value="Buscar"
+								onclick="window.open('/AlmacenDepositoWEB/general/inciso.xhtml')" />
+							<h:message for="partidaParcial" />
+
+							<h:outputLabel value="Codigo de clase: " for="codClase" />
+							<h:inputText id="codClase" label="Codigo de clase: "
+								required="true" value="#{confArticuloNew.articuloDTO.codClase}" />
+							<h:outputLabel />
+							<h:message for="codClase" />
+
+							<h:outputLabel value="codItem" for="codItem" />
+							<h:inputText id="codItem" label="Código de Item" required="true"
+								value="#{confArticuloNew.articuloDTO.codItem}" />
+							<h:outputLabel />
+							<h:message for="codItem" />
+
+							<h:outputText value="Compuesto: " />
+							<p:selectOneRadio value="#{confArticuloNew.articuloDTO.isComp}">
+								<f:selectItem itemLabel="Si" itemValue="True" />
+								<f:selectItem itemLabel="No" itemValue="False" />
+
+							</p:selectOneRadio>
+							<h:outputLabel />
+							<h:outputLabel />
+
+						</h:panelGrid>
+
+						<br />
+						<br />
+						<h:commandButton value="Mostrar Articulo"
+							action="/general/articulo.xhtml" immediate="true" />
+						<br />
+						<br />
+
+						<h:commandButton value="Volver a Indice" action="/index.xhtml"
+							immediate="true" />
+						<br />
+
+
+					</p:tab>
+
+					<p:tab title="Confirmar" id="confirmar">
+						<br />
+						<p:messages id="msgs" showDetail="true" />
+						<h:panelGrid columns="2" columnClasses="rightalign-bold,normal">
+							<h:outputLabel value="Nombre:" />
+							<h:outputText style="text-transform:capitalize"
+								value="#{confArticuloNew.articuloDTO.nomArticulo}" />
+
+							<h:outputLabel value="Material: " />
+							<h:outputText value="#{confArticuloNew.articuloDTO.materialId}" />
+
+							<h:outputLabel value="Tipo de articulo:" />
+							<h:outputText
+								value="#{confArticuloNew.articuloDTO.tipoArticuloId}" />
+
+							<h:outputLabel value="Unidad de Medida:" />
+							<h:outputText value="#{confArticuloNew.articuloDTO.medidaU}" />
+
+							<h:outputLabel value="Número de serie:" />
+							<h:outputText value="#{confArticuloNew.articuloDTO.nroSerie}" />
+
+							<h:outputLabel value="Fecha Vencimiento" />
+							<h:outputText value="#{confArticuloNew.articuloDTO.vto}" />
+
+							<h:outputLabel value="Peso:" />
+							<h:outputText value="#{confArticuloNew.articuloDTO.peso}" />
+
+							<h:outputLabel value="Unidad Peso:" />
+							<h:outputText value="#{confArticuloNew.articuloDTO.pesoUId}" />
+
+							<h:outputLabel value="Descripcion: " />
+							<h:outputText value="#{confArticuloNew.articuloDTO.descArticulo}" />
+
+							<h:outputLabel value="Partida Parcial" />
+							<h:outputText
+								value="#{confArticuloNew.articuloDTO.partidaParcialId}" />
+
+							<h:outputLabel value="Codigo de clase: " />
+							<h:outputText value="#{confArticuloNew.articuloDTO.codClase}" />
+
+							<h:outputLabel value="Codigo de Item: " />
+							<h:outputText value="#{confArticuloNew.articuloDTO.codItem}" />
+
+							<h:outputLabel value="Compuesto: " />
+							<h:outputText value="#{confArticuloNew.articuloDTO.isComp}" />
+
+
+						</h:panelGrid>
+
+
+						<br />
+
+						<br />
+
+						<h:commandButton value="Guardar"
+							action="#{confArticuloNew.guardarArticulo}" update="msgs" />
+
+						<br />
+						<br />
+						<h:commandButton value="Volver a Indice" action="/index.xhtml"
+							immediate="true" />
+
+						<br />
+
+						<br />
+					</p:tab>
+					
+				</p:wizard>
+
+			</h:panelGrid>
+			<br />
+		</h:form>
+
+
+	</ui:define>
+
+</ui:composition>
+
+
+
+</html>

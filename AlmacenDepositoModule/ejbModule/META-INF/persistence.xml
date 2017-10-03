@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<persistence version="2.1"
+	xmlns="http://xmlns.jcp.org/xml/ns/persistence" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence http://xmlns.jcp.org/xml/ns/persistence/persistence_2_1.xsd">
+	<persistence-unit name="AlmacenDepositoDS">
+		<provider>org.hibernate.ejb.HibernatePersistence</provider>
+		<jta-data-source>java:jboss/datasources/AlmacenDepositoDS</jta-data-source>
+		<class>com.articulo.entities.Articulo</class>
+		<class>com.articulo.entities.EstadoArticulo</class>
+		<class>com.articulo.entities.Grupo</class>
+		<class>com.articulo.entities.HistorialEstadoArticulo</class>
+		<class>com.articulo.entities.Material</class>
+		<class>com.articulo.entities.TipoArticulo</class>
+		<class>com.seguridad.entities.Rol</class>
+		<class>com.seguridad.entities.Usuario</class>
+		<class>com.institucional.entities.UnidadOrganica</class>
+		<class>com.institucional.entities.Centro</class>
+		<class>com.institucional.entities.Almacen</class>
+		<class>com.institucional.entities.Proveedor</class>
+		<class>com.institucional.entities.Empleado</class>
+		<class>com.institucional.entities.Actividad</class>
+		<class>com.institucional.entities.TipoPersona</class>
+		<class>com.institucional.entities.PParcial</class>
+		<class>com.institucional.entities.PPrincipal</class>
+		<class>com.institucional.entities.Inciso</class>
+		<class>com.conversion.entities.UnidadMedida</class>
+		<class>com.conversion.entities.TipoUM</class>
+		<class>com.conversion.entities.Conversion</class>
+		<class>com.movimiento.entities.Marca</class>
+		<class>com.movimiento.entities.Modelo</class>
+		<class>com.movimiento.entities.Solicitud</class>
+		<class>com.movimiento.entities.MovEntrada</class>
+		<class>com.movimiento.entities.TipoMovOrigen</class>
+		<class>com.movimiento.entities.MovOrigen</class>
+		<class>com.movimiento.entities.DetalleMovEntrada</class>
+		<class>com.movimiento.entities.DetalleMovSalida</class>
+		<class>com.movimiento.entities.MovSalida</class>
+		<class>com.movimiento.entities.Lote</class>
+		<class>com.movimiento.entities.LoteAlmacen</class>
+		<class>com.movimiento.entities.HistorialEstadoLote</class>
+		<class>com.movimiento.entities.EstadoLote</class>
+
+		<properties>
+			<property name="hibernate.dialect" value="org.hibernate.dialect.MySQL5Dialect" />
+			<property name="hibernate.hbm2ddl.auto" value="update" />
+			<property name="showSql" value="true" />
+			<property name="hibernate.case.use_query_cache" value="true" />
+		</properties>
+	</persistence-unit>
+</persistence>

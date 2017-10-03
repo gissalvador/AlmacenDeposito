@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Frameset//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-frameset.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:f="http://java.sun.com/jsf/core">
+
+<ui:composition template="/WEB-INF/templates/template.xhtml">
+
+
+	<ui:define name="content">
+
+
+		<h:form method="post">
+			<h2>Grupo</h2>
+
+
+			<p:dataTable var="g" value="#{grupoForm.grupos}" styleClass="abm">
+				<p:column headerText="Código de Grupo">
+					<h:outputText value="#{g.codGrupo}" />
+				</p:column>
+
+				<p:column headerText="Nombre de Grupo">
+					<h:outputText value="#{g.nomGrupo}" />
+				</p:column>
+
+				<p:column headerText="Descripción de Grupo">
+					<h:outputText value="#{g.desGrupo}" />
+				</p:column>
+
+
+
+			</p:dataTable>
+			<br />
+			<br />
+			<h:commandButton value="Excel" action="#{grupoForm.downloadExcel}" />
+			<br />
+			<br />
+			<h:link outcome="/tecnica/grupo.xhtml" value="Nuevo Grupo" />
+			<br />
+			<br />
+			<h:commandButton value="Volver a Indice" action="/index.xhtml"
+				immediate="true" />
+			<br />
+			<br />
+
+
+		</h:form>
+
+	</ui:define>
+
+</ui:composition>
+
+
+
+</html>

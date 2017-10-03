@@ -1,0 +1,177 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Frameset//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-frameset.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:f="http://java.sun.com/jsf/core">
+
+<ui:composition template="/WEB-INF/templates/template.xhtml">
+
+	<ui:define name="content">
+
+		<h:form>
+			<h:panelGrid columns="1" style="width: 90%">
+				<p:wizard>
+
+					<p:tab title="Nuevo Empleado" id="newEmpleado" update="display">
+						<br />
+						<br />
+
+						<h:panelGrid columns="3" width="50%"
+							columnClasses="rightalign,leftalign,leftalign">
+
+
+							<h:outputLabel value="Nombre:" for="nombre" />
+							<h:inputText style="text-transform:capitalize" id="nombre"
+								label="Nombre:" required="true" value="#{confEmpleado.nombre}" />
+							<h:message for="nombre" />
+
+							<h:outputLabel value="Apellido:" for="apellido" />
+							<h:inputText id="apellido" label="Apellido:" required="true"
+								value="#{confEmpleado.apellido}"
+								onblur="value=value.toUpperCase()" />
+							<h:message for="apellido" />
+
+							<h:outputLabel value="Legajo:" for="legajo" />
+							<h:inputText id="legajo" label="Legajo:" required="true"
+								value="#{confEmpleado.empleadoDTO.legajo}"
+								validatorMessage="Legajo: Escriba un legajo valido. Ejemplo: 17369">
+								<f:validateLength minimum="4" maximum="5" />
+							</h:inputText>
+							<h:message for="legajo" />
+
+							<h:outputLabel value="CUIL:" for="cuil" />
+							<h:inputText id="cuil" label="CUIL:" required="true"
+								value="#{confEmpleado.empleadoDTO.cuil}"
+								validatorMessage="CUIL: Escriba un C.U.I.L. valido. Ejemplo: 30546660210">
+								<f:validateLength minimum="11" maximum="11" />
+							</h:inputText>
+							<h:message for="cuil" />
+
+
+							<h:outputLabel value="Teléfono: " for="telefono" />
+							<h:inputText id="telefono" label="Teléfono:" required="true"
+								value="#{confEmpleado.empleadoDTO.telefono}" />
+							<h:message for="telefono" />
+
+							<h:outputLabel value="Celular: " for="celular" />
+							<h:inputText id="celular" label="Celular:"
+								value="#{confEmpleado.empleadoDTO.celular}" />
+							<h:message for="celular" />
+
+							<h:outputLabel value="Mail: " for="mail" />
+							<h:inputText id="mail" label="Mail:" required="false"
+								value="#{confEmpleado.empleadoDTO.mail}"
+								onblur="value=value.toLowerCase()"
+								validatorMessage="E-Mail: Escriba un mail valido. Ejemplo: adarleatomos@cnea.gov.ar">
+								<f:validateRegex pattern="(.+@.+\.[a-zA-Z]+)?" />
+							</h:inputText>
+							<h:message for="mail" />
+
+							<h:outputLabel value="Domicilio: " for="domicilio" />
+							<h:inputText id="domicilio" label="Domicilio:" required="true"
+								value="#{confEmpleado.empleadoDTO.domicilio}" />
+							<h:message for="domicilio" />
+
+							<p:outputLabel value="Unidad Organica:"	for="uorganica" />
+							<p:selectOneMenu id="uorganica"  required="true"
+								value="#{confEmpleado.uOrganica}" >
+								<f:selectItem itemLabel="Selecionar una opción" itemValue="" />
+								<f:selectItems value="#{confUnidadOrganica.options}" style="width:80px" />
+							</p:selectOneMenu>
+							<h:message for="uorganica" />
+
+							<h:outputLabel value="Número de Responsable: "
+								for="nroResponsable" />
+							<h:inputText id="nroResponsable" label="Número de Responsable: "
+								value="#{confEmpleado.empleadoDTO.conResPatriminial}" />
+							<h:message for="nroResponsable" />
+
+
+
+						</h:panelGrid>
+
+						<br />
+						<br />
+						<h:commandButton value="Mostrar Empleado"
+							action="/general/empleado.xhtml" immediate="true" />
+						<br />
+						<br />
+
+						<h:commandButton value="Volver a Indice" action="/index.xhtml"
+							immediate="true" />
+						<br />
+
+					</p:tab>
+
+					<p:tab title="Confirmar" id="confirmar">
+						<br />
+						<p:messages id="msgs" showDetail="true" />
+						<h:panelGrid columns="2" columnClasses="rightalign-bold,normal">
+
+							<h:outputLabel value="Nombre: " />
+							<h:outputText style="text-transform:capitalize"
+								value="#{confEmpleado.nombre}" />
+
+							<h:outputLabel value="Apellido: " />
+							<h:outputText value="#{confEmpleado.apellido}" />
+
+							<h:outputLabel value="Legajo " />
+							<h:outputText style="text-transform:capitalize"
+								value="#{confEmpleado.empleadoDTO.legajo}" />
+
+							<h:outputLabel value="CUIL: " />
+							<h:outputText value="#{confEmpleado.empleadoDTO.cuil}" />
+
+							<h:outputLabel value="Teléfono: " />
+							<h:outputText value="#{confEmpleado.empleadoDTO.telefono}" />
+
+							<h:outputLabel value="Celular: " />
+							<h:outputText value="#{confEmpleado.empleadoDTO.celular}" />
+
+							<h:outputLabel value="E-Mail: " />
+							<h:outputText value="#{confEmpleado.empleadoDTO.mail}" />
+
+							<h:outputLabel value="Domicilio: " />
+							<h:outputText value="#{confEmpleado.empleadoDTO.domicilio}" />
+
+							<h:outputLabel value="Número de Responsable:  " />
+							<h:outputText
+								value="#{confEmpleado.empleadoDTO.conResPatriminial}" />
+
+
+						</h:panelGrid>
+
+
+						<br />
+
+						<br />
+
+						<h:commandButton value="Guardar"
+							action="#{confEmpleado.guardarEmpleado}" update="msgs" />
+						<br />
+
+						<br />
+
+						<h:commandButton value="Volver a Indice" action="/index.xhtml"
+							immediate="true" />
+
+						<br />
+
+						<br />
+					</p:tab>
+				</p:wizard>
+
+			</h:panelGrid>
+			<br />
+		</h:form>
+
+
+	</ui:define>
+
+</ui:composition>
+
+
+
+</html>

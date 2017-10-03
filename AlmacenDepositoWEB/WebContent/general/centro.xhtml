@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Frameset//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-frameset.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:f="http://java.sun.com/jsf/core">
+
+<ui:composition template="/WEB-INF/templates/template.xhtml">
+
+
+	<ui:define name="content">
+
+
+		<h:form method="post">
+			<h2>Centros</h2>
+
+			<p:dataTable value="#{centroForm.centros}" var="c" styleClass="abm">
+				<p:column headerText="Código de Centro">
+					<h:outputText value="#{c.codCentro}"></h:outputText>
+				</p:column>
+
+				<p:column headerText="Nombre">
+					<h:outputText value="#{c.nomCentro}"></h:outputText>
+				</p:column>
+
+
+			</p:dataTable>
+
+			<br />
+			<br />
+				  <h:link outcome="/admin/conf-centro.xhtml" value="Nuevo Centro"/><br/><br/>
+								 	
+								 
+			<br />
+			<br />
+			<h:commandButton value="Volver a Indice" action="/index.xhtml"
+				immediate="true" />
+
+
+		</h:form>
+
+	</ui:define>
+
+</ui:composition>
+
+
+
+</html>

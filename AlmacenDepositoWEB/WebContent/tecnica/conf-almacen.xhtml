@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Frameset//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-frameset.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:f="http://java.sun.com/jsf/core">
+
+<ui:composition template="/WEB-INF/templates/template.xhtml">
+
+	<ui:define name="content">
+
+		<h:form>
+			<h:panelGrid columns="1" style="width: 90%">
+				<p:wizard>
+
+					<p:tab title="Nuevo Almacen" id="newAlmacen" update="display">
+						<br />
+						<br />
+
+						<h:panelGrid columns="4" width="100%"
+							columnClasses="rightalign,leftalign,leftalign">
+
+							<h:outputLabel value="Nombre Almacen:" for="nomAlmacen" />
+							<h:inputText style="text-transform:capitalize" id="nomAlmacen"
+								label="Nombre Almacen:" required="true"
+								value="#{confAlmacen.almacenDTO.nomAlmacen}" />
+							<h:outputLabel />
+							<h:message for="nomAlmacen" />
+
+							<h:outputText value="Código de Centro: " />
+							<h:inputText id="codCentro" label="Código Centro:"
+								required="true" value="#{confAlmacen.almacenDTO.codCentro}" />
+							<h:commandButton value="Buscar"
+								onclick="window.open('/AlmacenDepositoWEB/general/centro.xhtml')" />
+							<h:message for="codCentro" />
+
+
+						</h:panelGrid>
+						<br />
+						<br />
+						<h:commandButton value="Mostrar Almacenes"
+							action="/general/almacen.xhtml" immediate="true" />
+						<br />
+						<br />
+
+						<h:commandButton value="Volver a Indice" action="/index.xhtml"
+							immediate="true" />
+						<br />
+
+					</p:tab>
+
+					<p:tab title="Confirmar" id="confirmar">
+						<br />
+						<p:messages id="msgs" showDetail="true" />
+						<h:panelGrid columns="2" columnClasses="rightalign-bold,normal">
+
+							<h:outputLabel value="Nombre Almacen: " />
+							<h:outputText style="text-transform:capitalize"
+								value="#{confAlmacen.almacenDTO.nomAlmacen}" />
+							<h:outputLabel value="Código Centro: " />
+							<h:outputText value="#{confAlmacen.almacenDTO.codCentro}" />
+
+
+						</h:panelGrid>
+
+
+						<br />
+
+						<br />
+
+						<h:commandButton value="Guardar"
+							action="#{confAlmacen.guardarAlmacen}" update="msgs" />
+						<br />
+
+						<br />
+
+						<h:commandButton value="Volver a Indice" action="/index.xhtml"
+							immediate="true" />
+
+						<br />
+
+						<br />
+					</p:tab>
+				</p:wizard>
+
+			</h:panelGrid>
+			<br />
+		</h:form>
+
+
+	</ui:define>
+
+</ui:composition>
+
+
+
+</html>

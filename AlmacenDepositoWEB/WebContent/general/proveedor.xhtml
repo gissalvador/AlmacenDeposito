@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Frameset//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-frameset.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	   xmlns:h="http://java.sun.com/jsf/html"
+	   xmlns:ui="http://java.sun.com/jsf/facelets"
+       xmlns:p="http://primefaces.org/ui"
+       xmlns:f="http://java.sun.com/jsf/core">
+       
+    <ui:composition template="/WEB-INF/templates/template.xhtml">
+       
+              
+       <ui:define name="content"> 
+              
+              
+             	<h:form method="post">
+					<h2>Proveedor</h2>
+					
+					
+					<p:dataTable style="width:95%;" var="p" value="#{proveedorForm.proveedores}"  styleClass="abm">
+					
+					
+						    <p:column headerText="Código de Proveedor">
+						        <h:outputText value="#{p.codPersona}" />
+						    </p:column>
+						    
+						     <p:column headerText="C.U.I.T.">
+						        <h:outputText value="#{p.cuit}" />
+						    </p:column>
+						 
+						    
+						    <p:column headerText="Alias">
+						        <h:outputText value="#{p.alias}" />
+						    </p:column>
+						    
+						    <p:column headerText="Razon Social">
+						        <h:outputText value="#{p.razonSocial}" />
+						    </p:column>
+						    
+						     <p:column headerText="Teléfono">
+						        <h:outputText value="#{p.telefono}" />
+						     </p:column>
+						     
+						     <p:column headerText="Celular">
+						        <h:outputText value="#{p.celular}" />
+						     </p:column>
+						     
+						     <p:column headerText="Mail">
+						        <h:outputText value="#{p.mail}" />
+						     </p:column>
+						     
+						     <p:column headerText="Domicilio">
+						        <h:outputText value="#{p.domicilio}" />
+						     </p:column>
+						     
+						      <p:column headerText="Número de Provedoor">
+						        <h:outputText value="#{p.nroProveedor}" />
+						     </p:column>
+						 
+						 
+						   
+						</p:dataTable>
+						
+						
+			<br />
+			<br />
+			<h:link outcome="/tecnica/proveedor.xhtml" value="Nuevo Proveedor" />
+			<br />
+			<br />
+
+
+			<br />
+			<br />
+			<h:commandButton value="Volver a Indice" action="/index.xhtml"
+				immediate="true" />
+			<br />
+			<br />
+						 <br />  <br /> 
+						 
+				
+			        <br />         
+				</h:form>
+               
+       </ui:define>
+             
+    </ui:composition>
+    
+    
+
+</html>

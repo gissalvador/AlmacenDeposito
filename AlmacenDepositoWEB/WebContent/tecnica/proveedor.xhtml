@@ -1,0 +1,158 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Frameset//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-frameset.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:f="http://java.sun.com/jsf/core">
+
+<ui:composition template="/WEB-INF/templates/template.xhtml">
+
+	<ui:define name="content">
+
+		<h:form>
+			<h:panelGrid columns="1" style="width: 90%">
+				<p:wizard>
+
+					<p:tab title="Nuevo Proveedor" id="newProveedor" update="display">
+						<br />
+						<br />
+
+						<h:panelGrid columns="3" width="100%"
+							columnClasses="rightalign,leftalign,leftalign">
+
+
+							<h:outputLabel value="Alias:" for="alias" />
+							<h:inputText style="text-transform:capitalize" id="alias"
+								label="Alias:" required="true"
+								value="#{confProveedor.proveedorDTO.alias}" />
+							<h:message for="alias" />
+
+							<h:outputLabel value="Razon Social:" for="razonSocial" />
+							<h:inputText style="text-transform:capitalize" id="razonSocial" label="Razon Social:"
+								required="true"
+								value="#{confProveedor.proveedorDTO.razonSocial}" />
+							<h:message for="razonSocial" />
+
+							<h:outputLabel value="CUIT:" for="cuit" />
+							<h:inputText id="cuit" label="CUIT:" required="true" 
+								value="#{confProveedor.proveedorDTO.cuit}" 
+								validatorMessage="CUIT: Escriba un C.U.I.T. valido. Ejemplo: 30546660210">
+							<f:validateLength minimum="11" maximum="11" />
+							</h:inputText>
+							<h:message for="cuit" />
+						
+
+							<h:outputLabel value="Teléfono: " for="telefono" />
+							<h:inputText id="telefono" label="Teléfono:" required="true"
+								value="#{confProveedor.proveedorDTO.telefono}" />
+							<h:message for="telefono" />
+
+							<h:outputLabel value="Celular: " for="celular" />
+							<h:inputText id="celular" label="Celular:" 
+								value="#{confProveedor.proveedorDTO.celular}" />
+							<h:message for="celular" />
+
+							<h:outputLabel value="Mail: " for="mail" />
+							<h:inputText id="mail" label="Mail:" required="false" 
+								value="#{confProveedor.proveedorDTO.mail}" onblur="value=value.toLowerCase()"
+								validatorMessage="E-Mail: Escriba un mail valido. Ejemplo: adarleatomos@cnea.gov.ar">
+								<f:validateRegex
+									 pattern="(.+@.+\.[a-zA-Z]+)?"/>
+							</h:inputText>
+
+							<h:message for="mail" />
+
+							<h:outputLabel value="Domicilio: " for="domicilio" />
+							<h:inputText id="domicilio" label="Domicilio:" required="true"
+								value="#{confProveedor.proveedorDTO.domicilio}" />
+							<h:message for="domicilio" />
+
+							<h:outputLabel value="Número de Proveedor: " for="nroProveedor" />
+							<h:inputText id="nroProveedor" label="Número de Proveedor: "
+								value="#{confProveedor.proveedorDTO.nroProveedor}" />
+							<h:message for="nroProveedor" />
+
+
+
+						</h:panelGrid>
+
+						<br />
+						<br />
+						<h:commandButton value="Mostrar Proveedor"
+							action="/general/proveedor.xhtml" immediate="true" />
+						<br />
+						<br />
+
+						<h:commandButton value="Volver a Indice" action="/index.xhtml"
+							immediate="true" />
+						<br />
+
+					</p:tab>
+
+					<p:tab title="Confirmar" id="confirmar">
+						<br />
+						<p:messages id="msgs" showDetail="true" />
+						<h:panelGrid columns="2" columnClasses="rightalign-bold,normal">
+
+							<h:outputLabel value="Alias: " />
+							<h:outputText style="text-transform:capitalize"
+								value="#{confProveedor.proveedorDTO.alias}" />
+
+							<h:outputLabel value="Razon Social: " />
+							<h:outputText style="text-transform:capitalize"
+								value="#{confProveedor.proveedorDTO.razonSocial}" />
+
+							<h:outputLabel value="CUIT: " />
+							<h:outputText value="#{confProveedor.proveedorDTO.cuit}" />
+
+							<h:outputLabel value="Teléfono: " />
+							<h:outputText value="#{confProveedor.proveedorDTO.telefono}" />
+
+							<h:outputLabel value="Celular: " />
+							<h:outputText value="#{confProveedor.proveedorDTO.celular}" />
+
+							<h:outputLabel value="E-Mail: " />
+							<h:outputText value="#{confProveedor.proveedorDTO.mail}" />
+
+							<h:outputLabel value="Domicilio: " />
+							<h:outputText value="#{confProveedor.proveedorDTO.domicilio}" />
+
+							<h:outputLabel value="Número de Proveedor:  " />
+							<h:outputText value="#{confProveedor.proveedorDTO.nroProveedor}" />
+
+
+						</h:panelGrid>
+
+
+						<br />
+
+						<br />
+
+						<h:commandButton value="Guardar"
+							action="#{confProveedor.guardarProveedor}" update="msgs" />
+						<br />
+
+						<br />
+
+						<h:commandButton value="Volver a Indice" action="/index.xhtml"
+							immediate="true" />
+
+						<br />
+
+						<br />
+					</p:tab>
+				</p:wizard>
+
+			</h:panelGrid>
+			<br />
+		</h:form>
+
+
+	</ui:define>
+
+</ui:composition>
+
+
+
+</html>

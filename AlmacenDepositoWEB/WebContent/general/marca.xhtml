@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Frameset//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-frameset.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:f="http://java.sun.com/jsf/core">
+
+<ui:composition template="/WEB-INF/templates/template.xhtml">
+
+
+	<ui:define name="content">
+
+
+		<h:form method="post">
+			<h2>Marca</h2>
+
+
+			<p:dataTable style="width:50px;" var="m" value="#{marcaForm.marcas}" styleClass="abm">
+				<p:column headerText="Código de Marca">
+					<h:outputText value="#{m.codMarca}" />
+				</p:column>
+
+				<p:column headerText="Nombre de Marca">
+					<h:outputText value="#{m.nomMarca}" />
+				</p:column>
+
+				<p:column>
+					<f:facet name="header">Editar</f:facet>
+					<p:commandButton icon="ui-icon-pencil" action="/tecnica2/marcaEditar.xhtml">
+						<f:param name="id" value="#{m.codMarca}"></f:param>
+					</p:commandButton>
+				</p:column>
+
+
+
+			</p:dataTable>
+
+
+			<br />
+			<br />
+
+			<h:link value="Nueva Marca" outcome="/tecnica2/conf-marca.xhtml" />
+
+			<br />
+			<br />
+
+			<br />
+			<br />
+			<h:commandButton value="Volver a Indice" action="/index.xhtml"
+				immediate="true" />
+			<br />
+			<br />
+
+			<br />
+		</h:form>
+
+	</ui:define>
+
+</ui:composition>
+
+
+
+</html>
