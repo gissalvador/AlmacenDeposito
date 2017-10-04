@@ -1,0 +1,232 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Frameset//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-frameset.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:f="http://java.sun.com/jsf/core">
+
+<ui:composition template="/WEB-INF/templates/template.xhtml">
+
+
+	<ui:define name="content">
+
+
+		<h:form method="post">
+			<h:panelGrid columns="1" style="width: 90%">
+				<p:wizard>
+
+					<p:tab title="Movimiento de Salida" id="movBaja">
+						<br />
+						<br />
+
+						<h:panelGrid columns="3" width="100%"
+							columnClasses="rightalign,leftalign,leftalign">
+							<h:outputLabel value="Almacen: " for="almacen" />
+							<h:inputText id="almacen" label="Almacen" required="true"
+								value="#{movBaja.movBaja.almacen}" />
+							<h:message for="almacen" />
+							<h:outputLabel value="Fecha Salida:" for="fechaSalida" />
+							<p:calendar id="fechaIngreso"
+								value="#{movBaja.movBaja.fechaSalida}" showOn="button"
+								navigator="true" />
+							<h:message for="fechaIngreso" />
+							<h:outputLabel value="LEGAJO" for="legajo" />
+							<h:inputText id="legajo" label="LEGAJO" required="true"
+								value="#{movBaja.movBaja.legajo}" />
+							<h:message for="cuitlegajo" />
+
+							<h:outputLabel value="Observaciones" for="observaciones" />
+							<h:inputTextarea id="observaciones" label="Observaciones"
+								value="#{movBaja.movBaja.observaciones}" />
+							<h:message for="observaciones" />
+						</h:panelGrid>
+
+						<br />
+						<br />
+						<br />
+						<p:commandButton value="Cancel" action="#{movBaja.cancelar()}"
+							immediate="true" />
+
+					</p:tab>
+
+					<p:tab title="Detalle" id="detalle">
+						<br />
+
+
+						<h3>Seleccionar Lote Baja</h3>
+
+						<h:panelGrid columns="4" width="100%"
+							columnClasses="rightalign,leftalign,leftalign">
+
+
+							<h:outputLabel value="Código Lote:" for="codLote" />
+							<h:inputText size="20" id="codLote" label="Código Lote:"
+								required="true" value="#{movBaja.codLote}" />
+							<h:commandButton value="Buscar"
+								onclick="window.open('/AlmacenDepositoWEB/general/articulo.xhtml')" />
+							<h:message for="codLote" />
+							
+
+						</h:panelGrid>
+						<br />
+						<h:panelGrid columns="2">
+							<br />
+							<h:commandButton value="Buscar lote"
+								action="#{movBaja.buscarLote()}" update="msgs" />
+						</h:panelGrid>
+
+						<br />
+
+						<p:messages id="msgs" showDetail="true" />
+						<br />
+						<br />
+						<h:panelGroup rendered="#{not empty movBaja.bl}">
+
+							<h2>Buscar Lotes</h2>
+
+
+							<p:dataTable id="loteTable" border="1" value="#{movBaja.lote}"
+								var="lote">
+								<p:column>
+									<f:facet name="header">Id Lote</f:facet>    				
+                                           #{lote.codLote}
+                            </p:column>
+                            <p:column>
+								<f:facet name="header">Id Articulo</f:facet>    				
+                                           #{lote.articuloID}
+                            </p:column>
+								<p:column>
+									<f:facet name="header">Articulo</f:facet>
+                                		    #{lote.articulo}
+                                            
+                             </p:column>
+								<p:column>
+									<f:facet name="header">Marca</f:facet>    				
+                                           #{lote.marString}
+                            </p:column>
+								<p:column>
+									<f:facet name="header">Modelo</f:facet>
+                                		    #{lote.modString}
+                                            
+                             </p:column>
+								<p:column>
+									<f:facet name="header">Stock Actual</f:facet>    				
+                                           #{lote.stockActual}
+                            </p:column>
+                            						
+							<p:column>
+									<f:facet name="header">Estado</f:facet>    				
+                                             Baja
+                            </p:column>
+
+							</p:dataTable>
+
+
+
+						</h:panelGroup>
+
+
+
+						<br />
+						<br />
+						<br />
+						<p:commandButton value="Cancel" action="#{movBaja.cancelar()}"
+							immediate="true" />
+					</p:tab>
+
+
+
+					<p:tab title="Confirmar" id="confirmar">
+						<br />
+						<h:panelGrid columns="2" columnClasses="rightalign-bold,normal">
+
+							<h:outputLabel value="Almacen: " />
+							<h:outputText value="#{movBaja.movBaja.almacen}" />
+							<h:outputLabel value="Actividad: " />
+							<h:outputText value="#{movBaja.movBaja.actividad}" />
+							<h:outputLabel value="Fecha de Salida: " />
+							<h:outputText value="#{movBaja.movBaja.fechaSalida}" />
+							<h:outputLabel value="LEGAJO: " />
+							<h:outputText value="#{movBaja.movBaja.legajo}" />
+							<h:outputLabel value="Observaciones: " />
+							<h:outputText value="#{movBaja.movBaja.observaciones}" />
+
+
+						</h:panelGrid>
+
+						<br />
+
+						<p:dataTable border="1" value="#{movBaja.lote}"
+							var="lote">
+								<p:column>
+									<f:facet name="header">Id Lote</f:facet>    				
+                                           #{lote.codLote}
+                            </p:column>
+                            <p:column>
+								<f:facet name="header">Id Articulo</f:facet>    				
+                                           #{lote.articuloID}
+                            </p:column>
+								<p:column>
+									<f:facet name="header">Articulo</f:facet>
+                                		    #{lote.articulo}
+                                            
+                             </p:column>
+								<p:column>
+									<f:facet name="header">Marca</f:facet>    				
+                                           #{lote.marString}
+                            </p:column>
+								<p:column>
+									<f:facet name="header">Modelo</f:facet>
+                                		    #{lote.modString}
+                                            
+                             </p:column>
+								<p:column>
+									<f:facet name="header">Stock Actual</f:facet>    				
+                                           #{lote.stockActual}
+                            </p:column>
+                            						
+							<p:column>
+									<f:facet name="header">Estado</f:facet>    				
+                                             Baja
+                            </p:column>
+
+							</p:dataTable>
+
+						<br />
+						<br />
+
+						 
+						<p align="right">
+							<h:commandButton value="Guardar"
+								action="#{movBaja.crearMovimiento}" update="mgs" />
+						</p>
+						<h:commandButton value="Volver a Indice" action="/index.xhtml"
+							immediate="true" />
+
+
+						<p:messages id="mgs" showDetail="true" />
+
+						<br />
+						<br />
+						<br />
+						<p:commandButton value="Cancel" action="#{movBaja.cancelar()}"
+							immediate="true" />
+
+					</p:tab>
+
+
+
+				</p:wizard>
+
+			</h:panelGrid>
+			<br />
+		</h:form>
+
+	</ui:define>
+
+</ui:composition>
+
+
+
+</html>
