@@ -46,7 +46,8 @@ public class LoteRepository implements Repositorio <String, Lote> {
 
 	@Override
 	public List<Lote> getAll() {
-		String q = "SELECT p from " + Lote.class.getName() + " p " +  "where stockActual > 0" ;
+		String q = "SELECT p from " + Lote.class.getName() + " p " ;
+		//String q = "SELECT p from " + Lote.class.getName() + " p " +  "where stockActual > 0" ;
 		TypedQuery<Lote> query = entityManager.createQuery(q, Lote.class);
 		
 		List<Lote> result = query.getResultList();

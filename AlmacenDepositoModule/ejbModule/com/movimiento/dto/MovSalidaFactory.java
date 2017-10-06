@@ -21,7 +21,7 @@ public class MovSalidaFactory {
 		
 		MovSalidaDTO result = new MovSalidaDTO();
 		result.setId(movSalida.getCodMovSalida());
-		result.setActividad(movSalida.getActividad().getCodActividad());
+		result.setActividad(movSalida.getActividad().getNroActividad());
 		result.setNomActividad(movSalida.getActividad().getNomActividad());
 		result.setComprobante(movSalida.getMovOrigen().getTipoMovOrigen().getCodTMovOrigen());
 		result.setNomComprobante(movSalida.getMovOrigen().getTipoMovOrigen().getNomTMovOrigen());
@@ -44,6 +44,7 @@ public class MovSalidaFactory {
 		
 			
 			DetMovSalidaDTO detalleDTO = new DetMovSalidaDTO();
+			detalleDTO.setId(detalleMS.getCodDetalleMS());
 			detalleDTO.setCantidad(detalleMS.getCantidadMS());
 			detalleDTO.setCodArticulo(detalleMS.getLote().getArticulo().getCodArticulo());
 			detalleDTO.setNomArticulo(detalleMS.getLote().getArticulo().getNomArticulo());

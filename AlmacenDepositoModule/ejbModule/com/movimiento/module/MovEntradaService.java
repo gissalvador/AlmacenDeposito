@@ -254,7 +254,7 @@ public class MovEntradaService implements MovEntradaServiceRemote {
 		movEntrada.setImporteTotal(importetotal);
 
 		MovEntrada movEntradaNuevo = addMovEntrada(movEntrada, detList);
-		System.out.println(movEntradaNuevo.getCodMovEntrada());
+		//System.out.println(movEntradaNuevo.getCodMovEntrada());
 		return movEntradaNuevo.getCodMovEntrada();
 	}
 

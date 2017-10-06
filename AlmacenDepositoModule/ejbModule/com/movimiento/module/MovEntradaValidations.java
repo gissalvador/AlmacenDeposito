@@ -129,7 +129,7 @@ public class MovEntradaValidations {
 		}
 
 		if (nuevoMovEntrada.getNroSolicitud() == null
-				|| nuevoMovEntrada.getNroSolicitud() <= 0) {
+				|| nuevoMovEntrada.getNroSolicitud() < 0) {
 			errors.add(new ValidationError("nroSolicitud",
 					"Debe definir un numero de solicitud."));
 		}

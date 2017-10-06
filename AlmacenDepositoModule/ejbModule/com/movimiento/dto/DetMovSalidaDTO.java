@@ -6,6 +6,7 @@ import java.util.Date;
 public class DetMovSalidaDTO implements Serializable {
 	private static final long serialVersionUID = 1L;
 
+	private String id;
 	private Float cantidad;
 	private Integer codArticulo;
 	private String nomArticulo;
@@ -22,6 +23,7 @@ public class DetMovSalidaDTO implements Serializable {
 	private String marString;
 	private String lote;
 	private Float uniTotal;
+    private Float cantDevolucion = null;
 	
 	 
 
@@ -152,6 +154,26 @@ public class DetMovSalidaDTO implements Serializable {
 	public void setUniTotal(Float uniTotal) {
 		this.uniTotal = uniTotal;
 	}
+
+	public Float getCantDevolucion() {
+		return cantDevolucion;
+	}
+
+	public void setCantDevolucion(Float cantDevolucion) {
+		this.cantDevolucion = cantDevolucion;
+	}
+
+	public String getId() {
+		return id;
+	}
+
+	public void setId(String id) {
+		this.id = id;
+	}
+	
+	
+	
+	
 
 
 }

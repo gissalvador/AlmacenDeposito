@@ -1,0 +1,291 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Frameset//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-frameset.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:f="http://java.sun.com/jsf/core">
+
+<ui:composition template="/WEB-INF/templates/template.xhtml">
+
+
+	<ui:define name="content">
+
+
+		<h:form id="form" method="post">
+			<h:panelGrid columns="1" style="width: 90%">
+				<p:wizard>
+
+					<p:tab title="Movimiento de Devolución" id="movDevolucion">
+						<br />
+						<br />
+
+						<p:growl id="ms" showDetail="true" />
+
+						<h:panelGrid columns="4" width="100%"
+							columnClasses="rightalign,leftalign,leftalign">
+
+
+							<h:outputLabel value="Fecha Devolución" for="fechaIngreso" />
+							<p:calendar id="fechaIngreso"
+								value="#{movDevolucion.movDevolucion.fechaIngreso}"
+								showOn="button" navigator="true" />
+							<h:outputLabel />
+							<p:message for="fechaIngreso" />
+
+							<h:outputLabel value="Código Movimiento Salida: "
+								for="codMovSalida" />
+							<h:inputText id="codMovSalida" label="Número Movimiento Salida: "
+								required="true" value="#{movDevolucion.movDevolucion.nroComprobante}">
+							</h:inputText>
+							<p:commandButton value="Buscar"
+								onclick="window.open('/AlmacenDepositoWEB/reportes/movSalida.xhtml')" />
+							<p:message for="codMovSalida" />
+
+							<h:outputLabel value="Legajo" for="cuitlegajo" />
+							<h:inputText id="cuitlegajo" label="CUIT" required="true"
+								value="#{movDevolucion.movDevolucion.cuitlegajo}"
+								validatorMessage="CUIT: Escriba un Legajo valido. Ejemplo: 17316">
+								<f:validateLength minimum="4" maximum="5" />
+							</h:inputText>
+							<p:commandButton value="Buscar"
+								onclick="window.open('/AlmacenDepositoWEB/general/empleado.xhtml')" />
+							<p:message for="cuitlegajo" />
+
+							<h:outputLabel value="Observaciones" for="observaciones" />
+							<h:inputTextarea id="observaciones" label="Observaciones"
+								value="#{movDevolucion.movDevolucion.observaciones}" />
+							<h:outputLabel />
+							<p:message for="observaciones" />
+						</h:panelGrid>
+						<br />
+						<h:panelGrid columns="2">
+							<br />
+							<h:commandButton value="Buscar Movimiento Salida"
+								action="#{movDevolucion.buscarMovSalida()}" update="msgs" />
+						</h:panelGrid>
+
+						<br />
+
+						<p:messages id="msgs" showDetail="true" />
+						<br />
+						<br />
+						<h:panelGroup rendered="#{not empty movDevolucion.bl}">
+
+							<h2>Selecionar Lotes</h2>
+
+
+							<p:dataTable id="loteTable" border="1"
+								value="#{movDevolucion.movSalida.detalleMS}" var="ddto"
+								editable="true">
+								<f:facet name="header">
+						           Detalle Movimiento Salida
+						       </f:facet>
+
+								<p:ajax event="rowEdit" listener="#{movDevolucion.onRowEdit}"
+									update=":form:ms" />
+								<p:ajax event="rowEditCancel"
+									listener="#{movDevolucion.onRowCancel}" update=":form:ms" />
+
+								<p:column>
+									<f:facet name="header">Id Lote</f:facet>    				
+                                           #{ddto.lote}
+                            </p:column>
+								<p:column>
+									<f:facet name="header">Id Articulo</f:facet>    				
+                                           #{ddto.codArticulo}
+                            </p:column>
+								<p:column>
+									<f:facet name="header">Articulo</f:facet>
+                                		    #{ddto.nomArticulo}
+                                            
+                             </p:column>
+								<p:column>
+									<f:facet name="header">Marca</f:facet>    				
+                                           #{ddto.marString}
+                            </p:column>
+								<p:column>
+									<f:facet name="header">Modelo</f:facet>
+                                		    #{ddto.modString}
+                                            
+                             </p:column>
+								<p:column>
+									<f:facet name="header">Cantidad Salida</f:facet>    				
+                                           #{ddto.cantidad}
+                            </p:column>
+
+								<p:column headerText="Cantidad Devolución">
+									<p:cellEditor>
+										<f:facet name="output">
+											<h:outputText value="#{ddto.cantDevolucion}" />
+										</f:facet>
+										<f:facet name="input">
+											<p:inputText value="#{ddto.cantDevolucion}" style="width:50%"
+												label="Cantidad Devolución" />
+										</f:facet>
+									</p:cellEditor>
+								</p:column>
+
+								<p:column style="width:32px">
+									<p:rowEditor />
+								</p:column>
+
+
+							</p:dataTable>
+
+							<h:panelGrid columns="2">
+								<br />
+								<br />
+								<h:commandButton value="Generar Devolución"
+									action="#{movDevolucion.Detalle()}" update="msgs" />
+							</h:panelGrid>
+
+						</h:panelGroup>
+
+						<br />
+						<br />
+
+						<br />
+
+						<h:panelGroup rendered="#{not empty movDevolucion.bl2}">
+
+							<h2>Movimiento Devolución</h2>
+
+
+							<p:dataTable id="detEntrada" border="1"
+								value="#{movDevolucion.detlallesMovDevolucion}" var="dme">
+								<f:facet name="header">
+						           Detalle Movimiento Devolución
+						       </f:facet>
+
+								<p:column>
+									<f:facet name="header">Id Lote</f:facet>    				
+                                           #{dme.lote}
+                            </p:column>
+								<p:column>
+									<f:facet name="header">Id Articulo</f:facet>    				
+                                           #{dme.codArticulo}
+                            </p:column>
+								<p:column>
+									<f:facet name="header">Articulo</f:facet>
+                                		    #{dme.nomArticulo}
+                                            
+                             </p:column>
+								<p:column>
+									<f:facet name="header">Marca</f:facet>    				
+                                           #{dme.marString}
+                            </p:column>
+								<p:column>
+									<f:facet name="header">Modelo</f:facet>
+                                		    #{dme.modString}
+                                            
+                             </p:column>
+								<p:column>
+									<f:facet name="header">Cantidad Devolución</f:facet>    				
+                                           #{dme.cantidad}
+                            
+								</p:column>
+
+
+							</p:dataTable>
+
+						</h:panelGroup>
+
+						<br />
+						<br />
+						<p:commandButton value="Cancel"
+							action="#{movDevoluciones.cancelar()}" immediate="true" />
+
+					</p:tab>
+					<p:tab title="Confirmar" id="confirmar">
+						<br />
+						<h:panelGrid columns="2" columnClasses="rightalign-bold,normal">
+
+							<h:outputLabel value="Almacen: " />
+							<h:outputText value="#{movDevolucion.movDevolucion.almString}" />
+							<h:outputLabel value="Actividad: " />
+							<h:outputText value="#{movDevolucion.movDevolucion.actString}" />
+							<h:outputLabel value="Fecha de Ingreso: " />
+							<h:outputText value="#{movDevolucion.movDevolucion.fechaIngreso}" />
+							<h:outputLabel value="Número de Movimiento Salida: " />
+							<h:outputText
+								value="#{movDevolucion.movDevolucion.nroComprobante}" />
+							<h:outputLabel value="Legajo: " />
+							<h:outputText value="#{movDevolucion.movDevolucion.cuitlegajo}" />
+							<h:outputLabel value="Observaciones: " />
+							<h:outputText
+								value="#{movDevolucion.movDevolucion.observaciones}" />
+
+
+						</h:panelGrid>
+
+						<br />
+
+						<p:dataTable border="1"
+							value="#{movDevolucion.detlallesMovDevolucion}" var="dme">
+							<f:facet name="header">
+						           Detalle Movimiento Devolución
+						       </f:facet>
+
+							<p:column>
+								<f:facet name="header">Id Lote</f:facet>    				
+                                           #{dme.lote}
+                            </p:column>
+							<p:column>
+								<f:facet name="header">Id Articulo</f:facet>    				
+                                           #{dme.codArticulo}
+                            </p:column>
+							<p:column>
+								<f:facet name="header">Articulo</f:facet>
+                                		    #{dme.nomArticulo}
+                                            
+                             </p:column>
+							<p:column>
+								<f:facet name="header">Marca</f:facet>    				
+                                           #{dme.marString}
+                            </p:column>
+							<p:column>
+								<f:facet name="header">Modelo</f:facet>
+                                		    #{dme.modString}
+                                            
+                             </p:column>
+							<p:column>
+								<f:facet name="header">Cantidad Devolución</f:facet>    				
+                                           #{dme.cantidad}
+                            
+								</p:column>
+
+
+						</p:dataTable>
+						<br />
+						<br />
+
+						<p align="right">
+							<p:commandButton value="Guardar"
+								action="#{movDevolucion.crearMovimiento}" update="mgs">
+
+							</p:commandButton>
+						</p>
+						<p:commandButton value="Volver a Indice" action="/index.xhtml"
+							immediate="true" />
+
+						<p:messages id="mgs" showDetail="true" />
+						<br />
+						<br />
+						<p:commandButton value="Cancel"
+							action="#{movDevolucion.cancelar()}" immediate="true" />
+
+					</p:tab>
+				</p:wizard>
+
+			</h:panelGrid>
+			<br />
+		</h:form>
+
+	</ui:define>
+
+</ui:composition>
+
+
+
+</html>
