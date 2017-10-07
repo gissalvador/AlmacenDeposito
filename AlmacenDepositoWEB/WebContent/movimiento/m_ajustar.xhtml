@@ -1,0 +1,546 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Frameset//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-frameset.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:f="http://java.sun.com/jsf/core">
+
+<ui:composition template="/WEB-INF/templates/template.xhtml">
+
+
+	<ui:define name="content">
+
+
+		<h:form id="form" method="post">
+			<h:panelGrid columns="1" style="width: 90%">
+				<p:wizard>
+
+					<p:tab title="Movimiento de Ajustar Lote" id="movAjustar">
+						<br />
+						<br />
+
+						<p:growl id="ms" showDetail="true" />
+
+						<h:panelGrid columns="4" width="100%"
+							columnClasses="rightalign,leftalign,leftalign">
+
+							<p:outputLabel value="Almacen:" for="almacen" />
+							<p:selectOneMenu id="almacen" required="true"
+								value="#{movAjustar.almacen}">
+								<f:selectItem itemLabel="Selecionar una opción" itemValue="" />
+								<f:selectItems value="#{movAjustar.optionsAlm}"
+									style="width:200px" />
+							</p:selectOneMenu>
+							<h:outputLabel />
+							<h:message for="almacen" />
+
+							<h:outputLabel value="Código Lote:" for="codLote" />
+							<h:inputText size="20" id="codLote" label="Código Lote:"
+								required="true" value="#{movAjustar.codLote}" />
+							<h:commandButton value="Buscar"
+								onclick="window.open('/AlmacenDepositoWEB/general/lote.xhtml')" />
+							<h:message for="codLote" />
+
+
+						</h:panelGrid>
+						<br />
+						<br />
+						<h:panelGrid columns="2">
+							<br />
+							<h:commandButton value="Buscar lote"
+								action="#{movAjustar.buscarLote()}" update="msgs" />
+						</h:panelGrid>
+
+						<br />
+
+						<p:messages id="msgs" showDetail="true" />
+						<br />
+						<br />
+						<h:panelGroup rendered="#{not empty movAjustar.bl}">
+
+
+
+							<h2>Detalle Lotes</h2>
+
+							<p:dataTable id="loteTable" border="1" value="#{movAjustar.lote}"
+								var="lote" editable="true">
+								<f:facet name="header">
+						           Detalle Lote
+						       </f:facet>
+
+								<p:ajax event="rowEdit" listener="#{movAjustar.onRowEdit}"
+									update=":form:ms" />
+								<p:ajax event="rowEditCancel"
+									listener="#{movAjustar.onRowCancel}" update=":form:ms" />
+
+								<p:column>
+									<f:facet name="header">Id Lote</f:facet>    				
+                                           #{lote.codLote}
+	                            </p:column>
+								<p:column>
+									<f:facet name="header">Id Articulo</f:facet>    				
+	                                           #{lote.articuloID}
+	                            </p:column>
+								<p:column>
+									<f:facet name="header">Articulo</f:facet>
+	                                		    #{lote.articulo}
+	                                            
+	                             </p:column>
+								<p:column>
+									<f:facet name="header">Marca</f:facet>    				
+	                                           #{lote.marString}
+	                            </p:column>
+								<p:column>
+									<f:facet name="header">Modelo</f:facet>
+	                                		    #{lote.modString}
+	                                            
+	                             </p:column>
+								<p:column>
+									<f:facet name="header">Stock Inicial</f:facet>    				
+	                                           #{lote.stockInicial}
+	                            </p:column>
+								<p:column>
+									<f:facet name="header">Stock Actual</f:facet>    				
+	                                           #{lote.stockActual}
+	                            </p:column>
+
+								<p:column>
+									<f:facet name="header">Stock Almacen</f:facet>    				
+	                                           #{lote.stockAlmacen}
+	                            </p:column>
+
+								<p:column headerText="Cantidad Real">
+									<p:cellEditor>
+										<f:facet name="output">
+											<h:outputText value="#{lote.stockReal}" />
+										</f:facet>
+										<f:facet name="input">
+											<p:inputText value="#{lote.stockReal}" style="width:50%"
+												label="Cantidad Real" />
+										</f:facet>
+									</p:cellEditor>
+								</p:column>
+
+								<p:column style="width:32px">
+									<p:rowEditor />
+								</p:column>
+
+
+							</p:dataTable>
+
+							<h:panelGrid columns="2">
+								<br />
+								<br />
+								<h:commandButton value="Generar Ajuste"
+									action="#{movAjustar.Detalle()}" update="msgs" />
+							</h:panelGrid>
+
+						</h:panelGroup>
+
+						<br />
+						<br />
+
+						<br />
+
+
+						<h:panelGroup rendered="#{not empty movAjustar.ae}">
+
+							<h2>Ajustar Entrada</h2>
+
+							<h:panelGrid columns="3" width="100%"
+								columnClasses="rightalign,leftalign,leftalign">
+
+								<h:outputLabel value="Fecha Ajuste" for="fechaAjuste" />
+								<p:calendar id="fechaAjuste"
+									value="#{movAjustar.movAjustar.fechaIngreso}" showOn="button"
+									navigator="true" />
+								<h:message for="fechaAjuste" />
+
+								<h:outputLabel value="LEGAJO" for="legajo" />
+								<h:inputText id="legajo" label="LEGAJO" required="true"
+									value="#{movAjustar.movAjustar.cuitlegajo}" />
+								<h:message for="legajo" />
+
+								<h:outputLabel value="Observaciones" for="observaciones" />
+								<h:inputTextarea id="observaciones" label="Observaciones"
+									value="#{movAjustar.movAjustar.observaciones}" />
+								<h:message for="observaciones" />
+
+							</h:panelGrid>
+
+
+
+
+							<p:dataTable id="detEntrada" border="1"
+								value="#{movAjustar.detlallesMovAjustar}" var="dme">
+								<f:facet name="header">
+						           Detalle Movimiento Ajustar Entrada
+						       </f:facet>
+
+								<p:column>
+									<f:facet name="header">Id Lote</f:facet>    				
+                                           #{dme.lote}
+                            </p:column>
+								<p:column>
+									<f:facet name="header">Id Articulo</f:facet>    				
+                                           #{dme.codArticulo}
+                            </p:column>
+								<p:column>
+									<f:facet name="header">Articulo</f:facet>
+                                		    #{dme.nomArticulo}
+                                            
+                             </p:column>
+								<p:column>
+									<f:facet name="header">Marca</f:facet>    				
+                                           #{dme.marString}
+                            </p:column>
+								<p:column>
+									<f:facet name="header">Modelo</f:facet>
+                                		    #{dme.modString}
+                                            
+                             </p:column>
+								<p:column>
+									<f:facet name="header">Cantidad Ajustar</f:facet>    				
+                                           #{dme.cantidad}
+                            
+								</p:column>
+
+
+							</p:dataTable>
+
+						</h:panelGroup>
+
+						<br />
+						<h:panelGroup rendered="#{not empty movAjustar.af}">
+
+							<h2>Ajustar Faltante</h2>
+
+							<h:panelGrid columns="3" width="100%"
+								columnClasses="rightalign,leftalign,leftalign">
+
+								<h:outputLabel value="Fecha Ajuste" for="fechaAjusteSalida" />
+								<p:calendar id="fechaAjusteSalida"
+									value="#{movAjustar.movAjustarFaltante.fechaSalida}"
+									showOn="button" navigator="true" />
+								<h:message for="fechaAjusteSalida" />
+
+								<h:outputLabel value="LEGAJO" for="legajoSalida" />
+								<h:inputText id="legajoSalida" label="LEGAJO" required="true"
+									value="#{movAjustar.movAjustarFaltante.legajo}" />
+								<h:message for="legajoSalida" />
+
+								<h:outputLabel value="Observaciones" for="observacionesSalida" />
+								<h:inputTextarea id="observacionesSalida" label="Observaciones"
+									value="#{movAjustar.movAjustarFaltante.observaciones}" />
+								<h:message for="observacionesSalida" />
+
+							</h:panelGrid>
+
+
+
+
+							<p:dataTable id="detSalida" border="1"
+								value="#{movAjustar.detlallesMovAjustarFaltante}" var="dmaf">
+								<f:facet name="header">
+						           Detalle Movimiento Ajustar Faltante
+						       </f:facet>
+
+								<p:column>
+									<f:facet name="header">Id Lote</f:facet>    				
+                                           #{dmaf.lote}
+                            </p:column>
+								<p:column>
+									<f:facet name="header">Id Articulo</f:facet>    				
+                                           #{dmaf.codArticulo}
+                            </p:column>
+								<p:column>
+									<f:facet name="header">Articulo</f:facet>
+                                		    #{dmaf.nomArticulo}
+                                            
+                             </p:column>
+								<p:column>
+									<f:facet name="header">Marca</f:facet>    				
+                                           #{dmaf.marString}
+                            </p:column>
+								<p:column>
+									<f:facet name="header">Modelo</f:facet>
+                                		    #{dmaf.modString}
+                                            
+                             </p:column>
+								<p:column>
+									<f:facet name="header">Cantidad Ajustar</f:facet>    				
+                                           #{dmaf.cantidad}
+                            
+								</p:column>
+
+
+							</p:dataTable>
+
+						</h:panelGroup>
+
+						<br />
+						<br />
+
+						<h:panelGroup rendered="#{not empty movAjustar.ce}">
+						
+							<p:dataTable id="ajustarLote" border="1" value="#{movAjustar.lote}"
+								var="lote" >
+								<f:facet name="header">
+						           Detalle Lote
+						       </f:facet>
+
+								<p:column>
+									<f:facet name="header">Id Lote</f:facet>    				
+                                           #{lote.codLote}
+	                            </p:column>
+								<p:column>
+									<f:facet name="header">Id Articulo</f:facet>    				
+	                                           #{lote.articuloID}
+	                            </p:column>
+								<p:column>
+									<f:facet name="header">Articulo</f:facet>
+	                                		    #{lote.articulo}
+	                                            
+	                             </p:column>
+								<p:column>
+									<f:facet name="header">Marca</f:facet>    				
+	                                           #{lote.marString}
+	                            </p:column>
+								<p:column>
+									<f:facet name="header">Modelo</f:facet>
+	                                		    #{lote.modString}
+	                                            
+	                             </p:column>
+								<p:column>
+									<f:facet name="header">Stock Inicial</f:facet>    				
+	                                           #{lote.stockInicial}
+	                            </p:column>
+								<p:column>
+									<f:facet name="header">Stock Actual</f:facet>    				
+	                                           #{lote.stockActual}
+	                            </p:column>
+
+								<p:column>
+									<f:facet name="header">Stock Almacen</f:facet>    				
+	                                           #{lote.stockAlmacen}
+	                            </p:column>
+							
+							</p:dataTable>
+
+						</h:panelGroup>
+
+						<br />
+						<br />
+						<p:commandButton value="Cancel"
+							action="#{movAjustares.cancelar()}" immediate="true" />
+
+
+
+
+					</p:tab>
+					<p:tab title="Confirmar" id="confirmar">
+						<br />
+						<h:panelGroup rendered="#{not empty movAjustar.ae}">
+
+							<h:panelGrid columns="2" columnClasses="rightalign-bold,normal">
+
+								<h:outputLabel value="Almacen: " />
+								<h:outputText value="#{movAjustar.movAjustar.almString}" />
+								<h:outputLabel value="Actividad: " />
+								<h:outputText value="#{movAjustar.movAjustar.actString}" />
+								<h:outputLabel value="Fecha de Ingreso: " />
+								<h:outputText value="#{movAjustar.movAjustar.fechaIngreso}" />
+								<h:outputLabel value="Legajo: " />
+								<h:outputText value="#{movAjustar.movAjustar.cuitlegajo}" />
+								<h:outputLabel value="Observaciones: " />
+								<h:outputText value="#{movAjustar.movAjustar.observaciones}" />
+
+
+							</h:panelGrid>
+
+							<br />
+
+							<p:dataTable border="1" value="#{movAjustar.detlallesMovAjustar}"
+								var="dme">
+								<f:facet name="header">
+						           Detalle Movimiento Ajustar
+						       </f:facet>
+
+								<p:column>
+									<f:facet name="header">Id Lote</f:facet>    				
+                                           #{dme.lote}
+                            </p:column>
+								<p:column>
+									<f:facet name="header">Id Articulo</f:facet>    				
+                                           #{dme.codArticulo}
+                            </p:column>
+								<p:column>
+									<f:facet name="header">Articulo</f:facet>
+                                		    #{dme.nomArticulo}
+                                            
+                             </p:column>
+								<p:column>
+									<f:facet name="header">Marca</f:facet>    				
+                                           #{dme.marString}
+                            </p:column>
+								<p:column>
+									<f:facet name="header">Modelo</f:facet>
+                                		    #{dme.modString}
+                                            
+                             </p:column>
+								<p:column>
+									<f:facet name="header">Cantidad Ajustar</f:facet>    				
+                                           #{dme.cantidad}
+                            
+								</p:column>
+
+
+							</p:dataTable>
+							<br />
+							<br />
+
+						</h:panelGroup>
+
+						<h:panelGroup rendered="#{not empty movAjustar.af}">
+
+
+							<h:panelGrid columns="2" columnClasses="rightalign-bold,normal">
+
+								<h:outputLabel value="Almacen: " />
+								<h:outputText
+									value="#{movAjustar.movAjustarFaltante.nomAlmacen}" />
+								<h:outputLabel value="Actividad: " />
+								<h:outputText
+									value="#{movAjustar.movAjustarFaltante.nomActividad}" />
+								<h:outputLabel value="Fecha de Ingreso: " />
+								<h:outputText
+									value="#{movAjustar.movAjustarFaltante.fechaSalida}" />
+								<h:outputLabel value="Legajo: " />
+								<h:outputText value="#{movAjustar.movAjustarFaltante.legajo}" />
+								<h:outputLabel value="Observaciones: " />
+								<h:outputText
+									value="#{movAjustar.movAjustarFaltante.observaciones}" />
+
+
+							</h:panelGrid>
+
+							<p:dataTable border="1"
+								value="#{movAjustar.detlallesMovAjustarFaltante}" var="dmaf">
+								<f:facet name="header">
+						           Detalle Movimiento Ajustar Faltante
+						       </f:facet>
+
+								<p:column>
+									<f:facet name="header">Id Lote</f:facet>    				
+                                           #{dmaf.lote}
+                            </p:column>
+								<p:column>
+									<f:facet name="header">Id Articulo</f:facet>    				
+                                           #{dmaf.codArticulo}
+                            </p:column>
+								<p:column>
+									<f:facet name="header">Articulo</f:facet>
+                                		    #{dmaf.nomArticulo}
+                                            
+                             </p:column>
+								<p:column>
+									<f:facet name="header">Marca</f:facet>    				
+                                           #{dmaf.marString}
+                            </p:column>
+								<p:column>
+									<f:facet name="header">Modelo</f:facet>
+                                		    #{dmaf.modString}
+                                            
+                             </p:column>
+								<p:column>
+									<f:facet name="header">Cantidad Ajustar</f:facet>    				
+                                           #{dmaf.cantidad}
+                            
+								</p:column>
+
+
+							</p:dataTable>
+
+						</h:panelGroup>
+
+						<h:panelGroup rendered="#{not empty movAjustar.ce}">
+						
+							<p:dataTable border="1" value="#{movAjustar.lote}"
+								var="lote" >
+								<f:facet name="header">
+						           Detalle Lote
+						       </f:facet>
+
+								<p:column>
+									<f:facet name="header">Id Lote</f:facet>    				
+                                           #{lote.codLote}
+	                            </p:column>
+								<p:column>
+									<f:facet name="header">Id Articulo</f:facet>    				
+	                                           #{lote.articuloID}
+	                            </p:column>
+								<p:column>
+									<f:facet name="header">Articulo</f:facet>
+	                                		    #{lote.articulo}
+	                                            
+	                             </p:column>
+								<p:column>
+									<f:facet name="header">Marca</f:facet>    				
+	                                           #{lote.marString}
+	                            </p:column>
+								<p:column>
+									<f:facet name="header">Modelo</f:facet>
+	                                		    #{lote.modString}
+	                                            
+	                             </p:column>
+								<p:column>
+									<f:facet name="header">Stock Inicial</f:facet>    				
+	                                           #{lote.stockInicial}
+	                            </p:column>
+								<p:column>
+									<f:facet name="header">Stock Actual</f:facet>    				
+	                                           #{lote.stockActual}
+	                            </p:column>
+
+								<p:column>
+									<f:facet name="header">Stock Almacen</f:facet>    				
+	                                           #{lote.stockAlmacen}
+	                            </p:column>
+							
+							</p:dataTable>
+
+						</h:panelGroup>
+
+
+
+						<p align="right">
+
+							<p:commandButton value="Guardar"
+								action="#{movAjustar.crearMovimiento}" update="mgs">
+
+							</p:commandButton>
+						</p>
+						<p:commandButton value="Volver a Indice" action="/index.xhtml"
+							immediate="true" />
+
+						<p:messages id="mgs" showDetail="true" />
+						<br />
+						<br />
+						<p:commandButton value="Cancel" action="#{movAjustar.cancelar()}"
+							immediate="true" />
+
+					</p:tab>
+				</p:wizard>
+
+			</h:panelGrid>
+			<br />
+		</h:form>
+
+	</ui:define>
+
+</ui:composition>
+
+
+
+</html>

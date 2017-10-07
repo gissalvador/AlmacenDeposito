@@ -33,6 +33,9 @@ public class LoteDTO implements Serializable {
 	private String nomEstadoLote;
 	private Integer actividadID;
 	private String actividad;
+	private Float StockAlmacen;
+	private Float StockReal;
+	
 
 	private List<LoteAlmacenDTO> loteAlmacenDTO;
 
@@ -126,6 +129,22 @@ public class LoteDTO implements Serializable {
 
 	public void setMarString(String marString) {
 		this.marString = marString;
+	}
+	
+	public Float getStockAlmacen() {
+		return StockAlmacen;
+	}
+
+	public void setStockAlmacen(Float stockAlmacen) {
+		StockAlmacen = stockAlmacen;
+	}
+
+	public Float getStockReal() {
+		return StockReal;
+	}
+
+	public void setStockReal(Float stockReal) {
+		StockReal = stockReal;
 	}
 
 	public List<LoteAlmacenDTO> getLoteAlmacenDTO() {

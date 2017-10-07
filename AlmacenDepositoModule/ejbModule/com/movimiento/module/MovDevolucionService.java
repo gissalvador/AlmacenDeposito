@@ -131,7 +131,7 @@ public class MovDevolucionService implements MovDevolucionServiceRemote {
 
 		movDevolucion.setImporteTotal(importetotal);
 		MovEntrada movDevolucionNuevo = addMovEntrada(movDevolucion, detList);
-		System.out.println(movDevolucionNuevo.getCodMovEntrada());
+		//System.out.println(movDevolucionNuevo.getCodMovEntrada());
 
 	}
 
