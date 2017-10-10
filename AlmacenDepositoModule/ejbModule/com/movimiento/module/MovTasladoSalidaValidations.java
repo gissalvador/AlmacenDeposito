@@ -23,7 +23,7 @@ import com.movimiento.repository.TipoMORepository;
  */
 @Stateless
 @LocalBean
-public class MovSalidaValidations {
+public class MovTasladoSalidaValidations {
 
 	@EJB
 	MovEntradaRepository meRepository;
@@ -50,7 +50,7 @@ public class MovSalidaValidations {
 	 * Default constructor.
 	 */
 
-	public MovSalidaValidations() {
+	public MovTasladoSalidaValidations() {
 		// TODO Auto-generated constructor stub
 	}
 
@@ -66,17 +66,7 @@ public class MovSalidaValidations {
 			}
 		}
 
-		if (nuevoMovSalida.getActividad() == null
-				|| nuevoMovSalida.getActividad() <= 0) {
-			errors.add(new ValidationError("actividad",
-					"Debe definir un numero de actividad."));
-		}
-
-		if (aService.getActividad(nuevoMovSalida.getActividad()) == null) {
-			errors.add(new ValidationError("actividad",
-					"La Actividad no se encuentra registrada."));
-		}
-
+		
 		if (nuevoMovSalida.getAlmacen() == null
 				|| nuevoMovSalida.getAlmacen() <= 0) {
 			errors.add(new ValidationError("almacen",
@@ -92,44 +82,6 @@ public class MovSalidaValidations {
 			errors.add(new ValidationError("fechaSalida",
 					"Debe definir una Fecha."));
 		}
-/*
-		if (nuevoMovSalida.getComprobante() == null
-				|| nuevoMovSalida.getComprobante() <= 0) {
-			errors.add(new ValidationError("comprobante",
-					"Debe definir un numero de Tipo de Comprobante."));
-		}
-
-		if (tmoRepository.get(nuevoMovSalida.getComprobante()) == null) {
-			errors.add(new ValidationError("comprobante",
-					"El Tipo Movimiento de Origen no se encuentra registrado."));
-		} else if (tmoRepository.get(nuevoMovSalida.getComprobante())
-				.getTipoPersona().getCodTipoPersona() == 1) {
-
-			if (eService.getEmpleado(nuevoMovSalida.getLegajo()) == null) {
-				errors.add(new ValidationError("legajo",
-						"El Número de Legajo no se encuentra regitrado"));
-			}
-
-		}
-
-		if (nuevoMovSalida.getComprobante() != 3) {
-			if (nuevoMovSalida.getNroComprobante() == null
-					|| nuevoMovSalida.getNroComprobante().length() <= 0) {
-				errors.add(new ValidationError("Numero de Comprobante",
-						"Debe definir un número de Comprobante."));
-			}
-		}
-
-		/*if (nuevoMovSalida.getFechaMO() == null) {
-			errors.add(new ValidationError("fechaMO",
-					"Debe definir Fecha de Movimiento de Origen."));
-		}
-
-		if (nuevoMovSalida.getNroSolicitud() == null
-				|| nuevoMovSalida.getNroSolicitud() <= 0) {
-			errors.add(new ValidationError("nroSolicitud",
-					"Debe definir un numero de solicitud."));
-		}*/
 
 		if (nuevoMovSalida.getLegajo() == null
 				|| nuevoMovSalida.getLegajo().length() <= 0) {
@@ -141,16 +93,7 @@ public class MovSalidaValidations {
 			errors.add(new ValidationError("legajo",
 					"El Número de Legajo no se encuentra regitrado"));
 		}
-
-		
-		/*
-		if (nuevoMovSalida.getComprobante() == null
-				|| nuevoMovSalida.getComprobante() <= 0) {
-			errors.add(new ValidationError("comprobante",
-					"Debe definir un numero de Tipo de Comprobante."));
-
-		}
-*/				
+			
 		if (nuevoMovSalida.getObservaciones().length() > 250) {
 
 			errors.add(new ValidationError("Observaciones",

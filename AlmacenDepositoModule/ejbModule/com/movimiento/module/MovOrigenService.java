@@ -84,7 +84,13 @@ public class MovOrigenService implements MovOrigenServiceRemote {
 		mo.setTipoMovOrigen(tmo);
 		mo.setFechaMovOrigen(movSalida.getFechaSalida());
 		mo.setIdPersonaMovOrigen(movSalida.getLegajo());
-		// mo.setNroComprobanteMO(movSalida.getNroComprobante());
+		if(tMovSalida == 7){
+			
+			mo.setNroComprobanteMO(movSalida.getNroComprobante());
+			
+		}
+		
+		
 
 		movoRepository.add(mo);
 

@@ -16,40 +16,52 @@
 			<h:panelGrid columns="1" style="width: 90%">
 				<p:wizard>
 
-					<p:tab title="Movimiento de Salida" id="movSalida">
+					<p:tab title="Movimiento de Traslado Salida" id="movTrasladoSalida">
 						<br />
 						<br />
 
 						<h:panelGrid columns="3" width="100%"
 							columnClasses="rightalign,leftalign,leftalign">
-							<h:outputLabel value="Almacen: " for="almacen" />
-							<h:inputText id="almacen" label="Almacen" required="true"
-								value="#{movSalida.movSalida.almacen}" />
-							<h:message for="almacen" />
-							<h:outputLabel value="Actividad: " for="actividad" />
-							<h:inputText id="actividad" label="Actividad: " required="true"
-								value="#{movSalida.movSalida.actividad}" />
-							<h:message for="actividad" />
+							
+							<p:outputLabel value="Almacen Origen:" for="almacenOrigen" />
+							<p:selectOneMenu id="almacenOrigen" required="true"
+								value="#{movTrasladoSalida.almacenOrigen}">
+								<f:selectItem itemLabel="Selecionar una opción" itemValue="" />
+								<f:selectItems value="#{movTrasladoSalida.optionsAlm}"
+									style="width:200px" />
+							</p:selectOneMenu>
+							<h:message for="almacenOrigen" />
+							
+							<p:outputLabel value="Almacen Destino:" for="almacenDestino" />
+							<p:selectOneMenu id="almacenDestino" required="true"
+								value="#{movTrasladoSalida.almacenDestino}">
+								<f:selectItem itemLabel="Selecionar una opción" itemValue="" />
+								<f:selectItems value="#{movTrasladoSalida.optionsAlm}"
+									style="width:200px" />
+							</p:selectOneMenu>
+							<h:message for="almacenDestino" />
+							
 							<h:outputLabel value="Fecha Salida:" for="fechaSalida" />
 							<p:calendar id="fechaSalida"
-								value="#{movSalida.movSalida.fechaSalida}" showOn="button"
+								value="#{movTrasladoSalida.movTrasladoSalida.fechaSalida}" showOn="button"
 								navigator="true" />
 							<h:message for="fechaSalida" />
+							
 							<h:outputLabel value="LEGAJO" for="legajo" />
 							<h:inputText id="legajo" label="LEGAJO" required="true"
-								value="#{movSalida.movSalida.legajo}" />
+								value="#{movTrasladoSalida.movTrasladoSalida.legajo}" />
 							<h:message for="legajo" />
 
 							<h:outputLabel value="Observaciones" for="observaciones" />
 							<h:inputTextarea id="observaciones" label="Observaciones"
-								value="#{movSalida.movSalida.observaciones}" />
+								value="#{movTrasladoSalida.movTrasladoSalida.observaciones}" />
 							<h:message for="observaciones" />
 						</h:panelGrid>
 
 						<br />
 						<br />
 						<br />
-						<p:commandButton value="Cancel" action="#{movSalida.cancelar()}"
+						<p:commandButton value="Cancel" action="#{movTrasladoSalida.cancelar()}"
 							immediate="true" />
 
 					</p:tab>
@@ -66,18 +78,18 @@
 
 							<h:outputLabel value="Cantidad :" for="cantidad" />
 							<h:inputText size="10" id="cantidad" label="Cantidad"
-								required="true" value="#{movSalida.cantidad}" />
+								required="true" value="#{movTrasladoSalida.cantidad}" />
 							<h:outputLabel />
 							<h:message for="cantidad" />
 
 
-							<h:outputLabel value="Código Articulo :" for="codArticulo" />
-							<h:inputText size="20" id="codArticulo" label="Código Articulo"
-								required="true" value="#{movSalida.codArticulo}" />
+							<h:outputLabel value="Código Lote :" for="codLote" />
+							<h:inputText size="20" id="codLote" label="Código Lote"
+								required="true" value="#{movTrasladoSalida.codLote}" />
 							<h:commandButton value="Buscar"
-								onclick="window.open('/AlmacenDepositoWEB/general/articulo.xhtml')" />
-							<h:message for="codArticulo" />
-							<h:commandButton value="Agregar" action="#{movSalida.addDetalle}" />
+								onclick="window.open('/AlmacenDepositoWEB/general/lote.xhtml')" />
+							<h:message for="codLote" />
+							<h:commandButton value="Agregar" action="#{movTrasladoSalida.addDetalle}" />
 
 
 
@@ -87,20 +99,20 @@
 						<br />
 
 						<p:dataTable id="detalleTable" border="1"
-							value="#{movSalida.detallesMovSalida}" var="detalle">
+							value="#{movTrasladoSalida.detallesMovTrasladoSalida}" var="detalle">
 							<p:column>
 								<f:facet name="header">Cantidad</f:facet>    				
                                            #{detalle.cantidad}
                             </p:column>
 							<p:column>
-								<f:facet name="header">C. Articulo</f:facet>
-                                		    #{detalle.codArticulo}
+								<f:facet name="header">C. Lote</f:facet>
+                                		    #{detalle.lote}
                                             
                             </p:column>
 							<p:column>
 								<f:facet name="header">Eliminar</f:facet>
 								<p:commandButton icon="ui-icon-close" title="remove from cart"
-									action="#{movSalida.borrarFila(detalle)}" update="detalleTable" />
+									action="#{movTrasladoSalida.borrarFila(detalle)}" update="detalleTable" />
 
 
 							</p:column>
@@ -111,7 +123,7 @@
 						<h:panelGrid columns="2">
 							<br />
 							<h:commandButton value="Buscar lote"
-								action="#{movSalida.buscarLote()}" update="msgs" />
+								action="#{movTrasladoSalida.buscarLote()}" update="msgs" />
 						</h:panelGrid>
 
 						<br />
@@ -119,12 +131,12 @@
 						<p:messages id="msgs" showDetail="true" />
 						<br />
 						<br />
-						<h:panelGroup rendered="#{not empty movSalida.bl}">
+						<h:panelGroup rendered="#{not empty movTrasladoSalida.bl}">
 
 							<h2>Buscar Lotes</h2>
 
 
-							<p:dataTable id="loteTable" border="1" value="#{movSalida.buscarLotes}"
+							<p:dataTable id="loteTable" border="1" value="#{movTrasladoSalida.buscarLotes}"
 								var="lotes">
 								<p:column>
 									<f:facet name="header">Id Lote</f:facet>    				
@@ -162,22 +174,7 @@
 									</p:selectOneRadio>
 							</p:column>
 
-
-							<!--  
-							<p:column>
-									<f:facet name="header">Eliminar</f:facet>
-									<p:commandButton icon="ui-icon-close" title="remove from cart"
-										action="#{movSalida.borrarFilaLote(lotes)}"
-										update="loteTable" />
-
-
-							</p:column>
-							
-							-->
-
 							</p:dataTable>
-
-
 
 						</h:panelGroup>
 
@@ -186,7 +183,7 @@
 						<br />
 						<br />
 						<br />
-						<p:commandButton value="Cancel" action="#{movSalida.cancelar()}"
+						<p:commandButton value="Cancel" action="#{movTrasladoSalida.cancelar()}"
 							immediate="true" />
 					</p:tab>
 
@@ -197,22 +194,22 @@
 						<h:panelGrid columns="2" columnClasses="rightalign-bold,normal">
 
 							<h:outputLabel value="Almacen: " />
-							<h:outputText value="#{movSalida.movSalida.almacen}" />
+							<h:outputText value="#{movTrasladoSalida.movTrasladoSalida.almacen}" />
 							<h:outputLabel value="Actividad: " />
-							<h:outputText value="#{movSalida.movSalida.actividad}" />
+							<h:outputText value="#{movTrasladoSalida.movTrasladoSalida.actividad}" />
 							<h:outputLabel value="Fecha de Salida: " />
-							<h:outputText value="#{movSalida.movSalida.fechaSalida}" />
+							<h:outputText value="#{movTrasladoSalida.movTrasladoSalida.fechaSalida}" />
 							<h:outputLabel value="LEGAJO: " />
-							<h:outputText value="#{movSalida.movSalida.legajo}" />
+							<h:outputText value="#{movTrasladoSalida.movTrasladoSalida.legajo}" />
 							<h:outputLabel value="Observaciones: " />
-							<h:outputText value="#{movSalida.movSalida.observaciones}" />
+							<h:outputText value="#{movTrasladoSalida.movTrasladoSalida.observaciones}" />
 
 
 						</h:panelGrid>
 
 						<br />
 
-						<p:dataTable border="1" value="#{movSalida.buscarLotes}"
+						<p:dataTable border="1" value="#{movTrasladoSalida.buscarLotes}"
 							var="lotes">
 							<p:column>
 								<f:facet name="header">Id Lote</f:facet>    				
@@ -243,7 +240,7 @@
 							<!-- La cantidad no importa si el lote es ajustado es el stock actual-->
 							<p:column>
 								<f:facet name="header">Seleccionar</f:facet>
-									 #{movSalida.ajustar(lotes)}
+									 #{movTrasladoSalida.ajustar(lotes)}
 									
 
 								</p:column>
@@ -257,7 +254,7 @@
 						 
 						<p align="right">
 							<h:commandButton value="Guardar"
-								action="#{movSalida.crearMovimiento}" update="mgs" />
+								action="#{movTrasladoSalida.crearMovimiento}" update="mgs" />
 						</p>
 						<h:commandButton value="Volver a Indice" action="/index.xhtml"
 							immediate="true" />
@@ -268,7 +265,7 @@
 						<br />
 						<br />
 						<br />
-						<p:commandButton value="Cancel" action="#{movSalida.cancelar()}"
+						<p:commandButton value="Cancel" action="#{movTrasladoSalida.cancelar()}"
 							immediate="true" />
 
 					</p:tab>

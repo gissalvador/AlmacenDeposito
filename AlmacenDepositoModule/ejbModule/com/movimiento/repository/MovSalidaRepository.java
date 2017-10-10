@@ -46,7 +46,7 @@ public class MovSalidaRepository implements Repositorio <String, MovSalida> {
 
 	@Override
 	public List<MovSalida> getAll() {
-		String q = "SELECT p from " + MovSalida.class.getName() + " p ";
+		String q = "SELECT p from " + MovSalida.class.getName() + " p ORDER BY fechaCreado DESC";
 		TypedQuery<MovSalida> query = entityManager.createQuery(q, MovSalida.class);
 		
 		List<MovSalida> result = query.getResultList();
