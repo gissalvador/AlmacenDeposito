@@ -338,7 +338,7 @@ public class MovEntradaService implements MovEntradaServiceRemote {
 		} else {
 
 			Proveedor pro = new Proveedor();
-			System.out.println(movEntrada.getCuitlegajo());
+			//System.out.println(movEntrada.getCuitlegajo());
 			pro = pService.getProveedor(movEntrada.getCuitlegajo());
 			movEntrada.setNomPerPro(pro.getAlias());
 			movEntrada.setPerPro("Proveedor: ");

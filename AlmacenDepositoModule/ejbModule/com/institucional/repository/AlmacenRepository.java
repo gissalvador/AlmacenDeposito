@@ -37,6 +37,19 @@ public class AlmacenRepository implements Repositorio<Integer, Almacen> {
 		System.out.println(id);
 		return entityManager.find(Almacen.class, id);
 	}
+	
+	public List<Almacen> getAlmacen(String nomAlmacen) {
+
+		String q = "SELECT p from " + Almacen.class.getName() + " p"
+				+ " where nomAlmacen = '" + nomAlmacen + "'";
+		TypedQuery<Almacen> query = entityManager.createQuery(q, Almacen.class);
+
+		List<Almacen> result = query.getResultList();
+		if (result == null) {
+			result = new ArrayList<Almacen>();
+		}
+		return result;
+	}
 
 	@Override
 	public List<Almacen> getAll() {

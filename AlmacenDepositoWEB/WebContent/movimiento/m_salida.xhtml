@@ -20,29 +20,38 @@
 						<br />
 						<br />
 
-						<h:panelGrid columns="3" width="100%"
+						<h:panelGrid columns="4" width="100%"
 							columnClasses="rightalign,leftalign,leftalign">
 							<h:outputLabel value="Almacen: " for="almacen" />
 							<h:inputText id="almacen" label="Almacen" required="true"
 								value="#{movSalida.movSalida.almacen}" />
+							<p:commandButton value="Buscar"
+								onclick="window.open('/AlmacenDepositoWEB/general/almacen.xhtml')" />
 							<h:message for="almacen" />
+							
 							<h:outputLabel value="Actividad: " for="actividad" />
 							<h:inputText id="actividad" label="Actividad: " required="true"
 								value="#{movSalida.movSalida.actividad}" />
+							<p:commandButton value="Buscar"
+								onclick="window.open('/AlmacenDepositoWEB/general/actividad.xhtml')" />
 							<h:message for="actividad" />
+							
 							<h:outputLabel value="Fecha Salida:" for="fechaSalida" />
 							<p:calendar id="fechaSalida"
 								value="#{movSalida.movSalida.fechaSalida}" showOn="button"
 								navigator="true" />
+							<h:outputLabel />
 							<h:message for="fechaSalida" />
 							<h:outputLabel value="LEGAJO" for="legajo" />
 							<h:inputText id="legajo" label="LEGAJO" required="true"
 								value="#{movSalida.movSalida.legajo}" />
+							<h:outputLabel />
 							<h:message for="legajo" />
 
 							<h:outputLabel value="Observaciones" for="observaciones" />
 							<h:inputTextarea id="observaciones" label="Observaciones"
 								value="#{movSalida.movSalida.observaciones}" />
+							<h:outputLabel />
 							<h:message for="observaciones" />
 						</h:panelGrid>
 
@@ -77,6 +86,7 @@
 							<h:commandButton value="Buscar"
 								onclick="window.open('/AlmacenDepositoWEB/general/articulo.xhtml')" />
 							<h:message for="codArticulo" />
+							<br />
 							<h:commandButton value="Agregar" action="#{movSalida.addDetalle}" />
 
 

@@ -164,7 +164,7 @@ public class MovBaja implements Serializable {
 		if (err == 0) {
 			FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("movBaja", null);
 
-			return "/reportes/movBaja.xhtml";
+			return "/reportes/movSalida.xhtml";
 
 		}
 

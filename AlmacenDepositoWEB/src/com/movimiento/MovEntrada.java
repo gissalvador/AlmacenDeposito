@@ -224,7 +224,7 @@ public class MovEntrada  implements Serializable {
 				
 				FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error inesperado del sistema. No se pudo agregar el Movimiento de Entrada.", e.getMessage()));
 				
-				System.out.println("List<ValidationError> :"+e);
+				//System.out.println("List<ValidationError> :"+e);
 			}
 		
 		
@@ -267,6 +267,9 @@ public class MovEntrada  implements Serializable {
 		if ( movEntrada == null) {
 			movEntrada = new MovEntradaDTO();
 			detallesMovEntrada = new ArrayList<DetMovEntradaDTO>();
+			
+			movEntrada.setCodTipMovOrigen(1);
+			movEntrada.setComprobante(1);
 		} else {
 			nuevo = false;
 		}

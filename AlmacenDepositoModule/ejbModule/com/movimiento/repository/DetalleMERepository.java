@@ -69,7 +69,7 @@ public class DetalleMERepository implements Repositorio <String, DetalleMovEntra
 		}
 		return result;
 	}
-	
+	//verrrrrrrrrrrrrrrrrrrrr
 	public List<String> buscarxLote(String lote) {
 		
 		

@@ -50,17 +50,6 @@
 							<h:outputLabel />
 							<p:message for="fechaIngreso" />
 
-							<h:outputLabel value="Código Tipo Movimiento de Origen:"
-								for="tComprobante" />
-							<h:inputText id="tComprobante"
-								label="Código Tipo Movimiento de Origen:" required="true"
-								value="#{movEntrada.movEntrada.comprobante}" >
-							<f:validateLongRange minimum = "0" maximum = "10000" />
-        					 </h:inputText>	
-							<p:commandButton value="Buscar"
-								onclick="window.open('/AlmacenDepositoWEB/general/tipoMovOrigen.xhtml')" />
-							<p:message for="tComprobante" />
-
 							<h:outputLabel value="Número de Comprobante" for="nroFactura" />
 							<h:inputText id="nroFactura" label="Número de Comprobante"
 								value="#{movEntrada.movEntrada.nroComprobante}" />

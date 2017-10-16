@@ -27,6 +27,7 @@ public class DetMovEntradaDTO implements Serializable{
 	   private String nroSerie_Proveedor;
 	   private String lote;
 	   private Float uniTotal;
+	   private boolean ajustar;
 	
 		
 	   
@@ -164,6 +165,18 @@ public class DetMovEntradaDTO implements Serializable{
 
 	public void setUniTotal(Float uniTotal) {
 		this.uniTotal = uniTotal;
+	}
+
+
+
+	public boolean isAjustar() {
+		return ajustar;
+	}
+
+
+
+	public void setAjustar(boolean ajustar) {
+		this.ajustar = ajustar;
 	}
 
 

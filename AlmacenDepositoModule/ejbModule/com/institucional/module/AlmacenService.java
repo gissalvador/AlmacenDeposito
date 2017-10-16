@@ -81,5 +81,24 @@ public class AlmacenService implements AlmacenServiceRemote {
 
 		return almacen;
 	}
+	
+	public Almacen getAlmacen(String nomAlmacen) {
+		// TODO Auto-generated method stub
+		List<Almacen> almacenes = aRepository.getAlmacen(nomAlmacen);
+
+		Almacen almacen = new Almacen();
+		almacen = null;
+
+		for (Almacen almacen1 : almacenes) {
+
+			if (almacenes.size() == 1) {
+
+				almacen = almacen1;
+			}
+
+		}
+
+		return almacen;
+	}
 
 }
