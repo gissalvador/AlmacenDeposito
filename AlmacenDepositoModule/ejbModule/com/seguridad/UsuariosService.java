@@ -137,6 +137,18 @@ public class UsuariosService implements UsuariosServiceRemote {
 		Usuario usr = usuariosRepository.get(login);
 		usr.setPlainTextPassword(login, passwNuevo);
 	}
+	
+	
+	@Override
+	public void actualizarPassword(String login, String passwNuevo) throws BusinessException {
+		List<ValidationError> errors = seguridadServiceValidations.validarActivarUsuario(login);
+		if (errors.size() > 0) {
+			throw new BusinessException("Datos de usuario invalidos.", errors);
+		}
+		
+		Usuario usr = usuariosRepository.get(login);
+		usr.setPlainTextPassword(login, passwNuevo);
+	}
 
 	/**
 	 * Activa el usuario.

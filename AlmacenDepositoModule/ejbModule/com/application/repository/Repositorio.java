@@ -2,6 +2,8 @@ package com.application.repository;
 
 import java.util.List;
 
+import com.seguridad.entities.CambioClave;
+
 /**
  * Interfaz Repository de acceso a datos.
  * 
@@ -50,4 +52,6 @@ public interface Repositorio<K, T> {
 	 * @return Cantidad de objetos en el repositorio.
 	 */
 	long size();
+
+
 }

@@ -70,4 +70,12 @@ public interface UsuariosServiceRemote {
 	 * @param login
 	 */
 	void desactivarUsuario(String login);
+	
+	/**
+	 * Recupera contraseña calidada por codigo enviado al mail
+	 * 
+	 * @param login
+	 */
+
+	void actualizarPassword(String login, String passwNuevo) throws BusinessException;
 }

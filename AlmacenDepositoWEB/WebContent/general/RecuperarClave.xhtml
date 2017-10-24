@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Frameset//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-frameset.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:f="http://java.sun.com/jsf/core">
+
+<ui:composition template="/WEB-INF/templates/template.xhtml">
+
+
+	<ui:define name="content">
+
+
+		<h:form method="post" id='form'>
+			<h2>Envíar código al email para recuperar la contraseña</h2>
+
+			<h:panelGrid columns="3">
+
+				<h:outputLabel value="Login:" for="login" />
+				<h:inputText id="login" label="Login:" required="true"
+					value="#{cambiarClaveForm.login}" />
+				<h:message for="login" />
+
+			</h:panelGrid>
+			<br />
+			<br />
+
+			<p:messages id="msgs" showDetail="true" />
+
+			<h:panelGrid columns="2">
+				<br />
+				<h:commandButton value="Recuperar Clave"
+					action="#{cambiarClaveForm.enviarCambioClave()}" update="msgs" />
+
+
+			</h:panelGrid>
+
+			<br />
+			<br />
+
+			<h:panelGroup rendered="#{not empty cambiarClaveForm.bl}">
+
+				<h2>Se ha enviado un email a la cuenta registrada por el
+					usuario con el código de recuperación</h2>
+
+				<h:panelGrid columns="3">
+
+					<h:outputLabel value="Login:" for="login" />
+					<h:outputLabel value="#{cambiarClaveForm.login}" />
+					<h:outputLabel />
+
+					<h:outputLabel value="Ingrese Código:" for="codigoR" />
+					<h:inputText id="codigoR" label="Ingrese Código:" required="true"
+						value="#{cambiarClaveForm.codR}" />
+					<h:message for="codigoR" />
+
+				</h:panelGrid>
+
+				<h:panelGrid columns="2">
+					<br />
+					<br />
+					<h:commandButton value="Verificar Código"
+						action="#{cambiarClaveForm.comprobarCodigo()}" update="msgs" />
+				</h:panelGrid>
+
+
+			</h:panelGroup>
+
+			<br />
+			<br />
+			<h:panelGroup rendered="#{not empty cambiarClaveForm.bl2}">
+
+				<h2>Recuperar Contraseña</h2>
+
+				<h:panelGrid columns="3">
+					<h:outputLabel value="Login:" for="login" />
+					<h:outputLabel value="#{cambiarClaveForm.login}" />
+					<h:outputLabel />
+
+					<h:outputText value="Contraseña" />
+					<h:inputSecret id="plainTextPasswordNuevo"
+						value="#{cambiarClaveForm.plainTextPasswordNuevo}" />
+					<h:message for="plainTextPasswordNuevo" />
+
+					<h:outputText value="Repetir Contraseña" />
+					<h:inputSecret id="plainTextPasswordNuevo2"
+						value="#{cambiarClaveForm.plainTextPasswordNuevo2}" />
+					<h:message for="plainTextPasswordNuevo2" />
+				</h:panelGrid>
+
+				<h:panelGrid columns="2">
+					<br />
+					<br />
+					<h:commandButton value="Cambiar Contraseña"
+						action="#{cambiarClaveForm.cambiarContrasenia()}" update="msgs" />
+				</h:panelGrid>
+
+
+			</h:panelGroup>
+
+			<br />
+			<br />
+			<h:commandButton value="Volver a Indice" action="/index.xhtml"
+				immediate="true" />
+			<br />
+			<br />
+
+			<p:commandButton value="Cancel"
+				action="#{cambiarClaveForm.cancelar()}" immediate="true" />
+
+			<br />
+			<br />
+		</h:form>
+
+	</ui:define>
+
+</ui:composition>
+
+
+
+</html>

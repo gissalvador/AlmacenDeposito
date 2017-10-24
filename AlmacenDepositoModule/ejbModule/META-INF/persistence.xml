@@ -39,6 +39,7 @@
 		<class>com.movimiento.entities.LoteAlmacen</class>
 		<class>com.movimiento.entities.HistorialEstadoLote</class>
 		<class>com.movimiento.entities.EstadoLote</class>
+		<class>com.seguridad.entities.CambioClave</class>
 
 		<properties>
 			<property name="hibernate.dialect" value="org.hibernate.dialect.MySQL5Dialect" />

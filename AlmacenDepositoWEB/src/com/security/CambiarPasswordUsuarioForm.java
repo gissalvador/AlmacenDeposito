@@ -120,7 +120,7 @@ public class CambiarPasswordUsuarioForm  implements Serializable {
 	public boolean validateSave() {
 		if (plainTextPasswordNuevo.trim().length() > 0 || plainTextPasswordNuevo2.trim().length() > 0) {
 			if (!plainTextPasswordNuevo.equals(plainTextPasswordNuevo2)) {
-				FacesContext.getCurrentInstance().addMessage("form:plainTextPasswordNuevo", new FacesMessage(FacesMessage.SEVERITY_ERROR, "Las contraseÃ±as no coinciden.", "Las contraseÃ±as no coinciden."));
+				FacesContext.getCurrentInstance().addMessage("form:plainTextPasswordNuevo", new FacesMessage(FacesMessage.SEVERITY_ERROR, "Las contraseñas no coinciden.", "Las contraseñas no coinciden."));
 			}
 		}
 
