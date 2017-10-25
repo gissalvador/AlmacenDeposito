@@ -16,29 +16,42 @@
 			<h2>Artículo</h2>
 
 
-			<p:dataTable var="a" value="#{articuloForm.articulos}"
-				styleClass="abm">
-				<p:column headerText="Código de Articulo">
+			<p:dataTable var="a" value="#{articuloForm.arts}" widgetVar="artsTable"
+					multiViewState="true" rows="10" paginator="true"
+					paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+					rowsPerPageTemplate="5,10,15"
+					emptyMessage="No se encontro articulo" filteredValue="#{articuloForm.filteredArts}">
+ 
+
+					<f:facet name="header">
+						<p:outputPanel>
+							<h:outputText value="Buscar en todos los campos: " />
+							<p:inputText id="globalFilter" onkeyup="PF('artsTable').filter()"
+								style="width:150px" placeholder="Ingrese busqueda" />
+						</p:outputPanel>
+					</f:facet>
+					
+				<p:column filterBy="#{a.codArticulo}" headerText="Código de Articulo" filterMatchMode="contains">
 					<h:outputText value="#{a.codArticulo}" />
 				</p:column>
 
-				<p:column headerText="Nombre de Artículo">
+				<p:column filterBy="#{a.nomArticulo}" headerText="Nombre de Artículo" filterMatchMode="contains">
 					<h:outputText value="#{a.nomArticulo}" />
 				</p:column>
 
-				<p:column headerText="Material">
+				<p:column headerText="Material" filterBy="#{a.material}" filterMatchMode="contains">
 					<h:outputText value="#{a.material}" />
 				</p:column>
 
-				<p:column headerText="Tipo Artículo">
+				<p:column headerText="Tipo Artículo" filterBy="#{a.tArticulo}" filterMatchMode="contains">
 					<h:outputText value="#{a.tArticulo}" />
 				</p:column>
 
-				<p:column headerText="Grupo">
+				<p:column headerText="Grupo" filterBy="#{a.grupo}" filterMatchMode="contains">
 					<h:outputText value="#{a.grupo}" />
 				</p:column>
 
-				<p:column headerText="Unidad de Medida">
+				<p:column headerText="Unidad de Medida" filterBy="#{a.uMedida}" filterMatchMode="contains">
 					<h:outputText value="#{a.uMedida}" />
 				</p:column>
 
@@ -59,15 +72,15 @@
 					<h:outputText value="#{a.uPeso}" />
 				</p:column>
 
-				<p:column headerText="Descripción">
+				<p:column headerText="Descripción" filterBy="#{a.descArticulo}" filterMatchMode="contains">
 					<h:outputText value="#{a.descArticulo}" />
 				</p:column>
 
-				<p:column headerText="Partida Parcial">
+				<p:column headerText="Partida Parcial" filterBy="#{a.partidaParcialId}" filterMatchMode="contains">
 					<h:outputText value="#{a.partidaParcialId}" />
 				</p:column>
 
-				<p:column headerText="Código de Clase">
+				<p:column headerText="Código de Clase" filterBy="#{a.codClase}" filterMatchMode="contains">
 					<h:outputText value="#{a.codClase}" />
 				</p:column>
 
