@@ -1,5 +1,6 @@
 package com.movimiento;
 
+import java.io.IOException;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
@@ -21,6 +22,7 @@ import org.primefaces.event.RowEditEvent;
 
 import com.application.exceptions.BusinessException;
 import com.application.exceptions.ValidationError;
+import com.institucional.dto.EmpleadoDTO;
 import com.movimiento.dto.DetMovEntradaDTO;
 import com.movimiento.dto.DetMovSalidaDTO;
 import com.movimiento.dto.MovEntradaDTO;
@@ -87,6 +89,25 @@ public class MovDevolucion implements Serializable {
 	public void setDetlallesMovDevolucion(List<DetMovEntradaDTO> detlallesMovDevolucion) {
 		this.detlallesMovDevolucion = detlallesMovDevolucion;
 	}
+	
+	public void seleccionarFilaMov(MovSalidaDTO mos) throws IOException {
+
+		this.movDevolucion.setNroComprobante(mos.getId());
+
+		ExternalContext ec = FacesContext.getCurrentInstance().getExternalContext();
+		ec.redirect(ec.getRequestContextPath() + "/movimiento/m_devolver.xhtml");
+
+	}
+
+	public void seleccionarFilaEmp(EmpleadoDTO emp) throws IOException {
+
+		this.movDevolucion.setCuitlegajo(emp.getLegajo());
+
+		ExternalContext ec = FacesContext.getCurrentInstance().getExternalContext();
+		ec.redirect(ec.getRequestContextPath() + "/movimiento/m_devolver.xhtml");
+
+	}
+
 
 	public String buscarMovSalida() {
 

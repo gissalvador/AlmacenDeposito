@@ -28,7 +28,7 @@
 
 				<h:outputLabel value="Cantidad :" for="cantidad" />
 				<h:inputText size="10" id="cantidad" label="Cantidad"
-					required="true" value="#{movSalida.cantidad}" />
+				value="#{movSalida.cantidad}" />
 				<h:outputLabel />
 				<h:message for="cantidad" />
 
@@ -45,6 +45,50 @@
 
 			</h:panelGrid>
 
+			<h:panelGrid columns="1" cellpadding="5">
+
+
+
+				<p:commandButton value="Effects" type="button"
+					onclick="PF('dlg3').show();" />
+
+				<p:commandButton value="Effects2" type="button"
+					onclick="PF('dlg2').show();" />
+
+				<p:commandButton onclick="PF('dlg').show();" type="button"
+					icon="ui-icon-search" />
+
+
+			</h:panelGrid>
+
+
+
+			<p:dialog header="Effects" widgetVar="dlg3" height="100">
+
+				<h:panelGrid columns="2" cellpadding="5">
+
+
+					<f:facet name="footer">
+						<p:commandButton value="Login" update="msgs"
+							actionListener="#{dialogForm.login}" />
+					</f:facet>
+				</h:panelGrid>
+
+			</p:dialog>
+
+
+			<p:dialog header="Effects" widgetVar="dlg2" height="100">
+
+				<h:panelGrid columns="2" cellpadding="5">
+
+
+					<f:facet name="footer">
+						<p:commandButton value="Save" update="msgs"
+							actionListener="#{dialogForm.update()}" />
+					</f:facet>
+				</h:panelGrid>
+
+			</p:dialog>
 
 			<p:dialog header="Buscar" widgetVar="dlg" resizable="false">
 
@@ -86,12 +130,22 @@
 						<h:outputText value="#{a.material}" />
 					</p:column>
 
-				
+					<p:column headerText="Tipo Artículo" filterBy="#{a.tArticulo}"
+						filterMatchMode="contains">
+						<h:outputText value="#{a.tArticulo}" />
+					</p:column>
+
 					<p:column headerText="Grupo" filterBy="#{a.grupo}"
 						filterMatchMode="contains">
 						<h:outputText value="#{a.grupo}" />
 					</p:column>
-					
+
+					<p:column headerText="Unidad de Medida" filterBy="#{a.uMedida}"
+						filterMatchMode="contains">
+						<h:outputText value="#{a.uMedida}" />
+					</p:column>
+
+
 					<p:column headerText="Descripción" filterBy="#{a.descArticulo}"
 						filterMatchMode="contains">
 						<h:outputText value="#{a.descArticulo}" />
@@ -108,10 +162,15 @@
 					</p:column>
 
 
+					
+
+
 				</p:dataTable>
 
 
 			</p:dialog>
+
+
 
 		</h:form>
 

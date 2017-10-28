@@ -22,10 +22,9 @@
 
 						<p:growl id="ms" showDetail="true" />
 
-						<h:panelGrid columns="4" width="100%"
-							columnClasses="rightalign,leftalign,leftalign">
+						<h:panelGrid columns="4">
 
-							<p:outputLabel value="Almacen:" for="almacen" />
+							<h:outputLabel value="* Almacen:" for="almacen" />
 							<p:selectOneMenu id="almacen" required="true"
 								value="#{movAjustar.almacen}">
 								<f:selectItem itemLabel="Selecionar una opción" itemValue="" />
@@ -35,11 +34,12 @@
 							<h:outputLabel />
 							<h:message for="almacen" />
 
-							<h:outputLabel value="Código Lote:" for="codLote" />
+							<h:outputLabel value="* Código Lote:" for="codLote" />
 							<h:inputText size="20" id="codLote" label="Código Lote:"
-								required="true" value="#{movAjustar.codLote}" />
-							<h:commandButton value="Buscar"
-								onclick="window.open('/AlmacenDepositoWEB/general/lote.xhtml')" />
+								value="#{movAjustar.codLote}" />
+							<p:commandButton onclick="PF('dlgl').show();" type="button"
+								icon="ui-icon-search" />
+							<h:outputLabel />
 							<h:message for="codLote" />
 
 
@@ -148,23 +148,26 @@
 
 							<h2>Ajustar Entrada</h2>
 
-							<h:panelGrid columns="3" width="100%"
-								columnClasses="rightalign,leftalign,leftalign">
+							<h:panelGrid columns="4" >
 
-								<h:outputLabel value="Fecha Ajuste" for="fechaAjuste" />
+								<h:outputLabel value="* Fecha Ajuste" for="fechaAjuste" />
 								<p:calendar id="fechaAjuste"
 									value="#{movAjustar.movAjustar.fechaIngreso}" showOn="button"
 									navigator="true" />
+								<h:outputLabel />
 								<h:message for="fechaAjuste" />
 
-								<h:outputLabel value="LEGAJO" for="legajo" />
-								<h:inputText id="legajo" label="LEGAJO" required="true"
+								<h:outputLabel value="* LEGAJO" for="legajo" />
+								<h:inputText id="legajo" label="LEGAJO"
 									value="#{movAjustar.movAjustar.cuitlegajo}" />
+								<p:commandButton onclick="PF('dlge').show();" type="button"
+									icon="ui-icon-search" />
 								<h:message for="legajo" />
 
 								<h:outputLabel value="Observaciones" for="observaciones" />
 								<h:inputTextarea id="observaciones" label="Observaciones"
 									value="#{movAjustar.movAjustar.observaciones}" />
+								<h:outputLabel />
 								<h:message for="observaciones" />
 
 							</h:panelGrid>
@@ -216,23 +219,26 @@
 
 							<h2>Ajustar Faltante</h2>
 
-							<h:panelGrid columns="3" width="100%"
-								columnClasses="rightalign,leftalign,leftalign">
+							<h:panelGrid columns="4" >
 
-								<h:outputLabel value="Fecha Ajuste" for="fechaAjusteSalida" />
+								<h:outputLabel value="* Fecha Ajuste" for="fechaAjusteSalida" />
 								<p:calendar id="fechaAjusteSalida"
 									value="#{movAjustar.movAjustarFaltante.fechaSalida}"
 									showOn="button" navigator="true" />
+								<h:outputLabel />
 								<h:message for="fechaAjusteSalida" />
-
-								<h:outputLabel value="LEGAJO" for="legajoSalida" />
-								<h:inputText id="legajoSalida" label="LEGAJO" required="true"
+								
+								<h:outputLabel value="* LEGAJO" for="legajoSalida" />
+								<h:inputText id="legajoSalida" label="LEGAJO"
 									value="#{movAjustar.movAjustarFaltante.legajo}" />
+								<p:commandButton onclick="PF('dlge').show();" type="button"
+									icon="ui-icon-search" />
 								<h:message for="legajoSalida" />
 
 								<h:outputLabel value="Observaciones" for="observacionesSalida" />
 								<h:inputTextarea id="observacionesSalida" label="Observaciones"
 									value="#{movAjustar.movAjustarFaltante.observaciones}" />
+								<h:outputLabel />
 								<h:message for="observacionesSalida" />
 
 							</h:panelGrid>
@@ -283,9 +289,9 @@
 						<br />
 
 						<h:panelGroup rendered="#{not empty movAjustar.ce}">
-						
-							<p:dataTable id="ajustarLote" border="1" value="#{movAjustar.lote}"
-								var="lote" >
+
+							<p:dataTable id="ajustarLote" border="1"
+								value="#{movAjustar.lote}" var="lote">
 								<f:facet name="header">
 						           Detalle Lote
 						       </f:facet>
@@ -325,7 +331,7 @@
 									<f:facet name="header">Stock Almacen</f:facet>    				
 	                                           #{lote.stockAlmacen}
 	                            </p:column>
-							
+
 							</p:dataTable>
 
 						</h:panelGroup>
@@ -335,6 +341,135 @@
 						<p:commandButton value="Cancel"
 							action="#{movAjustares.cancelar()}" immediate="true" />
 
+
+
+
+						<p:dialog header="Buscar" widgetVar="dlge" resizable="false">
+
+							<p:dataTable var="e" value="#{empleadoForm.empleados}"
+								widgetVar="empsTable" multiViewState="true" rows="10"
+								paginator="true"
+								paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+								rowsPerPageTemplate="5,10,15"
+								emptyMessage="No se encontro empleado"
+								filteredValue="#{empleadoForm.filteredEmps}">
+
+								<f:facet name="header">
+									<p:outputPanel>
+										<h:outputText value="Buscar en todos los campos: " />
+										<p:inputText id="globalFilter"
+											onkeyup="PF('empsTable').filter()" style="width:150px"
+											placeholder="Ingrese busqueda" />
+									</p:outputPanel>
+								</f:facet>
+
+
+								<p:column headerText="Seleccionar">
+									<p:commandButton icon="ui-icon-check" title="seleccionar"
+										actionListener="#{movAjustar.seleccionarFilaEmp(e)}" />
+
+								</p:column>
+
+
+								<p:column headerText="Legajo:" filterBy="#{e.legajo}"
+									filterMatchMode="contains">
+									<h:outputText value="#{e.legajo}" />
+								</p:column>
+
+								<p:column headerText="Nombre: " filterBy="#{e.nomPersona}"
+									filterMatchMode="contains">
+									<h:outputText value="#{e.nomPersona}" />
+								</p:column>
+
+								<p:column headerText="C.U.I.L." filterBy="#{e.cuil}"
+									filterMatchMode="contains">
+									<h:outputText value="#{e.cuil}" />
+								</p:column>
+
+								<p:column headerText="Unidad Organica: "
+									filterBy="#{e.uOrganica}" filterMatchMode="contains">
+									<h:outputText value="#{e.uOrganica}" />
+								</p:column>
+
+
+							</p:dataTable>
+
+
+
+						</p:dialog>
+
+						<p:dialog header="Buscar" widgetVar="dlgl" resizable="false">
+
+							<p:dataTable var="l" value="#{loteForm.lotes}"
+								widgetVar="lotsTable" multiViewState="true" rows="10"
+								paginator="true"
+								paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+								rowsPerPageTemplate="5,10,15"
+								emptyMessage="No se encontro proveedor"
+								filteredValue="#{loteForm.filteredLots}">
+
+								<f:facet name="header">
+									<p:outputPanel>
+										<h:outputText value="Buscar en todos los campos: " />
+										<p:inputText id="globalFilter"
+											onkeyup="PF('lotsTable').filter()" style="width:150px"
+											placeholder="Ingrese busqueda" />
+									</p:outputPanel>
+								</f:facet>
+
+								<p:column headerText="Seleccionar">
+									<p:commandButton icon="ui-icon-check" title="seleccionar"
+										actionListener="#{movAjustar.seleccionarFilaLot(l)}" />
+
+								</p:column>
+
+								<p:column headerText="Código de Lote" filterBy="#{l.codLote}"
+									filterMatchMode="contains">
+									<h:outputText value="#{l.codLote}" />
+								</p:column>
+
+								<p:column headerText="Articulo Id" filterBy="#{l.articuloID}"
+									filterMatchMode="contains">
+									<h:outputText value="#{l.articuloID}">
+									</h:outputText>
+								</p:column>
+
+								<p:column headerText="Articulo" filterBy="#{l.articulo}"
+									filterMatchMode="contains">
+									<h:outputText value="#{l.articulo}" />
+								</p:column>
+
+								<p:column headerText="Actividad Nro."
+									filterBy="#{l.actividadID}" filterMatchMode="contains">
+									<h:outputText value="#{l.actividadID}" />
+								</p:column>
+
+								<p:column headerText="Stock Actual" filterBy="#{l.stockActual}"
+									filterMatchMode="contains">
+									<h:outputText value="#{l.stockActual}" />
+								</p:column>
+
+								<p:column headerText="Marca" filterBy="#{l.marString}"
+									filterMatchMode="contains">
+									<h:outputText value="#{l.marString}" />
+								</p:column>
+
+								<p:column headerText="Modelo" filterBy="#{l.modString}"
+									filterMatchMode="contains">
+									<h:outputText value="#{l.modString}" />
+								</p:column>
+
+
+								<p:column headerText="Estado Actual"
+									filterBy="#{l.nomEstadoLote}" filterMatchMode="contains">
+									<h:outputText value="#{l.nomEstadoLote}">
+									</h:outputText>
+								</p:column>
+
+
+							</p:dataTable>
+
+						</p:dialog>
 
 
 
@@ -465,9 +600,8 @@
 						</h:panelGroup>
 
 						<h:panelGroup rendered="#{not empty movAjustar.ce}">
-						
-							<p:dataTable border="1" value="#{movAjustar.lote}"
-								var="lote" >
+
+							<p:dataTable border="1" value="#{movAjustar.lote}" var="lote">
 								<f:facet name="header">
 						           Detalle Lote
 						       </f:facet>
@@ -507,7 +641,7 @@
 									<f:facet name="header">Stock Almacen</f:facet>    				
 	                                           #{lote.stockAlmacen}
 	                            </p:column>
-							
+
 							</p:dataTable>
 
 						</h:panelGroup>

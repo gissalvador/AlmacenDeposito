@@ -1,5 +1,6 @@
 package com.movimiento;
 
+import java.io.IOException;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
@@ -22,6 +23,7 @@ import org.primefaces.event.RowEditEvent;
 import com.application.exceptions.BusinessException;
 import com.application.exceptions.ValidationError;
 import com.institucional.dto.AlmacenDTO;
+import com.institucional.dto.EmpleadoDTO;
 import com.movimiento.dto.DetMovEntradaDTO;
 import com.movimiento.dto.DetMovSalidaDTO;
 import com.movimiento.dto.LoteDTO;
@@ -71,6 +73,24 @@ public class MovTrasladoEntrada implements Serializable {
 
 	public void setBl(String bl) {
 		this.bl = bl;
+	}
+	
+	public void seleccionarFilaMov(MovSalidaDTO mos) throws IOException {
+
+		this.movTrasladoEntrada.setNroComprobante(mos.getId());
+
+		ExternalContext ec = FacesContext.getCurrentInstance().getExternalContext();
+		ec.redirect(ec.getRequestContextPath() + "/movimiento/m_traslado_entrada.xhtml");
+
+	}
+
+	public void seleccionarFilaEmp(EmpleadoDTO emp) throws IOException {
+
+		this.movTrasladoEntrada.setCuitlegajo(emp.getLegajo()); 
+
+		ExternalContext ec = FacesContext.getCurrentInstance().getExternalContext();
+		ec.redirect(ec.getRequestContextPath() + "/movimiento/m_traslado_entrada.xhtml");
+
 	}
 
 	public String ajustar(DetMovEntradaDTO buslote) {

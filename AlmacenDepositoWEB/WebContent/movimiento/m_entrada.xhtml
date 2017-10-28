@@ -12,7 +12,7 @@
 	<ui:define name="content">
 
 
-		<h:form method="post">
+		<h:form method="post" id="form">
 			<h:panelGrid columns="1" style="width: 90%">
 				<p:wizard>
 
@@ -20,63 +20,58 @@
 						<br />
 						<br />
 
-						<h:panelGrid columns="4" width="100%"
-							columnClasses="rightalign,leftalign,leftalign">
+						<h:panelGrid columns="4">
 
-							<h:outputLabel value="Almacen: " for="almacen" />
-							<h:inputText id="almacen" label="Almacen" required="true"
-								value="#{movEntrada.movEntrada.almacen}" >
-							<f:validateLongRange minimum = "1" maximum = "1000000" />
-        					 </h:inputText>		
-								
-							<p:commandButton value="Buscar"
-								onclick="window.open('/AlmacenDepositoWEB/general/almacen.xhtml')" />
-
+							<h:outputLabel value="* Almacen:" for="almacen" />
+							<p:selectOneMenu id="almacen" required="true"
+								value="#{movEntrada.almacen}">
+								<f:selectItem itemLabel="Selecionar una opción" itemValue="" />
+								<f:selectItems value="#{movEntrada.optionsAlm}"
+									style="width:200px" />
+							</p:selectOneMenu>
+							<h:outputLabel />
 							<p:message for="almacen" />
 
-							<h:outputLabel value="Número Actividad: " for="actividad" />
-							<h:inputText id="actividad" label="Número Actividad: " required="true"
-								value="#{movEntrada.movEntrada.actividad}" >
-							<f:validateLongRange minimum = "0" maximum = "10000" />
-        					 </h:inputText>	
-							<p:commandButton value="Buscar"
-								onclick="window.open('/AlmacenDepositoWEB/general/actividad.xhtml')" />
+							<h:outputLabel value="* Actividad: " for="actividad" />
+							<h:inputText id="actividad" label="Número Actividad: "
+								value="#{movEntrada.movEntrada.actividad}">
+							</h:inputText>
+							<p:commandButton onclick="PF('dlga').show();" type="button"
+								icon="ui-icon-search" />
 							<p:message for="actividad" />
 
-							<h:outputLabel value="Fecha Ingreso:" for="fechaIngreso" />
+							<h:outputLabel value="* Fecha Ingreso:" for="fechaIngreso" />
 							<p:calendar id="fechaIngreso"
 								value="#{movEntrada.movEntrada.fechaIngreso}" showOn="button"
 								navigator="true" />
 							<h:outputLabel />
 							<p:message for="fechaIngreso" />
 
-							<h:outputLabel value="Número de Comprobante" for="nroFactura" />
+							<h:outputLabel value="* Número de Comprobante" for="nroFactura" />
 							<h:inputText id="nroFactura" label="Número de Comprobante"
 								value="#{movEntrada.movEntrada.nroComprobante}" />
 							<h:outputLabel />
 							<p:message for="nroFactura" />
 
-							<h:outputLabel value="Fecha Comprobante:" for="fechaMO" />
+							<h:outputLabel value="* Fecha Comprobante:" for="fechaMO" />
 							<p:calendar id="fechaMO" value="#{movEntrada.movEntrada.fechaMO}"
 								showOn="button" navigator="true" />
 							<h:outputLabel />
 							<p:message for="fechaMO" />
 
-							<h:outputLabel value="Número de Solicitud" for="nroSolicitud" />
+							<h:outputLabel value="* Número de Solicitud" for="nroSolicitud" />
 							<h:inputText id="nroSolicitud" label="Número de Solicitud"
-								required="true" value="#{movEntrada.movEntrada.nroSolicitud}" >
-							<f:validateLongRange minimum = "0" maximum = "1000000" />
-        					 </h:inputText>	
+								value="#{movEntrada.movEntrada.nroSolicitud}">
+								<f:validateLongRange minimum="0" maximum="1000000" />
+							</h:inputText>
 							<h:outputLabel />
 							<p:message for="nroSolicitud" />
 
-							<h:outputLabel value="CUIT" for="cuitlegajo" />
-							<h:inputText id="cuitlegajo" label="CUIT" required="true"
-								value="#{movEntrada.movEntrada.cuitlegajo}" validatorMessage="CUIT: Escriba un C.U.I.T. valido. Ejemplo: 30546660210">
-							<f:validateLength minimum="11" maximum="11" />
-							 </h:inputText>	
-							<p:commandButton value="Buscar"
-								onclick="window.open('/AlmacenDepositoWEB/general/proveedor.xhtml')" />
+							<h:outputLabel value="* CUIT" for="cuitlegajo" />
+							<h:inputText id="cuitlegajo" label="CUIT"
+								value="#{movEntrada.movEntrada.cuitlegajo}" />
+							<p:commandButton onclick="PF('dlgp').show();" type="button"
+								icon="ui-icon-search" />
 							<p:message for="cuitlegajo" />
 
 							<h:outputLabel value="Observaciones" for="observaciones" />
@@ -90,6 +85,125 @@
 						<p:commandButton value="Cancel" action="#{movEntrada.cancelar()}"
 							immediate="true" />
 
+						<p:dialog header="Buscar" widgetVar="dlgp" resizable="false">
+
+							<p:dataTable var="p" value="#{proveedorForm.proveedores}"
+								widgetVar="prosTable" multiViewState="true" rows="10"
+								paginator="true"
+								paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+								rowsPerPageTemplate="5,10,15"
+								emptyMessage="No se encontro proveedor"
+								filteredValue="#{proveedorForm.filteredPros}">
+
+								<f:facet name="header">
+									<p:outputPanel>
+										<h:outputText value="Buscar en todos los campos: " />
+										<p:inputText id="globalFilter"
+											onkeyup="PF('prosTable').filter()" style="width:150px"
+											placeholder="Ingrese busqueda" />
+									</p:outputPanel>
+								</f:facet>
+
+								<p:column headerText="Seleccionar">
+									<p:commandButton icon="ui-icon-check" title="seleccionar"
+										actionListener="#{movEntrada.seleccionarFilaP(p)}" />
+
+								</p:column>
+
+								<p:column headerText="Código de Proveedor"
+									filterBy="#{p.codPersona}" filterMatchMode="contains">
+									<h:outputText value="#{p.codPersona}" />
+								</p:column>
+
+								<p:column headerText="C.U.I.T." filterBy="#{p.cuit}"
+									filterMatchMode="contains">
+									<h:outputText value="#{p.cuit}" />
+								</p:column>
+
+
+								<p:column headerText="Alias" filterBy="#{p.alias}"
+									filterMatchMode="contains">
+									<h:outputText value="#{p.alias}" />
+								</p:column>
+
+								<p:column headerText="Razon Social" filterBy="#{p.razonSocial}"
+									filterMatchMode="contains">
+									<h:outputText value="#{p.razonSocial}" />
+								</p:column>
+
+
+								<p:column headerText="Mail" filterBy="#{p.mail}"
+									filterMatchMode="contains">
+									<h:outputText value="#{p.mail}" />
+								</p:column>
+
+
+
+							</p:dataTable>
+
+
+
+						</p:dialog>
+
+						<p:dialog header="Buscar" widgetVar="dlga" resizable="false">
+
+							<p:dataTable var="a" value="#{actividadForm.actividades}"
+								widgetVar="prosTable" multiViewState="true" rows="10"
+								paginator="true"
+								paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+								rowsPerPageTemplate="5,10,15"
+								emptyMessage="No se encontro proveedor"
+								filteredValue="#{actividadForm.filteredActs}">
+
+
+								<f:facet name="header">
+									<p:outputPanel>
+										<h:outputText value="Buscar en todos los campos: " />
+										<p:inputText id="globalFilter"
+											onkeyup="PF('prosTable').filter()" style="width:150px"
+											placeholder="Ingrese busqueda" />
+									</p:outputPanel>
+								</f:facet>
+
+								<p:column headerText="Seleccionar">
+									<p:commandButton icon="ui-icon-check" title="seleccionar"
+										actionListener="#{movEntrada.seleccionarFilaAct(a)}" />
+
+								</p:column>
+
+
+								<p:column headerText="Número de Actividad"
+									filterBy="#{a.nroActividad}" filterMatchMode="contains">
+									<h:outputText value="#{a.nroActividad}" />
+								</p:column>
+
+								<p:column headerText="Nombre de Actividad"
+									filterBy="#{a.nomActividad}" filterMatchMode="contains">
+									<h:outputText value="#{a.nomActividad}" />
+								</p:column>
+
+								<p:column headerText="Red Programatia">
+									<h:outputText value="#{a.redProgramatica}" />
+								</p:column>
+
+								<p:column headerText="Nombre del Responsable"
+									filterBy="#{a.responsable}" filterMatchMode="contains">
+									<h:outputText value="#{a.responsable}" />
+								</p:column>
+
+								<p:column headerText="Nombre del Subesponsable"
+									filterBy="#{a.subresponsable}" filterMatchMode="contains">
+									<h:outputText value="#{a.subresponsable}" />
+								</p:column>
+
+
+
+							</p:dataTable>
+
+
+						</p:dialog>
+
+
 					</p:tab>
 
 					<p:tab title="Detalle" id="detalle">
@@ -98,29 +212,30 @@
 
 						<h3>Agregar Detalle</h3>
 
-						<h:panelGrid columns="4" width="100%"
-							columnClasses="rightalign,leftalign,leftalign">
+						<h:panelGrid columns="4">
 
 
-							<h:outputLabel value="Cantidad :" for="cantidad" />
+							<h:outputLabel value="* Cantidad :" for="cantidad" />
 							<h:inputText size="10" id="cantidad" label="Cantidad"
-								required="true" value="#{movEntrada.cantidad}" />
+								value="#{movEntrada.cantidad}" />
 							<h:outputLabel />
 							<h:message for="cantidad" />
 
 
-							<h:outputLabel value="Código Articulo :" for="codArticulo" />
-							<h:inputText size="20" id="codArticulo" label="Código Articulo"
-								required="true" value="#{movEntrada.codArticulo}" />
-							<h:commandButton value="Buscar"
-								onclick="window.open('/AlmacenDepositoWEB/general/articulo.xhtml')" />
-							<h:message for="codArticulo" />
+							<h:outputLabel value="* Código Articulo :" for="codArticulo" />
+							<h:inputText id="codArticulo" size="20" label="Código Articulo"
+								value="#{movEntrada.codArticulo}">
+							</h:inputText>
+							<p:commandButton onclick="PF('dlg').show();" type="button"
+								icon="ui-icon-search" />
+							<h:outputLabel />
+
 
 
 							<h:outputLabel value="Número de serie o proveedor:"
 								for="nroSerie" />
 							<h:inputText size="20" id="nroSerie"
-								label="Número de serie o proveedor:" required="true"
+								label="Número de serie o proveedor:"
 								value="#{movEntrada.nroSerie}" />
 							<h:outputLabel />
 							<h:message for="nroSerie" />
@@ -132,23 +247,22 @@
 							<h:message for="fechaVto" />
 
 
-							<h:outputLabel value="Ubicación :" for="ubicacion" />
+							<h:outputLabel value="* Ubicación :" for="ubicacion" />
 							<h:inputText size="5" id="ubicacion" label="Ubicación"
-								required="true" value="#{movEntrada.ubicacion}" />
+								value="#{movEntrada.ubicacion}" />
 							<h:outputLabel />
 							<h:message for="ubicacion" />
 
-							<h:outputLabel value="Modelo y Marca:" for="modelo" />
-							<h:inputText size="5" id="modelo" label="Modelo" required="true"
+							<h:outputLabel value="* Modelo y Marca:" for="modelo" />
+							<h:inputText size="5" id="modelo" label="Modelo"
 								value="#{movEntrada.modelo}" />
-							<h:commandButton value="Buscar"
+							<p:commandButton icon="ui-icon-search" 
 								onclick="window.open('/AlmacenDepositoWEB/general/marca.xhtml')" />
 							<h:message for="modelo" />
 
-							<h:outputLabel value="Importe Unitario :" for="importeUnitario" />
+							<h:outputLabel value="* Importe Unitario :" for="importeUnitario" />
 							<h:inputText size="5" id="importeUnitario"
-								label="Importe Unitario :" required="true"
-								value="#{movEntrada.importeUnitario}" />
+								label="Importe Unitario :" value="#{movEntrada.importeUnitario}" />
 							<h:outputLabel />
 							<h:message for="importeUnitario" />
 							<br />
@@ -162,8 +276,8 @@
 						<hr />
 						<br />
 
-						<p:dataTable id="detalleTable" border="1" value="#{movEntrada.detallesMovEntrada}"
-							var="detalle">
+						<p:dataTable id="detalleTable" border="1"
+							value="#{movEntrada.detallesMovEntrada}" var="detalle">
 							<p:column>
 								<f:facet name="header">Cantidad</f:facet>    				
                                            #{detalle.cantidad}
@@ -206,7 +320,8 @@
 							<p:column>
 								<f:facet name="header">Eliminar</f:facet>
 								<p:commandButton icon="ui-icon-close" title="remove from cart"
-									action="#{movEntrada.borrarFila(detalle)}" update="detalleTable" />
+									action="#{movEntrada.borrarFila(detalle)}"
+									update="detalleTable" />
 
 
 							</p:column>
@@ -220,6 +335,75 @@
 						<br />
 						<p:commandButton value="Cancel" action="#{movEntrada.cancelar()}"
 							immediate="true" />
+
+						<p:dialog header="Buscar" widgetVar="dlg" resizable="false">
+
+							<p:dataTable var="a" value="#{articuloForm.arts}"
+								widgetVar="artsTable" multiViewState="true" rows="10"
+								paginator="true"
+								paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+								rowsPerPageTemplate="5,10,15"
+								emptyMessage="No se encontro articulo"
+								filteredValue="#{articuloForm.filteredArts}">
+
+
+								<f:facet name="header">
+									<p:outputPanel>
+										<h:outputText value="Buscar en todos los campos: " />
+										<p:inputText id="globalFilter"
+											onkeyup="PF('artsTable').filter()" style="width:150px"
+											placeholder="Ingrese busqueda" />
+									</p:outputPanel>
+								</f:facet>
+
+								<p:column headerText="Seleccionar">
+									<p:commandButton icon="ui-icon-check" title="seleccionar"
+										actionListener="#{movEntrada.seleccionarFila2(a)}" />
+
+								</p:column>
+
+								<p:column filterBy="#{a.codArticulo}"
+									headerText="Código de Articulo" filterMatchMode="contains">
+									<h:outputText value="#{a.codArticulo}" />
+								</p:column>
+
+								<p:column filterBy="#{a.nomArticulo}"
+									headerText="Nombre de Artículo" filterMatchMode="contains">
+									<h:outputText value="#{a.nomArticulo}" />
+								</p:column>
+
+								<p:column headerText="Material" filterBy="#{a.material}"
+									filterMatchMode="contains">
+									<h:outputText value="#{a.material}" />
+								</p:column>
+
+
+								<p:column headerText="Grupo" filterBy="#{a.grupo}"
+									filterMatchMode="contains">
+									<h:outputText value="#{a.grupo}" />
+								</p:column>
+
+								<p:column headerText="Descripción" filterBy="#{a.descArticulo}"
+									filterMatchMode="contains">
+									<h:outputText value="#{a.descArticulo}" />
+								</p:column>
+
+								<p:column headerText="Partida Parcial"
+									filterBy="#{a.partidaParcialId}" filterMatchMode="contains">
+									<h:outputText value="#{a.partidaParcialId}" />
+								</p:column>
+
+								<p:column headerText="Código de Clase" filterBy="#{a.codClase}"
+									filterMatchMode="contains">
+									<h:outputText value="#{a.codClase}" />
+								</p:column>
+
+
+							</p:dataTable>
+
+
+						</p:dialog>
+
 					</p:tab>
 
 
@@ -229,7 +413,7 @@
 						<h:panelGrid columns="2" columnClasses="rightalign-bold,normal">
 
 							<h:outputLabel value="Almacen: " />
-							<h:outputText value="#{movEntrada.movEntrada.almacen}" />
+							<h:outputText value="#{movEntrada.almacen}" />
 							<h:outputLabel value="Actividad: " />
 							<h:outputText value="#{movEntrada.movEntrada.actividad}" />
 							<h:outputLabel value="Fecha de Ingreso: " />
@@ -295,9 +479,9 @@
 
 						<p align="right">
 							<p:commandButton value="Guardar"
-								action="#{movEntrada.crearMovimiento}" update="msgs" >
-											 
-							 </p:commandButton>
+								action="#{movEntrada.crearMovimiento}" update="msgs">
+
+							</p:commandButton>
 						</p>
 						<p:commandButton value="Volver a Indice" action="/index.xhtml"
 							immediate="true" />

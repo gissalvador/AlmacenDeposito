@@ -22,35 +22,31 @@
 
 						<p:growl id="ms" showDetail="true" />
 
-						<h:panelGrid columns="4" width="100%"
-							columnClasses="rightalign,leftalign,leftalign">
+						<h:panelGrid columns="4">
 
 
-							<h:outputLabel value="Fecha Devolución" for="fechaIngreso" />
+							<h:outputLabel value="* Fecha Devolución" for="fechaIngreso" />
 							<p:calendar id="fechaIngreso"
 								value="#{movDevolucion.movDevolucion.fechaIngreso}"
 								showOn="button" navigator="true" />
 							<h:outputLabel />
 							<p:message for="fechaIngreso" />
 
-							<h:outputLabel value="Código Movimiento Salida: "
+							<h:outputLabel value="* Código Movimiento Salida: "
 								for="codMovSalida" />
 							<h:inputText id="codMovSalida" label="Número Movimiento Salida: "
-								required="true" value="#{movDevolucion.movDevolucion.nroComprobante}">
+								value="#{movDevolucion.movDevolucion.nroComprobante}">
 							</h:inputText>
-							<p:commandButton value="Buscar"
-								onclick="window.open('/AlmacenDepositoWEB/reportes/movSalida.xhtml')" />
+							<p:commandButton onclick="PF('dlgms').show();" type="button"
+								icon="ui-icon-search" />
 							<p:message for="codMovSalida" />
 
-							<h:outputLabel value="Legajo" for="cuitlegajo" />
-							<h:inputText id="cuitlegajo" label="CUIT" required="true"
-								value="#{movDevolucion.movDevolucion.cuitlegajo}"
-								validatorMessage="CUIT: Escriba un Legajo valido. Ejemplo: 17316">
-								<f:validateLength minimum="4" maximum="5" />
-							</h:inputText>
-							<p:commandButton value="Buscar"
-								onclick="window.open('/AlmacenDepositoWEB/general/empleado.xhtml')" />
-							<p:message for="cuitlegajo" />
+							<h:outputLabel value="* LEGAJO" for="cuitlegajo" />
+							<h:inputText id="cuitlegajo" label="LEGAJO"
+								value="#{movDevolucion.movDevolucion.cuitlegajo}" />
+							<p:commandButton onclick="PF('dlge').show();" type="button"
+								icon="ui-icon-search" />
+							<h:message for="cuitlegajo" />
 
 							<h:outputLabel value="Observaciones" for="observaciones" />
 							<h:inputTextarea id="observaciones" label="Observaciones"
@@ -195,6 +191,130 @@
 						<br />
 						<p:commandButton value="Cancel"
 							action="#{movDevoluciones.cancelar()}" immediate="true" />
+
+						<p:dialog header="Buscar" widgetVar="dlgms" resizable="false">
+
+							<p:dataTable var="ms" value="#{movSalidaForm.movSalidas}"
+								widgetVar="mossTable" multiViewState="true" rows="10"
+								paginator="true"
+								paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+								rowsPerPageTemplate="5,10,15"
+								emptyMessage="No se encontro proveedor"
+								filteredValue="#{movSalidaForm.filteredMoss}">
+
+
+								<f:facet name="header">
+									<p:outputPanel>
+										<h:outputText value="Buscar en todos los campos: " />
+										<p:inputText id="globalFilter"
+											onkeyup="PF('mossTable').filter()" style="width:150px"
+											placeholder="Ingrese busqueda" />
+									</p:outputPanel>
+								</f:facet>
+
+								<p:column headerText="Seleccionar">
+									<p:commandButton icon="ui-icon-check" title="seleccionar"
+										actionListener="#{movDevolucion.seleccionarFilaMov(ms)}" />
+
+								</p:column>
+
+								<p:column headerText="Código de Movimiento" filterBy="#{ms.id}"
+									filterMatchMode="contains">
+									<h:outputText value="#{ms.id}" />
+								</p:column>
+
+								<p:column headerText="Fecha de Salida"
+									filterBy="#{ms.fechaSalida}" filterMatchMode="contains">
+									<h:outputText value="#{ms.fechaSalida}">
+										<f:convertDateTime pattern="dd/MM/yyyy" type="date" />
+									</h:outputText>
+								</p:column>
+
+								<p:column headerText="Almacen" filterBy="#{ms.nomAlmacen}"
+									filterMatchMode="contains">
+									<h:outputText value="#{ms.nomAlmacen}" />
+								</p:column>
+
+								<p:column headerText="Centro" filterBy="#{ms.cenString}"
+									filterMatchMode="contains">
+									<h:outputText value="#{ms.cenString}" />
+								</p:column>
+
+								<p:column headerText="Tipo Movimiento de Origen"
+									filterBy="#{ms.nomComprobante}" filterMatchMode="contains">
+									<h:outputText value="#{ms.nomComprobante}" />
+								</p:column>
+
+								<p:column headerText="Persona" filterBy="#{ms.legajo}"
+									filterMatchMode="contains">
+									<h:outputText value="#{ms.legajo}" />
+								</p:column>
+
+								<p:column headerText="Observaciones"
+									filterBy="#{ms.observaciones}" filterMatchMode="contains">
+									<h:outputText value="#{ms.observaciones}" />
+								</p:column>
+
+
+
+							</p:dataTable>
+
+
+
+						</p:dialog>
+						<p:dialog header="Buscar" widgetVar="dlge" resizable="false">
+
+							<p:dataTable var="e" value="#{empleadoForm.empleados}"
+								widgetVar="empsTable" multiViewState="true" rows="10"
+								paginator="true"
+								paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+								rowsPerPageTemplate="5,10,15"
+								emptyMessage="No se encontro empleado"
+								filteredValue="#{empleadoForm.filteredEmps}">
+
+								<f:facet name="header">
+									<p:outputPanel>
+										<h:outputText value="Buscar en todos los campos: " />
+										<p:inputText id="globalFilter"
+											onkeyup="PF('empsTable').filter()" style="width:150px"
+											placeholder="Ingrese busqueda" />
+									</p:outputPanel>
+								</f:facet>
+
+
+								<p:column headerText="Seleccionar">
+									<p:commandButton icon="ui-icon-check" title="seleccionar"
+										actionListener="#{movDevolucion.seleccionarFilaEmp(e)}" />
+
+								</p:column>
+
+
+								<p:column headerText="Legajo:" filterBy="#{e.legajo}"
+									filterMatchMode="contains">
+									<h:outputText value="#{e.legajo}" />
+								</p:column>
+
+								<p:column headerText="Nombre: " filterBy="#{e.nomPersona}"
+									filterMatchMode="contains">
+									<h:outputText value="#{e.nomPersona}" />
+								</p:column>
+
+								<p:column headerText="C.U.I.L." filterBy="#{e.cuil}"
+									filterMatchMode="contains">
+									<h:outputText value="#{e.cuil}" />
+								</p:column>
+
+								<p:column headerText="Unidad Organica: "
+									filterBy="#{e.uOrganica}" filterMatchMode="contains">
+									<h:outputText value="#{e.uOrganica}" />
+								</p:column>
+
+
+							</p:dataTable>
+
+
+
+						</p:dialog>
 
 					</p:tab>
 					<p:tab title="Confirmar" id="confirmar">

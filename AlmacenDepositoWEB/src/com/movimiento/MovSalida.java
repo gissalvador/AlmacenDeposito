@@ -1,5 +1,6 @@
 package com.movimiento;
 
+import java.io.IOException;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collection;
@@ -18,6 +19,12 @@ import javax.validation.ConstraintViolation;
 import javax.validation.ConstraintViolationException;
 import com.application.exceptions.BusinessException;
 import com.application.exceptions.ValidationError;
+import com.articulo.dto.ArticuloDTO;
+import com.institucional.dto.ActividadDTO;
+import com.institucional.dto.AlmacenDTO;
+import com.institucional.dto.EmpleadoDTO;
+import com.institucional.dto.ProveedorDTO;
+import com.institucional.module.AlmacenServiceRemote;
 import com.movimiento.dto.DetMovSalidaDTO;
 import com.movimiento.dto.LoteDTO;
 import com.movimiento.dto.MovSalidaDTO;
@@ -35,10 +42,18 @@ public class MovSalida implements Serializable {
 	@EJB
 	private MovSalidaServiceRemote movSalidaService;
 
+	@EJB
+	private AlmacenServiceRemote almacenService;
+
 	private MovSalidaDTO movSalida;
 	private Collection<DetMovSalidaDTO> detallesMovSalida;
 	private Collection<LoteDTO> lotes;
 	private String bl;
+
+	private String almacen;
+	private List<String> optionsAlm;
+	Collection<AlmacenDTO> listALM = new ArrayList<AlmacenDTO>();
+	AlmacenDTO almacenDTO;
 
 	private boolean nuevo = true;
 
@@ -59,6 +74,42 @@ public class MovSalida implements Serializable {
 
 	public void setDetallesMovEntrada(Collection<DetMovSalidaDTO> detallesMovSalida) {
 		this.detallesMovSalida = detallesMovSalida;
+	}
+
+	public Collection<AlmacenDTO> getAlmacenes() {
+		return almacenService.listAll();
+	}
+
+	public String getAlmacen() {
+		return almacen;
+	}
+
+	public void setAlmacen(String almacen) {
+		this.almacen = almacen;
+	}
+
+	public List<String> getOptionsAlm() {
+		return optionsAlm;
+	}
+
+	public void setOptionsAlm(List<String> optionsAlm) {
+		this.optionsAlm = optionsAlm;
+	}
+
+	public Collection<AlmacenDTO> getListALM() {
+		return listALM;
+	}
+
+	public void setListALM(Collection<AlmacenDTO> listALM) {
+		this.listALM = listALM;
+	}
+
+	public AlmacenDTO getAlmacenDTO() {
+		return almacenDTO;
+	}
+
+	public void setAlmacenDTO(AlmacenDTO almacenDTO) {
+		this.almacenDTO = almacenDTO;
 	}
 
 	public boolean isNuevo() {
@@ -91,6 +142,33 @@ public class MovSalida implements Serializable {
 
 	public void setBuscarLotes(Collection<LoteDTO> buscarLotes) {
 		this.lotes = buscarLotes;
+	}
+
+	public void seleccionarFila2(ArticuloDTO art) throws IOException {
+
+		this.codArticulo = art.getCodArticulo();
+
+		ExternalContext ec = FacesContext.getCurrentInstance().getExternalContext();
+		ec.redirect(ec.getRequestContextPath() + "/movimiento/m_salida.xhtml");
+
+	}
+
+	public void seleccionarFilaAct(ActividadDTO act) throws IOException {
+
+		this.movSalida.setActividad(act.getNroActividad());
+
+		ExternalContext ec = FacesContext.getCurrentInstance().getExternalContext();
+		ec.redirect(ec.getRequestContextPath() + "/movimiento/m_salida.xhtml");
+
+	}
+
+	public void seleccionarFilaEmp(EmpleadoDTO emp) throws IOException {
+
+		this.movSalida.setLegajo(emp.getLegajo());
+
+		ExternalContext ec = FacesContext.getCurrentInstance().getExternalContext();
+		ec.redirect(ec.getRequestContextPath() + "/movimiento/m_salida.xhtml");
+
 	}
 
 	public void addDetalle() {
@@ -137,7 +215,17 @@ public class MovSalida implements Serializable {
 
 				lotes = new ArrayList<LoteDTO>();
 
-			} 
+			}
+
+			for (AlmacenDTO al : listALM) {
+
+				if (al.getNomAlmacen().equals(almacen)) {
+
+					movSalida.setAlmacen(al.getCodAlmacen());
+					movSalida.setNomAlmacen(al.getNomAlmacen());
+
+				}
+			}
 
 			lotes = movSalidaService.buscarLotes(movSalida, detallesMovSalida);
 
@@ -179,7 +267,7 @@ public class MovSalida implements Serializable {
 
 				d.setCantidad(l.getCantidad());
 				d.setLoteId(l.getCodLote());
-				//System.out.println(l.isAjustar());
+				// System.out.println(l.isAjustar());
 				d.setAjustar(l.isAjustar());
 				detalles.add(d);
 
@@ -249,6 +337,17 @@ public class MovSalida implements Serializable {
 		} else {
 			nuevo = false;
 		}
+
+		listALM = this.getAlmacenes();
+
+		optionsAlm = new ArrayList<String>();
+
+		for (AlmacenDTO al : listALM) {
+
+			optionsAlm.add(al.getNomAlmacen());
+
+		}
+
 	}
 
 	/**

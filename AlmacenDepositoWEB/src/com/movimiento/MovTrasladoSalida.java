@@ -1,5 +1,6 @@
 package com.movimiento;
 
+import java.io.IOException;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collection;
@@ -19,6 +20,7 @@ import javax.validation.ConstraintViolationException;
 import com.application.exceptions.BusinessException;
 import com.application.exceptions.ValidationError;
 import com.institucional.dto.AlmacenDTO;
+import com.institucional.dto.EmpleadoDTO;
 import com.institucional.module.AlmacenServiceRemote;
 import com.movimiento.dto.DetMovSalidaDTO;
 import com.movimiento.dto.LoteDTO;
@@ -144,6 +146,24 @@ public class MovTrasladoSalida implements Serializable {
 
 	public Collection<AlmacenDTO> getAlmacenes() {
 		return almacenService.listAll();
+	}
+	
+	public void seleccionarFilaEmp(EmpleadoDTO emp) throws IOException {
+
+		this.movTrasladoSalida.setLegajo(emp.getLegajo()); 
+
+		ExternalContext ec = FacesContext.getCurrentInstance().getExternalContext();
+		ec.redirect(ec.getRequestContextPath() + "/movimiento/m_traslado_salida.xhtml");
+
+	}
+
+	public void seleccionarFilaLot(LoteDTO lot) throws IOException {
+
+		this.codLote = lot.getCodLote();
+
+		ExternalContext ec = FacesContext.getCurrentInstance().getExternalContext();
+		ec.redirect(ec.getRequestContextPath() + "/movimiento/m_traslado_salida.xhtml");
+
 	}
 
 	public void addDetalle() {

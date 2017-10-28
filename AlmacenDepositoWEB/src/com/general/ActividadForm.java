@@ -1,11 +1,13 @@
 package com.general;
 
 import java.util.Collection;
+import java.util.List;
 
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
 
+import com.articulo.dto.ArticuloDTO;
 import com.institucional.dto.ActividadDTO;
 import com.institucional.module.ActividadServiceRemote;
 
@@ -16,6 +18,17 @@ import com.institucional.module.ActividadServiceRemote;
 public class ActividadForm {
 	@EJB
 	private ActividadServiceRemote aService;
+	
+	private List<ArticuloDTO>  filteredActs;
+	
+	
+	public List<ArticuloDTO> getFilteredActs() {
+		return filteredActs;
+	}
+
+	public void setFilteredActs(List<ArticuloDTO> filteredActs) {
+		this.filteredActs = filteredActs;
+	}
 
 	public Collection<ActividadDTO> getActividades() {
 		return aService.listAll();

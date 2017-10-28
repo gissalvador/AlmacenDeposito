@@ -20,37 +20,43 @@
 						<br />
 						<br />
 
-						<h:panelGrid columns="3" width="100%"
-							columnClasses="rightalign,leftalign,leftalign">
-							
-							<p:outputLabel value="Almacen Origen:" for="almacenOrigen" />
+						<h:panelGrid columns="4">
+
+							<h:outputLabel value="* Almacen Origen:" for="almacenOrigen" />
 							<p:selectOneMenu id="almacenOrigen" required="true"
 								value="#{movTrasladoSalida.almacenOrigen}">
 								<f:selectItem itemLabel="Selecionar una opción" itemValue="" />
 								<f:selectItems value="#{movTrasladoSalida.optionsAlm}"
 									style="width:200px" />
 							</p:selectOneMenu>
+							<p:outputLabel />
 							<h:message for="almacenOrigen" />
-							
-							<p:outputLabel value="Almacen Destino:" for="almacenDestino" />
+
+							<h:outputLabel value="* Almacen Destino:" for="almacenDestino" />
 							<p:selectOneMenu id="almacenDestino" required="true"
 								value="#{movTrasladoSalida.almacenDestino}">
 								<f:selectItem itemLabel="Selecionar una opción" itemValue="" />
 								<f:selectItems value="#{movTrasladoSalida.optionsAlm}"
 									style="width:200px" />
 							</p:selectOneMenu>
+							<p:outputLabel />
 							<h:message for="almacenDestino" />
-							
-							<h:outputLabel value="Fecha Salida:" for="fechaSalida" />
+
+							<h:outputLabel value="* Fecha Salida:" for="fechaSalida" />
 							<p:calendar id="fechaSalida"
-								value="#{movTrasladoSalida.movTrasladoSalida.fechaSalida}" showOn="button"
-								navigator="true" />
+								value="#{movTrasladoSalida.movTrasladoSalida.fechaSalida}"
+								showOn="button" navigator="true" />
+							<p:outputLabel />
 							<h:message for="fechaSalida" />
-							
-							<h:outputLabel value="LEGAJO" for="legajo" />
-							<h:inputText id="legajo" label="LEGAJO" required="true"
+
+
+							<h:outputLabel value="* LEGAJO" for="legajo" />
+							<h:inputText id="legajo" label="LEGAJO"
 								value="#{movTrasladoSalida.movTrasladoSalida.legajo}" />
+							<p:commandButton onclick="PF('dlge').show();" type="button"
+								icon="ui-icon-search" />
 							<h:message for="legajo" />
+
 
 							<h:outputLabel value="Observaciones" for="observaciones" />
 							<h:inputTextarea id="observaciones" label="Observaciones"
@@ -61,8 +67,62 @@
 						<br />
 						<br />
 						<br />
-						<p:commandButton value="Cancel" action="#{movTrasladoSalida.cancelar()}"
-							immediate="true" />
+						<p:commandButton value="Cancel"
+							action="#{movTrasladoSalida.cancelar()}" immediate="true" />
+
+						<p:dialog header="Buscar" widgetVar="dlge" resizable="false">
+
+							<p:dataTable var="e" value="#{empleadoForm.empleados}"
+								widgetVar="empsTable" multiViewState="true" rows="10"
+								paginator="true"
+								paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+								rowsPerPageTemplate="5,10,15"
+								emptyMessage="No se encontro empleado"
+								filteredValue="#{empleadoForm.filteredEmps}">
+
+								<f:facet name="header">
+									<p:outputPanel>
+										<h:outputText value="Buscar en todos los campos: " />
+										<p:inputText id="globalFilter"
+											onkeyup="PF('empsTable').filter()" style="width:150px"
+											placeholder="Ingrese busqueda" />
+									</p:outputPanel>
+								</f:facet>
+
+
+								<p:column headerText="Seleccionar">
+									<p:commandButton icon="ui-icon-check" title="seleccionar"
+										actionListener="#{movTrasladoSalida.seleccionarFilaEmp(e)}" />
+
+								</p:column>
+
+
+								<p:column headerText="Legajo:" filterBy="#{e.legajo}"
+									filterMatchMode="contains">
+									<h:outputText value="#{e.legajo}" />
+								</p:column>
+
+								<p:column headerText="Nombre: " filterBy="#{e.nomPersona}"
+									filterMatchMode="contains">
+									<h:outputText value="#{e.nomPersona}" />
+								</p:column>
+
+								<p:column headerText="C.U.I.L." filterBy="#{e.cuil}"
+									filterMatchMode="contains">
+									<h:outputText value="#{e.cuil}" />
+								</p:column>
+
+								<p:column headerText="Unidad Organica: "
+									filterBy="#{e.uOrganica}" filterMatchMode="contains">
+									<h:outputText value="#{e.uOrganica}" />
+								</p:column>
+
+
+							</p:dataTable>
+
+
+
+						</p:dialog>
 
 					</p:tab>
 
@@ -72,25 +132,27 @@
 
 						<h3>Agregar Detalle</h3>
 
-						<h:panelGrid columns="4" width="100%"
-							columnClasses="rightalign,leftalign,leftalign">
+						<h:panelGrid columns="4">
 
 
-							<h:outputLabel value="Cantidad :" for="cantidad" />
+							<h:outputLabel value="* Cantidad :" for="cantidad" />
 							<h:inputText size="10" id="cantidad" label="Cantidad"
 								required="true" value="#{movTrasladoSalida.cantidad}" />
 							<h:outputLabel />
 							<h:message for="cantidad" />
 
 
-							<h:outputLabel value="Código Lote :" for="codLote" />
-							<h:inputText size="20" id="codLote" label="Código Lote"
-								required="true" value="#{movTrasladoSalida.codLote}" />
-							<h:commandButton value="Buscar"
-								onclick="window.open('/AlmacenDepositoWEB/general/lote.xhtml')" />
+							<h:outputLabel value="* Código Lote:" for="codLote" />
+							<h:inputText size="20" id="codLote" label="Código Lote:"
+								value="#{movTrasladoSalida.codLote}" />
+							<p:commandButton onclick="PF('dlgl').show();" type="button"
+								icon="ui-icon-search" />
 							<h:message for="codLote" />
-							<h:commandButton value="Agregar" action="#{movTrasladoSalida.addDetalle}" />
+							<br />
 
+							<br />
+							<h:commandButton value="Agregar"
+								action="#{movTrasladoSalida.addDetalle}" />
 
 
 						</h:panelGrid>
@@ -99,7 +161,8 @@
 						<br />
 
 						<p:dataTable id="detalleTable" border="1"
-							value="#{movTrasladoSalida.detallesMovTrasladoSalida}" var="detalle">
+							value="#{movTrasladoSalida.detallesMovTrasladoSalida}"
+							var="detalle">
 							<p:column>
 								<f:facet name="header">Cantidad</f:facet>    				
                                            #{detalle.cantidad}
@@ -112,7 +175,8 @@
 							<p:column>
 								<f:facet name="header">Eliminar</f:facet>
 								<p:commandButton icon="ui-icon-close" title="remove from cart"
-									action="#{movTrasladoSalida.borrarFila(detalle)}" update="detalleTable" />
+									action="#{movTrasladoSalida.borrarFila(detalle)}"
+									update="detalleTable" />
 
 
 							</p:column>
@@ -136,14 +200,14 @@
 							<h2>Buscar Lotes</h2>
 
 
-							<p:dataTable id="loteTable" border="1" value="#{movTrasladoSalida.buscarLotes}"
-								var="lotes">
+							<p:dataTable id="loteTable" border="1"
+								value="#{movTrasladoSalida.buscarLotes}" var="lotes">
 								<p:column>
 									<f:facet name="header">Id Lote</f:facet>    				
                                            #{lotes.codLote}
                             </p:column>
-                            <p:column>
-								<f:facet name="header">Id Articulo</f:facet>    				
+								<p:column>
+									<f:facet name="header">Id Articulo</f:facet>    				
                                            #{lotes.articuloID}
                             </p:column>
 								<p:column>
@@ -164,15 +228,15 @@
 									<f:facet name="header">Cantidad</f:facet>    				
                                            #{lotes.cantidad}
                             </p:column>
-                            
-							<p:column>
+
+								<p:column>
 									<f:facet name="header">Seleccionar</f:facet>
 									<p:selectOneRadio id="salida" label="Seleccionar"
 										value="#{lotes.ajustar}" required="true">
 										<f:selectItem itemLabel="Salida" itemValue="False" />
 										<f:selectItem itemLabel="Ajustar" itemValue="True" />
 									</p:selectOneRadio>
-							</p:column>
+								</p:column>
 
 							</p:dataTable>
 
@@ -183,8 +247,82 @@
 						<br />
 						<br />
 						<br />
-						<p:commandButton value="Cancel" action="#{movTrasladoSalida.cancelar()}"
-							immediate="true" />
+						<p:commandButton value="Cancel"
+							action="#{movTrasladoSalida.cancelar()}" immediate="true" />
+
+						<p:dialog header="Buscar" widgetVar="dlgl" resizable="false">
+
+							<p:dataTable var="l" value="#{loteForm.lotes}"
+								widgetVar="lotsTable" multiViewState="true" rows="10"
+								paginator="true"
+								paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+								rowsPerPageTemplate="5,10,15"
+								emptyMessage="No se encontro proveedor"
+								filteredValue="#{loteForm.filteredLots}">
+
+								<f:facet name="header">
+									<p:outputPanel>
+										<h:outputText value="Buscar en todos los campos: " />
+										<p:inputText id="globalFilter"
+											onkeyup="PF('lotsTable').filter()" style="width:150px"
+											placeholder="Ingrese busqueda" />
+									</p:outputPanel>
+								</f:facet>
+
+								<p:column headerText="Seleccionar">
+									<p:commandButton icon="ui-icon-check" title="seleccionar"
+										actionListener="#{movTrasladoSalida.seleccionarFilaLot(l)}" />
+
+								</p:column>
+
+								<p:column headerText="Código de Lote" filterBy="#{l.codLote}"
+									filterMatchMode="contains">
+									<h:outputText value="#{l.codLote}" />
+								</p:column>
+
+								<p:column headerText="Articulo Id" filterBy="#{l.articuloID}"
+									filterMatchMode="contains">
+									<h:outputText value="#{l.articuloID}">
+									</h:outputText>
+								</p:column>
+
+								<p:column headerText="Articulo" filterBy="#{l.articulo}"
+									filterMatchMode="contains">
+									<h:outputText value="#{l.articulo}" />
+								</p:column>
+
+								<p:column headerText="Actividad Nro."
+									filterBy="#{l.actividadID}" filterMatchMode="contains">
+									<h:outputText value="#{l.actividadID}" />
+								</p:column>
+
+								<p:column headerText="Stock Actual" filterBy="#{l.stockActual}"
+									filterMatchMode="contains">
+									<h:outputText value="#{l.stockActual}" />
+								</p:column>
+
+								<p:column headerText="Marca" filterBy="#{l.marString}"
+									filterMatchMode="contains">
+									<h:outputText value="#{l.marString}" />
+								</p:column>
+
+								<p:column headerText="Modelo" filterBy="#{l.modString}"
+									filterMatchMode="contains">
+									<h:outputText value="#{l.modString}" />
+								</p:column>
+
+
+								<p:column headerText="Estado Actual"
+									filterBy="#{l.nomEstadoLote}" filterMatchMode="contains">
+									<h:outputText value="#{l.nomEstadoLote}">
+									</h:outputText>
+								</p:column>
+
+
+							</p:dataTable>
+
+						</p:dialog>
+
 					</p:tab>
 
 
@@ -194,15 +332,20 @@
 						<h:panelGrid columns="2" columnClasses="rightalign-bold,normal">
 
 							<h:outputLabel value="Almacen: " />
-							<h:outputText value="#{movTrasladoSalida.movTrasladoSalida.almacen}" />
+							<h:outputText
+								value="#{movTrasladoSalida.movTrasladoSalida.almacen}" />
 							<h:outputLabel value="Actividad: " />
-							<h:outputText value="#{movTrasladoSalida.movTrasladoSalida.actividad}" />
+							<h:outputText
+								value="#{movTrasladoSalida.movTrasladoSalida.actividad}" />
 							<h:outputLabel value="Fecha de Salida: " />
-							<h:outputText value="#{movTrasladoSalida.movTrasladoSalida.fechaSalida}" />
+							<h:outputText
+								value="#{movTrasladoSalida.movTrasladoSalida.fechaSalida}" />
 							<h:outputLabel value="LEGAJO: " />
-							<h:outputText value="#{movTrasladoSalida.movTrasladoSalida.legajo}" />
+							<h:outputText
+								value="#{movTrasladoSalida.movTrasladoSalida.legajo}" />
 							<h:outputLabel value="Observaciones: " />
-							<h:outputText value="#{movTrasladoSalida.movTrasladoSalida.observaciones}" />
+							<h:outputText
+								value="#{movTrasladoSalida.movTrasladoSalida.observaciones}" />
 
 
 						</h:panelGrid>
@@ -215,7 +358,7 @@
 								<f:facet name="header">Id Lote</f:facet>    				
                                            #{lotes.codLote}
                             </p:column>
-                            <p:column>
+							<p:column>
 								<f:facet name="header">Id Articulo</f:facet>    				
                                            #{lotes.articuloID}
                             </p:column>
@@ -251,7 +394,7 @@
 						<br />
 						<br />
 
-						 
+
 						<p align="right">
 							<h:commandButton value="Guardar"
 								action="#{movTrasladoSalida.crearMovimiento}" update="mgs" />
@@ -265,8 +408,8 @@
 						<br />
 						<br />
 						<br />
-						<p:commandButton value="Cancel" action="#{movTrasladoSalida.cancelar()}"
-							immediate="true" />
+						<p:commandButton value="Cancel"
+							action="#{movTrasladoSalida.cancelar()}" immediate="true" />
 
 					</p:tab>
 

@@ -1,14 +1,12 @@
 package com.movimiento;
 
-
-
+import java.io.IOException;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collection;
 
-
-
 import java.util.Date;
+import java.util.List;
 
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
@@ -24,64 +22,109 @@ import javax.validation.ConstraintViolationException;
 
 import com.application.exceptions.BusinessException;
 import com.application.exceptions.ValidationError;
+import com.articulo.dto.ArticuloDTO;
+import com.institucional.dto.ActividadDTO;
+import com.institucional.dto.AlmacenDTO;
+import com.institucional.dto.ProveedorDTO;
+import com.institucional.module.AlmacenServiceRemote;
 import com.movimiento.dto.MovEntradaDTO;
 import com.movimiento.dto.DetMovEntradaDTO;
 import com.movimiento.module.MovEntradaServiceRemote;
 
-@ManagedBean(name = "movEntrada" )
+@ManagedBean(name = "movEntrada")
 @SessionScoped
 
-public class MovEntrada  implements Serializable {
-	
-/**
-	 * 
-	 */
+public class MovEntrada implements Serializable {
+
+	/**
+		 * 
+		 */
 	private static final long serialVersionUID = 1L;
-	
+
 	@EJB
 	private MovEntradaServiceRemote movEntradaService;
-	
+
+	@EJB
+	private AlmacenServiceRemote almacenService;
+
 	private MovEntradaDTO movEntrada;
 	private Collection<DetMovEntradaDTO> detallesMovEntrada;
-	
+
+	private String almacen;
+	private List<String> optionsAlm;
+	Collection<AlmacenDTO> listALM = new ArrayList<AlmacenDTO>();
+	AlmacenDTO almacenDTO;
+
 	private boolean nuevo = true;
-	
-	 private Float cantidad;
-	 private Integer codArticulo;
-	 private String ubicacion;
-	 private Integer modelo;
-	 private Integer marca;
-	 private Date fechaVto;
-	 private String nroSerie;  
-	 private float importeUnitario;
-	 private String id;
-	 
-	
+
+	private Float cantidad;
+	private Integer codArticulo;
+	private String ubicacion;
+	private Integer modelo;
+	private Integer marca;
+	private Date fechaVto;
+	private String nroSerie;
+	private float importeUnitario;
+	private String id;
+
 	public MovEntradaDTO getMovEntrada() {
 		return movEntrada;
 	}
-	
+
 	public void setMovEntrada(MovEntradaDTO movEntrada) {
 		this.movEntrada = movEntrada;
 	}
-	
+
 	public Collection<DetMovEntradaDTO> getDetallesMovEntrada() {
 		return detallesMovEntrada;
 	}
-	
-	public void setDetallesMovEntrada(
-			Collection<DetMovEntradaDTO> detallesMovEntrada) {
+
+	public void setDetallesMovEntrada(Collection<DetMovEntradaDTO> detallesMovEntrada) {
 		this.detallesMovEntrada = detallesMovEntrada;
 	}
-	
-	
-	
+
 	public MovEntradaServiceRemote getMovEntradaService() {
 		return movEntradaService;
 	}
 
 	public void setMovEntradaService(MovEntradaServiceRemote movEntradaService) {
 		this.movEntradaService = movEntradaService;
+	}
+
+	public Collection<AlmacenDTO> getAlmacenes() {
+		return almacenService.listAll();
+	}
+
+	public List<String> getOptionsAlm() {
+		return optionsAlm;
+	}
+
+	public void setOptionsAlm(List<String> optionsAlm) {
+		this.optionsAlm = optionsAlm;
+	}
+
+	public Collection<AlmacenDTO> getListALM() {
+		return listALM;
+	}
+
+	public void setListALM(Collection<AlmacenDTO> listALM) {
+		this.listALM = listALM;
+	}
+
+	public AlmacenDTO getAlmacenDTO() {
+		return almacenDTO;
+	}
+
+	public void setAlmacenDTO(AlmacenDTO almacenDTO) {
+		this.almacenDTO = almacenDTO;
+	}
+
+	public String getAlmacen() {
+		return almacen;
+	}
+
+	public void setAlmacen(String almacen) {
+		this.almacen = almacen;
 	}
 
 	public boolean isNuevo() {
@@ -139,9 +182,6 @@ public class MovEntrada  implements Serializable {
 	public void setFechaVto(Date fechaVto) {
 		this.fechaVto = fechaVto;
 	}
-	
-	
-	
 
 	public String getNroSerie() {
 		return nroSerie;
@@ -158,9 +198,7 @@ public class MovEntrada  implements Serializable {
 	public void setImporteUnitario(float importeUnitario) {
 		this.importeUnitario = importeUnitario;
 	}
-	
-	
-	
+
 	public String getId() {
 		return id;
 	}
@@ -169,9 +207,35 @@ public class MovEntrada  implements Serializable {
 		this.id = id;
 	}
 
+	public void seleccionarFila2(ArticuloDTO art) throws IOException {
+
+		this.codArticulo = art.getCodArticulo();
+
+		ExternalContext ec = FacesContext.getCurrentInstance().getExternalContext();
+		ec.redirect(ec.getRequestContextPath() + "/movimiento/m_entrada.xhtml");
+
+	}
+
+	public void seleccionarFilaP(ProveedorDTO pro) throws IOException {
+
+		this.movEntrada.setCuitlegajo(pro.getCuit());
+
+		ExternalContext ec = FacesContext.getCurrentInstance().getExternalContext();
+		ec.redirect(ec.getRequestContextPath() + "/movimiento/m_entrada.xhtml");
+
+	}
+
+	public void seleccionarFilaAct(ActividadDTO act) throws IOException {
+
+		this.movEntrada.setActividad(act.getNroActividad());
+
+		ExternalContext ec = FacesContext.getCurrentInstance().getExternalContext();
+		ec.redirect(ec.getRequestContextPath() + "/movimiento/m_entrada.xhtml");
+
+	}
+
 	public void addDetalle() {
-		
-		
+
 		DetMovEntradaDTO detMovEntrada = new DetMovEntradaDTO();
 		detMovEntrada.setCantidad(cantidad);
 		detMovEntrada.setCodArticulo(codArticulo);
@@ -181,35 +245,41 @@ public class MovEntrada  implements Serializable {
 		detMovEntrada.setFechaVto(fechaVto);
 		detMovEntrada.setImporteUnitario(importeUnitario);
 		detMovEntrada.setNroSerie_Proveedor(nroSerie);
-		
-		//ingresar validador remoto
-		
+
+		// ingresar validador remoto
+
 		this.detallesMovEntrada.add(detMovEntrada);
-		
-		
-		
+
 	}
-	
+
 	public String crearMovimiento() {
-		
-		Integer err=0;
-		
-		try{
-			
+
+		Integer err = 0;
+
+		try {
+
 			FacesContext context = FacesContext.getCurrentInstance();
 			ExternalContext externalContext = context.getExternalContext();
 			HttpServletRequest request = (HttpServletRequest) externalContext.getRequest();
 			movEntrada.setUsuario(request.getUserPrincipal().getName());
-			
-					
-			id= movEntradaService.crearMovEntrada(movEntrada, detallesMovEntrada);
-			
+
+			for (AlmacenDTO al : listALM) {
+
+				if (al.getNomAlmacen().equals(almacen)) {
+
+					movEntrada.setAlmacen(al.getCodAlmacen());
+					movEntrada.setAlmString(al.getNomAlmacen());
+
+				}
+			}
+
+			id = movEntradaService.crearMovEntrada(movEntrada, detallesMovEntrada);
+
 			movEntrada.setId(id);
-			
-			
+
 		} catch (BusinessException be) {
 			processBusinessException(be);
-			err=1;
+			err = 1;
 		} catch (ConstraintViolationException cve) {
 			processConstraintViolationException(cve);
 		} catch (EJBException e) {
@@ -219,62 +289,71 @@ public class MovEntrada  implements Serializable {
 				processBusinessException((BusinessException) e.getCause());
 			}
 		} catch (Exception e) {
-				
-				e.printStackTrace();
-				
-				FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error inesperado del sistema. No se pudo agregar el Movimiento de Entrada.", e.getMessage()));
-				
-				//System.out.println("List<ValidationError> :"+e);
-			}
-		
-		
-		//FacesContext.getCurrentInstance().getExternalContext().invalidateSession();
+
+			e.printStackTrace();
+
+			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR,
+					"Error inesperado del sistema. No se pudo agregar el Movimiento de Entrada.", e.getMessage()));
+
+			// System.out.println("List<ValidationError> :"+e);
+		}
+
+		// FacesContext.getCurrentInstance().getExternalContext().invalidateSession();
 		//
-		
-		if( err == 0){
-		//System.out.println("FIN");
-		
-		FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("movEntrada", null);
-		
-		return "/reportes/movEntrada.xhtml";
-		
+
+		if (err == 0) {
+			// System.out.println("FIN");
+
+			FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("movEntrada", null);
+
+			return "/reportes/movEntrada.xhtml";
+
 		}
-		
-		//return "/index.xhtml?faces-redirect=true";
+
+		// return "/index.xhtml?faces-redirect=true";
 		return null;
-		
+
 	}
-	
+
 	public String cancelar() {
-		
-		
+
 		FacesContext.getCurrentInstance().getExternalContext().invalidateSession();
-		
-		return "/index.xhtml"; 
+
+		return "/index.xhtml";
 	}
-	
+
 	public String borrarFila(DetMovEntradaDTO detalle) {
-			
-			
+
 		this.detallesMovEntrada.remove(detalle);
-			
-	    return null;
-	    
-		}
+
+		return null;
+
+	}
+
 	@PostConstruct
 	private void initialize() {
-		
-		if ( movEntrada == null) {
+
+		if (movEntrada == null) {
 			movEntrada = new MovEntradaDTO();
 			detallesMovEntrada = new ArrayList<DetMovEntradaDTO>();
-			
+
 			movEntrada.setCodTipMovOrigen(1);
 			movEntrada.setComprobante(1);
 		} else {
 			nuevo = false;
 		}
+
+		listALM = this.getAlmacenes();
+
+		optionsAlm = new ArrayList<String>();
+
+		for (AlmacenDTO al : listALM) {
+
+			optionsAlm.add(al.getNomAlmacen());
+
+		}
 	}
-	
+
 	/**
 	 * Procesa y revisa las excepciones de negocio obtenidas.
 	 * 
@@ -284,10 +363,12 @@ public class MovEntrada  implements Serializable {
 		BusinessException be = (BusinessException) e;
 		if (be.getErrores().size() > 0) {
 			for (ValidationError ve : be.getErrores()) {
-				FacesContext.getCurrentInstance().addMessage("form:" + ve.getProperty(), new FacesMessage(FacesMessage.SEVERITY_ERROR, ve.getError(), ve.getError()));
+				FacesContext.getCurrentInstance().addMessage("form:" + ve.getProperty(),
+						new FacesMessage(FacesMessage.SEVERITY_ERROR, ve.getError(), ve.getError()));
 			}
 		} else {
-			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, be.getMessage(), be.getMessage()));
+			FacesContext.getCurrentInstance().addMessage(null,
+					new FacesMessage(FacesMessage.SEVERITY_ERROR, be.getMessage(), be.getMessage()));
 		}
 	}
 
@@ -298,11 +379,9 @@ public class MovEntrada  implements Serializable {
 	 */
 	private void processConstraintViolationException(ConstraintViolationException cve) {
 		for (ConstraintViolation<?> v : cve.getConstraintViolations()) {
-			FacesContext.getCurrentInstance().addMessage("form:" + v.getPropertyPath().toString(), new FacesMessage(FacesMessage.SEVERITY_ERROR, v.getMessage(), v.getMessage()));
+			FacesContext.getCurrentInstance().addMessage("form:" + v.getPropertyPath().toString(),
+					new FacesMessage(FacesMessage.SEVERITY_ERROR, v.getMessage(), v.getMessage()));
 		}
 	}
-	
-			
+
 }
-
-

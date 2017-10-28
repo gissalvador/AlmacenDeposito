@@ -1,5 +1,6 @@
 package com.movimiento;
 
+import java.io.IOException;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collection;
@@ -24,6 +25,7 @@ import org.primefaces.event.RowEditEvent;
 import com.application.exceptions.BusinessException;
 import com.application.exceptions.ValidationError;
 import com.institucional.dto.AlmacenDTO;
+import com.institucional.dto.EmpleadoDTO;
 import com.institucional.module.AlmacenServiceRemote;
 import com.movimiento.dto.DetMovEntradaDTO;
 import com.movimiento.dto.DetMovSalidaDTO;
@@ -179,6 +181,34 @@ public class MovAjustar implements Serializable {
 		this.detallesMovAjustarFaltante = detlallesMovAjustarFaltante;
 	}
 
+	public void seleccionarFilaEmp(EmpleadoDTO emp) throws IOException {
+		
+		if(af != null){
+			
+			this.movAjustarFaltante.setLegajo(emp.getLegajo()); 
+			
+		} else if(ae != null){
+			
+			this.movAjustar.setCuitlegajo(emp.getLegajo()); 
+			
+		} 
+
+		
+
+		ExternalContext ec = FacesContext.getCurrentInstance().getExternalContext();
+		ec.redirect(ec.getRequestContextPath() + "/movimiento/m_ajustar.xhtml");
+
+	}
+
+	public void seleccionarFilaLot(LoteDTO lot) throws IOException {
+
+		this.codLote = lot.getCodLote();
+
+		ExternalContext ec = FacesContext.getCurrentInstance().getExternalContext();
+		ec.redirect(ec.getRequestContextPath() + "/movimiento/m_ajustar.xhtml");
+
+	}
+
 	public String buscarLote() {
 
 		bl = "Hello world!";
@@ -307,24 +337,24 @@ public class MovAjustar implements Serializable {
 					 * se agrega para que no de errores de nulos en la base de
 					 * datos
 					 */
-					
+
 					movAjustarFaltante.setNroComprobante("no posee");
 
-				} 	else {
-					
+				} else {
+
 					System.out.println(lote.getActividad());
 
 					ce = "Desajustar Lote";
-					
+
 					System.out.println(lote.getActividad());
-									
 
 				}
 
 			} else {
 
-				throw new BusinessException("La cantidad ajustada no puede ser mayor que la cantidad inicial o menor a 0 del lote: "
-						+ lote.getCodLote());
+				throw new BusinessException(
+						"La cantidad ajustada no puede ser mayor que la cantidad inicial o menor a 0 del lote: "
+								+ lote.getCodLote());
 
 			}
 
@@ -383,28 +413,27 @@ public class MovAjustar implements Serializable {
 			FacesContext context = FacesContext.getCurrentInstance();
 			ExternalContext externalContext = context.getExternalContext();
 			HttpServletRequest request = (HttpServletRequest) externalContext.getRequest();
-			
 
 			if (ae != null) {
-				
+
 				movAjustar.setUsuario(request.getUserPrincipal().getName());
 
 				movAjustarService.crearMovAjustar(movAjustar);
 
 			} else if (af != null) {
-				
+
 				movAjustarFaltante.setUsuario(request.getUserPrincipal().getName());
-				
+
 				movAjustarService.crearMovAjustarSalida(movAjustarFaltante);
-				
+
 			} else if (ce != null) {
-				
+
 				String usuario;
-				
-				usuario=request.getUserPrincipal().getName();
-				
-				movAjustarService.crearMovAjustarDesajuste(lote,usuario);
-				
+
+				usuario = request.getUserPrincipal().getName();
+
+				movAjustarService.crearMovAjustarDesajuste(lote, usuario);
+
 			}
 
 		} catch (BusinessException be) {
@@ -444,10 +473,10 @@ public class MovAjustar implements Serializable {
 
 				return "/reportes/movSalida.xhtml";
 
-			}  else if (ce != null) {
-				
+			} else if (ce != null) {
+
 				return "/general/lote.xhtml";
-				
+
 			}
 
 		}

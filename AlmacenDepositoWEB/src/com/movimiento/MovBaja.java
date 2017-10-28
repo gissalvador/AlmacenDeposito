@@ -1,7 +1,9 @@
 package com.movimiento;
 
+import java.io.IOException;
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 
 import javax.annotation.PostConstruct;
@@ -17,6 +19,9 @@ import javax.validation.ConstraintViolation;
 import javax.validation.ConstraintViolationException;
 import com.application.exceptions.BusinessException;
 import com.application.exceptions.ValidationError;
+import com.institucional.dto.AlmacenDTO;
+import com.institucional.dto.EmpleadoDTO;
+import com.institucional.module.AlmacenServiceRemote;
 import com.movimiento.dto.DetMovSalidaDTO;
 import com.movimiento.dto.LoteDTO;
 import com.movimiento.dto.MovSalidaDTO;
@@ -34,14 +39,60 @@ public class MovBaja implements Serializable {
 
 	@EJB
 	private MovBajaServiceRemote movBajaService;
+	
+	@EJB
+	private AlmacenServiceRemote almacenService;
 
 	private MovSalidaDTO movBaja;
 	private LoteDTO lote;
 	private String bl;
+	
+	private String almacen;
+	private List<String> optionsAlm;
+	Collection<AlmacenDTO> listALM = new ArrayList<AlmacenDTO>();
+	AlmacenDTO almacenDTO;
 
 	private boolean nuevo = true;
 
 	private String codLote;
+	
+	
+
+	public String getAlmacen() {
+		return almacen;
+	}
+
+	public void setAlmacen(String almacen) {
+		this.almacen = almacen;
+	}
+
+	public List<String> getOptionsAlm() {
+		return optionsAlm;
+	}
+
+	public void setOptionsAlm(List<String> optionsAlm) {
+		this.optionsAlm = optionsAlm;
+	}
+
+	public Collection<AlmacenDTO> getListALM() {
+		return listALM;
+	}
+
+	public void setListALM(Collection<AlmacenDTO> listALM) {
+		this.listALM = listALM;
+	}
+
+	public AlmacenDTO getAlmacenDTO() {
+		return almacenDTO;
+	}
+
+	public void setAlmacenDTO(AlmacenDTO almacenDTO) {
+		this.almacenDTO = almacenDTO;
+	}
+	
+	public Collection<AlmacenDTO> getAlmacenes() {
+		return almacenService.listAll();
+	}
 
 	public MovSalidaDTO getMovBaja() {
 		return movBaja;
@@ -85,12 +136,49 @@ public class MovBaja implements Serializable {
 	public void setBl(String bl) {
 		this.bl = bl;
 	}
+	
+	public void seleccionarFilaEmp(EmpleadoDTO emp) throws IOException {
+
+		
+		this.movBaja.setLegajo(emp.getLegajo());
+		
+				
+		 ExternalContext ec = FacesContext.getCurrentInstance().getExternalContext();
+		 ec.redirect(ec.getRequestContextPath() + "/movimiento/m_baja.xhtml");
+		
+		
+		
+	}
+		
+		public void seleccionarFilaLot(LoteDTO lot) throws IOException {
+
+			
+			this.codLote = lot.getCodLote();
+			
+					
+			 ExternalContext ec = FacesContext.getCurrentInstance().getExternalContext();
+			 ec.redirect(ec.getRequestContextPath() + "/movimiento/m_baja.xhtml");
+			
+			
+			
+		}
 
 	public String buscarLote() {
 
 		bl = "Hello world!";
 
 		try {
+			
+			
+			for (AlmacenDTO al : listALM) {
+
+				if (al.getNomAlmacen().equals(almacen)) {
+
+					movBaja.setAlmacen(al.getCodAlmacen());
+					movBaja.setNomAlmacen(al.getNomAlmacen());
+
+				}
+			}
 
 			lote = movBajaService.buscarLotes(movBaja, codLote);
 			
@@ -189,6 +277,17 @@ public class MovBaja implements Serializable {
 		} else {
 			nuevo = false;
 		}
+		
+		listALM = this.getAlmacenes();
+
+		optionsAlm = new ArrayList<String>();
+
+		for (AlmacenDTO al : listALM) {
+
+			optionsAlm.add(al.getNomAlmacen());
+
+		}
+		
 	}
 
 	/**
