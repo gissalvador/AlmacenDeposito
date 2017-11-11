@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Frameset//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-frameset.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:f="http://java.sun.com/jsf/core">
+
+<ui:composition template="/WEB-INF/templates/template.xhtml">
+
+	<ui:define name="content">
+
+		<h:form id="add-form" enctype="multipart/form-data">
+			<h:panelGrid columns="1" style="width: 90%">
+		
+
+					<br />
+					<br />
+
+					<h:panelGrid columns="3" width="100%"
+						columnClasses="rightalign,leftalign,leftalign">
+
+						<h:outputLabel value="Nombre Grupo: " for="nomGrupo" />
+						<h:inputText id="nomGrupo" label="Nombre Grupo:" required="true"
+							value="#{confGrupo.grupoDTO.nomGrupo}"
+							onblur="value=value.toUpperCase()" />
+						<p:message for="nomGrupo" />
+
+						<h:outputLabel value="Descripción Grupo:" for="desGrupo" />
+						<h:inputTextarea id="desGrupo" label="Descripción Grupo:"
+							required="true" value="#{confGrupo.grupoDTO.desGrupo}" />
+						<p:message for="desGrupo" />
+
+
+					</h:panelGrid>
+					<br />
+					<br />
+
+					<h:panelGrid columns="3">
+						<p:outputLabel for="file" value="Elegir Imagen: " />
+						<p:fileUpload id="file" value="#{confGrupo.file}"
+							 multiple="false" allowTypes="/(\.|\/)(gif|jpe?g|png)$/"
+							 required="true" mode="simple" />
+						<p:message for="file" />
+						
+						
+					</h:panelGrid>
+
+
+
+					<h:commandButton value="Guardar" ajax="false" id="save-btn" actionListener="#{confGrupo.guardarGrupo}"
+						update="msgs" />
+
+					<br />
+					<br />
+
+					<h:commandButton value="Mostrar Grupo"
+						action="/general/grupo.xhtml" immediate="true" />
+
+					<br />
+
+					<br />
+
+					<h:commandButton value="Volver al Índice" action="/index.xhtml"
+						immediate="true" />
+
+					<br />
+					<br />
+
+
+			</h:panelGrid>
+			<br />
+		</h:form>
+
+
+	</ui:define>
+
+</ui:composition>
+
+
+
+</html>

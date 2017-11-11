@@ -18,60 +18,59 @@
 						<br />
 						<br />
 
-						<h:panelGrid columns="3" width="100%"
-							columnClasses="rightalign,leftalign,leftalign">
+						<h:panelGrid columns="3" >
 
 
-							<h:outputLabel value="Alias:" for="alias" />
+							<h:outputLabel value="*Alias:" for="alias" />
 							<h:inputText style="text-transform:capitalize" id="alias"
 								label="Alias:" required="true"
 								value="#{confProveedor.proveedorDTO.alias}" />
-							<h:message for="alias" />
+							<p:message for="alias" />
 
-							<h:outputLabel value="Razon Social:" for="razonSocial" />
+							<h:outputLabel value="*Razón Social:" for="razonSocial" />
 							<h:inputText style="text-transform:capitalize" id="razonSocial" label="Razon Social:"
 								required="true"
 								value="#{confProveedor.proveedorDTO.razonSocial}" />
-							<h:message for="razonSocial" />
+							<p:message for="razonSocial" />
 
-							<h:outputLabel value="CUIT:" for="cuit" />
+							<h:outputLabel value="*CUIT: " for="cuit" />
 							<h:inputText id="cuit" label="CUIT:" required="true" 
 								value="#{confProveedor.proveedorDTO.cuit}" 
 								validatorMessage="CUIT: Escriba un C.U.I.T. valido. Ejemplo: 30546660210">
 							<f:validateLength minimum="11" maximum="11" />
 							</h:inputText>
-							<h:message for="cuit" />
+							<p:message for="cuit" />
 						
 
-							<h:outputLabel value="Teléfono: " for="telefono" />
+							<h:outputLabel value="*Teléfono: " for="telefono" />
 							<h:inputText id="telefono" label="Teléfono:" required="true"
 								value="#{confProveedor.proveedorDTO.telefono}" />
-							<h:message for="telefono" />
+							<p:message for="telefono" />
 
 							<h:outputLabel value="Celular: " for="celular" />
 							<h:inputText id="celular" label="Celular:" 
 								value="#{confProveedor.proveedorDTO.celular}" />
-							<h:message for="celular" />
+							<p:message for="celular" />
 
-							<h:outputLabel value="Mail: " for="mail" />
+							<h:outputLabel value="Email: " for="mail" />
 							<h:inputText id="mail" label="Mail:" required="false" 
 								value="#{confProveedor.proveedorDTO.mail}" onblur="value=value.toLowerCase()"
-								validatorMessage="E-Mail: Escriba un mail valido. Ejemplo: adarleatomos@cnea.gov.ar">
+								validatorMessage="Email: Escriba un mail valido. Ejemplo: sgadtic@cnea.gov.ar">
 								<f:validateRegex
 									 pattern="(.+@.+\.[a-zA-Z]+)?"/>
 							</h:inputText>
 
-							<h:message for="mail" />
+							<p:message for="mail" />
 
-							<h:outputLabel value="Domicilio: " for="domicilio" />
+							<h:outputLabel value="*Domicilio: " for="domicilio" />
 							<h:inputText id="domicilio" label="Domicilio:" required="true"
 								value="#{confProveedor.proveedorDTO.domicilio}" />
-							<h:message for="domicilio" />
+							<p:message for="domicilio" />
 
 							<h:outputLabel value="Número de Proveedor: " for="nroProveedor" />
 							<h:inputText id="nroProveedor" label="Número de Proveedor: "
 								value="#{confProveedor.proveedorDTO.nroProveedor}" />
-							<h:message for="nroProveedor" />
+							<p:message for="nroProveedor" />
 
 
 
@@ -84,7 +83,7 @@
 						<br />
 						<br />
 
-						<h:commandButton value="Volver a Indice" action="/index.xhtml"
+						<h:commandButton value="Volver al Índice" action="/index.xhtml"
 							immediate="true" />
 						<br />
 
@@ -99,7 +98,7 @@
 							<h:outputText style="text-transform:capitalize"
 								value="#{confProveedor.proveedorDTO.alias}" />
 
-							<h:outputLabel value="Razon Social: " />
+							<h:outputLabel value="Razón Social: " />
 							<h:outputText style="text-transform:capitalize"
 								value="#{confProveedor.proveedorDTO.razonSocial}" />
 
@@ -112,7 +111,7 @@
 							<h:outputLabel value="Celular: " />
 							<h:outputText value="#{confProveedor.proveedorDTO.celular}" />
 
-							<h:outputLabel value="E-Mail: " />
+							<h:outputLabel value="Email: " />
 							<h:outputText value="#{confProveedor.proveedorDTO.mail}" />
 
 							<h:outputLabel value="Domicilio: " />
@@ -135,7 +134,7 @@
 
 						<br />
 
-						<h:commandButton value="Volver a Indice" action="/index.xhtml"
+						<h:commandButton value="Volver al Índice" action="/index.xhtml"
 							immediate="true" />
 
 						<br />

@@ -10,6 +10,8 @@ public class PPrincipalDTO implements Serializable {
 	private int codPPrincipal;
 	private Integer nroPPrincipal;
 	private String nomPPrincipal;
+	private Float movEntrada;
+	private Float movSalida;
 
 	private List<PParcialDTO> listPParcialDTO;
 
@@ -35,6 +37,22 @@ public class PPrincipalDTO implements Serializable {
 
 	public void setNomPPrincipal(String nomPPrincipal) {
 		this.nomPPrincipal = nomPPrincipal;
+	}
+		
+	public Float getMovEntrada() {
+		return movEntrada;
+	}
+
+	public void setMovEntrada(Float movEntrada) {
+		this.movEntrada = movEntrada;
+	}
+
+	public Float getMovSalida() {
+		return movSalida;
+	}
+
+	public void setMovSalida(Float movSalida) {
+		this.movSalida = movSalida;
 	}
 
 	public List<PParcialDTO> getListPParcialDTO() {

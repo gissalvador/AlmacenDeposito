@@ -23,7 +23,7 @@ public class MovEntradaFactory {
 		
 		MovEntradaDTO result = new MovEntradaDTO();
 		result.setId(movEntrada.getCodMovEntrada());
-		result.setActividad(movEntrada.getActividad().getCodActividad());
+		result.setActividad(movEntrada.getActividad().getNroActividad());
 		result.setActString(movEntrada.getActividad().getNomActividad());
 		result.setComprobante(movEntrada.getMovOrigen().getTipoMovOrigen().getCodTMovOrigen());
 		result.setNomComprobante(movEntrada.getMovOrigen().getTipoMovOrigen().getNomTMovOrigen());
@@ -59,6 +59,7 @@ public class MovEntradaFactory {
 			detalleDTO.setLote(detalleME.getLote().getCodLote());
 			detalleDTO.setCantidad(detalleME.getCantidadME());
 			detalleDTO.setUniTotal(detalleME.getImporteUnitarioME()*detalleME.getCantidadME());
+			detalleDTO.setPparcial(detalleME.getLote().getArticulo().getPartidaparcial().getNroPParcial());
 			
 			total+= detalleDTO.getUniTotal();
 			

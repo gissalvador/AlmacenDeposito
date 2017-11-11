@@ -17,35 +17,35 @@
 				<h:outputText value="Login" />
 				<h:inputText id="login"
 					value="#{registrarUsuarioForm.usuarioEditado.login}" />
-				<h:message for="login" />
+				<p:message for="login" />
 
 				<h:outputText value="Nombre" />
 				<h:inputText id="nombre"
 					value="#{registrarUsuarioForm.usuarioEditado.nombre}" />
-				<h:message for="nombre" />
+				<p:message for="nombre" />
 
 
 				<h:outputText value="Contraseña" />
 				<h:inputSecret id="plainTextPassword"
 					value="#{registrarUsuarioForm.plainTextPassword}" />
-				<h:message for="plainTextPassword" />
+				<p:message for="plainTextPassword" />
 
 				<h:outputText value="Repetir Contraseña" />
 				<h:inputSecret id="plainTextPassword2"
 					value="#{registrarUsuarioForm.plainTextPassword2}" />
-				<h:message for="plainTextPassword2" />
+				<p:message for="plainTextPassword2" />
 
 				<h:outputText value="Email" />
 				<h:inputText id="email"
 					value="#{registrarUsuarioForm.usuarioEditado.email}" />
-				<h:message for="email" />
+				<p:message for="email" />
 
 				<h:outputText value="Inicio vigencia" />
 				<h:inputText id="inicioVigencia"
 					value="#{registrarUsuarioForm.usuarioEditado.inicioVigencia}">
 					<f:convertDateTime pattern="dd/MM/yyyy" />
 				</h:inputText>
-				<h:message for="inicioVigencia" />
+				<p:message for="inicioVigencia" />
 
 				<h:outputText value="Roles Habilitados" />
 				<h:selectManyCheckbox id="roles"
@@ -55,7 +55,7 @@
 						value="#{registrarUsuarioForm.getRolesDisponibles()}" var="r"
 						itemValue="#{r}" itemLabel="#{r}" />
 				</h:selectManyCheckbox>
-				<h:message for="roles" />
+				<p:message for="roles" />
 
 			</h:panelGrid>
 			<h:panelGrid columns="2">

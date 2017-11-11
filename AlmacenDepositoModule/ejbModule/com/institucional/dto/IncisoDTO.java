@@ -10,6 +10,8 @@ public class IncisoDTO implements Serializable{
 	private int inciso;
 	private int nroInciso;
 	private String nomInciso;
+	private Float movEntrada;
+	private Float movSalida;
 	
 	private List<PPrincipalDTO> listPPrincipalDTO;
 
@@ -36,7 +38,22 @@ public class IncisoDTO implements Serializable{
 	public void setNomInciso(String nomInciso) {
 		this.nomInciso = nomInciso;
 	}
+		
+	public Float getMovEntrada() {
+		return movEntrada;
+	}
 
+	public void setMovEntrada(Float movEntrada) {
+		this.movEntrada = movEntrada;
+	}
+
+	public Float getMovSalida() {
+		return movSalida;
+	}
+
+	public void setMovSalida(Float movSalida) {
+		this.movSalida = movSalida;
+	}
 
 	public List<PPrincipalDTO> getListPPrincipalDTO() {
 		return listPPrincipalDTO;

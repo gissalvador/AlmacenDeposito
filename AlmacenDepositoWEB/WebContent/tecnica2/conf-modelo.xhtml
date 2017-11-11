@@ -21,13 +21,13 @@
 						<h:panelGrid columns="3" width="100%"
 							columnClasses="rightalign,leftalign,leftalign">
 
-							<h:outputLabel value="Nombre Modelo" for="nomModelo" />
+							<h:outputLabel value="Nombre Modelo: " for="nomModelo" />
 							<h:inputText id="nomModelo" label="Nombre Modelo:"
 								required="true" value="#{confModelo.modeloDTO.nomModelo}"
 								onblur="value=value.toUpperCase()" />
-							<h:message for="nomModelo" />
+							<p:message for="nomModelo" />
 
-							<h:outputLabel value="Marca:" for="marcaModelo" />
+							<h:outputLabel value="Marca: " for="marcaModelo" />
 							<h:outputText value="#{confModelo.modeloDTO.marca}" />
 
 							<h:outputText />
@@ -70,7 +70,7 @@
 
 							<br />
 							<br />
-							<h:commandButton value="Volver a Indice" action="/index.xhtml"
+							<h:commandButton value="Volver al Índice" action="/index.xhtml"
 								immediate="true" />
 							<br />
 							<br />

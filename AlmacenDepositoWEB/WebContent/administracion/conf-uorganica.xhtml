@@ -30,7 +30,7 @@
 								label="Número Unidad Organica:" required="true"
 								value="#{confUnidadOrganica.unidadOrganicaDTO.nroDependencia}" />
 							<h:outputLabel />
-							<h:message for="nroUnidadOrganica" />
+							<p:message for="nroUnidadOrganica" />
 
 
 							<h:outputLabel value="Nombre Unidad Organica:"
@@ -40,14 +40,14 @@
 								value="#{confUnidadOrganica.unidadOrganicaDTO.nomUnidaOrganica}"
 								onblur="value=value.toUpperCase()" />
 							<h:outputLabel />
-							<h:message for="nomUnidadOrganica" />
+							<p:message for="nomUnidadOrganica" />
 
 
 							<h:outputLabel value="Legajo Responsable:" for="legajo" />
 							<h:inputText id="legajo" label="Legajo Responsable:"
 								value="#{confUnidadOrganica.unidadOrganicaDTO.legajo}" />
 							<h:outputLabel />
-							<h:message for="legajo" />
+							<p:message for="legajo" />
 
 
 							<p:outputLabel value="Unidad Organica Predecesora:"
@@ -58,7 +58,7 @@
 								<f:selectItems value="#{confUnidadOrganica.options}" style="width:80px" />
 							</p:selectOneMenu>
 							<h:outputLabel />
-							<h:message for="uorganica" />
+							<p:message for="uorganica" />
 
 
 
@@ -70,7 +70,7 @@
 						<br />
 						<br />
 
-						<h:commandButton value="Volver a Indice" action="/index.xhtml"
+						<h:commandButton value="Volver al Índice" action="/index.xhtml"
 							immediate="true" />
 						<br />
 
@@ -109,7 +109,7 @@
 
 						<br />
 
-						<h:commandButton value="Volver a Indice" action="/index.xhtml"
+						<h:commandButton value="Volver al Índice" action="/index.xhtml"
 							immediate="true" />
 
 						<br />

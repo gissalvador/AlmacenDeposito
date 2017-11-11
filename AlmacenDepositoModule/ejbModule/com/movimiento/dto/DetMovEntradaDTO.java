@@ -17,6 +17,7 @@ public class DetMovEntradaDTO implements Serializable{
 	   private Float cantidad;
 	   private Integer codArticulo;
 	   private String nomArticulo;
+	   private Integer pparcial;
 	   private Integer modelo;
 	   private String modString;
 	   private Integer marca;
@@ -180,11 +181,16 @@ public class DetMovEntradaDTO implements Serializable{
 	}
 
 
+	public Integer getPparcial() {
+		return pparcial;
+	}
 
-	
-	
 
-	
+
+	public void setPparcial(Integer pparcial) {
+		this.pparcial = pparcial;
+	}
+
 	
 	   
 }

@@ -1,5 +1,6 @@
 package com.configuracion.tecnica;
 
+import java.io.ByteArrayInputStream;
 import java.io.Serializable;
 
 import javax.annotation.PostConstruct;
@@ -16,7 +17,11 @@ import com.application.exceptions.BusinessException;
 import com.application.exceptions.ValidationError;
 import com.articulo.dto.GrupoDTO;
 import com.articulo.modules.*;
+import com.general.FTPUpload;
 
+import org.primefaces.event.FileUploadEvent;
+import org.primefaces.model.StreamedContent;
+import org.primefaces.model.UploadedFile;
 
 @ManagedBean (name = "confGrupo")
 @ViewScoped
@@ -28,13 +33,37 @@ public class confGrupo implements Serializable {
 private static final long serialVersionUID = 1L;
 @EJB
 private GrupoService grupoService;
+
+private FTPUpload  guardarftp;
+
 private GrupoDTO grupoDTO;
+private StreamedContent content;
+private UploadedFile file;
+
+
+
+public void setContent(StreamedContent content) {
+    this.content = content;
+}
+public UploadedFile getFile() {
+    return file;
+}
+
+public void setFile(UploadedFile file) {
+    this.file = file;
+}
+
+
 
 
 
 public String guardarGrupo(){
 	try {
 		grupoService.addGrupo(grupoDTO);
+		
+		guardarftp.uploadDemo();
+		
+		
 		return "/general/grupo.xhtml";
 	} catch (BusinessException be) {
 		processBusinessException(be);
@@ -54,6 +83,11 @@ public String guardarGrupo(){
 	
 	
 	
+}
+
+public void handleFileUpload(FileUploadEvent event) {
+    FacesMessage message = new FacesMessage("Succesful", event.getFile().getFileName() + " is uploaded.");
+    FacesContext.getCurrentInstance().addMessage(null, message);
 }
 
 

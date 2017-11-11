@@ -20,7 +20,7 @@
 				<h:outputLabel value="Login:" for="login" />
 				<h:inputText id="login" label="Login:" required="true"
 					value="#{cambiarClaveForm.login}" />
-				<h:message for="login" />
+				<p:message for="login" />
 
 			</h:panelGrid>
 			<br />
@@ -53,7 +53,7 @@
 					<h:outputLabel value="Ingrese Código:" for="codigoR" />
 					<h:inputText id="codigoR" label="Ingrese Código:" required="true"
 						value="#{cambiarClaveForm.codR}" />
-					<h:message for="codigoR" />
+					<p:message for="codigoR" />
 
 				</h:panelGrid>
 
@@ -81,12 +81,12 @@
 					<h:outputText value="Contraseña" />
 					<h:inputSecret id="plainTextPasswordNuevo"
 						value="#{cambiarClaveForm.plainTextPasswordNuevo}" />
-					<h:message for="plainTextPasswordNuevo" />
+					<p:message for="plainTextPasswordNuevo" />
 
 					<h:outputText value="Repetir Contraseña" />
 					<h:inputSecret id="plainTextPasswordNuevo2"
 						value="#{cambiarClaveForm.plainTextPasswordNuevo2}" />
-					<h:message for="plainTextPasswordNuevo2" />
+					<p:message for="plainTextPasswordNuevo2" />
 				</h:panelGrid>
 
 				<h:panelGrid columns="2">
@@ -101,12 +101,12 @@
 
 			<br />
 			<br />
-			<h:commandButton value="Volver a Indice" action="/index.xhtml"
+			<h:commandButton value="Volver al Índice" action="/index.xhtml"
 				immediate="true" />
 			<br />
 			<br />
 
-			<p:commandButton value="Cancel"
+			<p:commandButton value="Cancelar"
 				action="#{cambiarClaveForm.cancelar()}" immediate="true" />
 
 			<br />

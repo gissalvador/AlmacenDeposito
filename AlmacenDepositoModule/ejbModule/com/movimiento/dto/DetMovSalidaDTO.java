@@ -10,6 +10,7 @@ public class DetMovSalidaDTO implements Serializable {
 	private Float cantidad;
 	private Integer codArticulo;
 	private String nomArticulo;
+	private Integer pparcial;
 	private String loteId;
 	private String ubicacion;
 	private String nroSerie_Proveedor;
@@ -169,6 +170,14 @@ public class DetMovSalidaDTO implements Serializable {
 
 	public void setId(String id) {
 		this.id = id;
+	}
+
+	public Integer getPparcial() {
+		return pparcial;
+	}
+
+	public void setPparcial(Integer pparcial) {
+		this.pparcial = pparcial;
 	}
 	
 	

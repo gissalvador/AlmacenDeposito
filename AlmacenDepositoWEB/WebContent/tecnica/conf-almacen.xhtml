@@ -14,7 +14,7 @@
 			<h:panelGrid columns="1" style="width: 90%">
 				<p:wizard>
 
-					<p:tab title="Nuevo Almacen" id="newAlmacen" update="display">
+					<p:tab title="Nuevo Almacén" id="newAlmacen" update="display">
 						<br />
 						<br />
 
@@ -26,14 +26,14 @@
 								label="Nombre Almacen:" required="true"
 								value="#{confAlmacen.almacenDTO.nomAlmacen}" />
 							<h:outputLabel />
-							<h:message for="nomAlmacen" />
+							<p:message for="nomAlmacen" />
 
 							<h:outputText value="Código de Centro: " />
 							<h:inputText id="codCentro" label="Código Centro:"
 								required="true" value="#{confAlmacen.almacenDTO.codCentro}" />
 							<h:commandButton value="Buscar"
 								onclick="window.open('/AlmacenDepositoWEB/general/centro.xhtml')" />
-							<h:message for="codCentro" />
+							<p:message for="codCentro" />
 
 
 						</h:panelGrid>
@@ -44,7 +44,7 @@
 						<br />
 						<br />
 
-						<h:commandButton value="Volver a Indice" action="/index.xhtml"
+						<h:commandButton value="Volver al Índice" action="/index.xhtml"
 							immediate="true" />
 						<br />
 
@@ -75,7 +75,7 @@
 
 						<br />
 
-						<h:commandButton value="Volver a Indice" action="/index.xhtml"
+						<h:commandButton value="Volver al Índice" action="/index.xhtml"
 							immediate="true" />
 
 						<br />

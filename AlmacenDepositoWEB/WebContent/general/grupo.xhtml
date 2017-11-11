@@ -16,31 +16,61 @@
 			<h2>Grupo</h2>
 
 
-			<p:dataTable var="g" value="#{grupoForm.grupos}" styleClass="abm">
-				<p:column headerText="Código de Grupo">
+			
+			<p:dataTable var="g" value="#{grupoForm.grupos}"
+				widgetVar="grusTable" multiViewState="true" rows="10"
+				paginator="true"
+				paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+				rowsPerPageTemplate="5,10,15"
+				emptyMessage="No se encontro grupo"
+				filteredValue="#{grupoForm.filteredGrus}">
+
+
+				<f:facet name="header">
+					<p:outputPanel>
+						<h:outputText value="Buscar en Todos los Campos: " />
+						<p:inputText id="globalFilter" onkeyup="PF('grusTable').filter()"
+							style="width:150px" placeholder="Ingrese búsqueda" />
+					</p:outputPanel>
+				</f:facet>
+				<p:column headerText="Código de Grupo" 
+					filterBy="#{g.codGrupo}" filterMatchMode="contains">
 					<h:outputText value="#{g.codGrupo}" />
 				</p:column>
 
-				<p:column headerText="Nombre de Grupo">
+				<p:column headerText="Nombre de Grupo"
+					filterBy="#{g.nomGrupo}" filterMatchMode="contains">
 					<h:outputText value="#{g.nomGrupo}" />
 				</p:column>
 
-				<p:column headerText="Descripción de Grupo">
+				<p:column headerText="Descripción de Grupo"
+					filterBy="#{g.desGrupo}" filterMatchMode="contains">
 					<h:outputText value="#{g.desGrupo}" />
 				</p:column>
+				
+				<!--  
+				
+				<p:column>					
+				
+					<p:graphicImage value="#{g.url}"/>
+					
+													
+				</p:column>
+				
 
+				-->
 
 
 			</p:dataTable>
 			<br />
 			<br />
-			<h:commandButton value="Excel" action="#{grupoForm.downloadExcel}" />
+			<p:commandButton value="Descargar en Excel" action="#{grupoForm.downloadExcel}" />
 			<br />
 			<br />
 			<h:link outcome="/tecnica/grupo.xhtml" value="Nuevo Grupo" />
 			<br />
 			<br />
-			<h:commandButton value="Volver a Indice" action="/index.xhtml"
+			<h:commandButton value="Volver al Índice" action="/index.xhtml"
 				immediate="true" />
 			<br />
 			<br />

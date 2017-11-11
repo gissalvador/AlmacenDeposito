@@ -1,11 +1,11 @@
 package com.institucional.repository;
 
-
 import java.util.ArrayList;
 import java.util.List;
 
 import com.application.repository.Repositorio;
 import com.institucional.entities.Inciso;
+import com.institucional.entities.PParcial;
 
 import javax.ejb.LocalBean;
 import javax.ejb.Stateless;
@@ -40,9 +40,9 @@ public class IncisoRepository implements Repositorio<Integer, Inciso> {
 	public List<Inciso> getAll() {
 		String q = "SELECT p from " + Inciso.class.getName() + " p ";
 		TypedQuery<Inciso> query = entityManager.createQuery(q, Inciso.class);
-		
+
 		List<Inciso> result = query.getResultList();
-		if(result == null) {
+		if (result == null) {
 			result = new ArrayList<Inciso>();
 		}
 		return result;
@@ -52,5 +52,16 @@ public class IncisoRepository implements Repositorio<Integer, Inciso> {
 	public long size() {
 		String q = "SELECT count(p) from " + Inciso.class.getName() + " p";
 		return (Long) entityManager.createQuery(q).getSingleResult();
+	}
+
+	public List<Inciso> get2y4() {
+		String q = "SELECT p from " + Inciso.class.getName() + " p where nroInciso = 2 or nroInciso = 4";
+		TypedQuery<Inciso> query = entityManager.createQuery(q, Inciso.class);
+
+		List<Inciso> result = query.getResultList();
+		if (result == null) {
+			result = new ArrayList<Inciso>();
+		}
+		return result;
 	}
 }

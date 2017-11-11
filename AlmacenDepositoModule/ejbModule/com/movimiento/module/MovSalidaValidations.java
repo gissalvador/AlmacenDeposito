@@ -62,7 +62,7 @@ public class MovSalidaValidations {
 			MovEntrada movEntrada = meRepository.get(nuevoMovSalida.getId());
 			if (movEntrada != null) {
 				errors.add(new ValidationError("id",
-						"El Movimiento de Entrada ya se encuentra registrado."));
+						"El Movimiento de Salida ya se encuentra registrado."));
 			}
 		}
 

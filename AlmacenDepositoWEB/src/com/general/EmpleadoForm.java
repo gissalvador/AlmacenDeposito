@@ -19,16 +19,18 @@ public class EmpleadoForm {
 	@EJB
 	private EmpleadoServiceRemote eService;
 	
-	private List<ArticuloDTO>  filteredEmps;
+	private List<EmpleadoDTO>  filteredEmps;
 	
 	
-	public List<ArticuloDTO> getFilteredEmps() {
+	public List<EmpleadoDTO> getFilteredEmps() {
 		return filteredEmps;
 	}
 
-	public void setFilteredEmps(List<ArticuloDTO> filteredEmps) {
+
+	public void setFilteredEmps(List<EmpleadoDTO> filteredEmps) {
 		this.filteredEmps = filteredEmps;
 	}
+
 
 	public Collection<EmpleadoDTO> getEmpleados() {
 		return eService.listAll();

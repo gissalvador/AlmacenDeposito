@@ -3,6 +3,7 @@ package com.general;
 
 import java.io.IOException;
 import java.util.Collection;
+import java.util.List;
 
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
@@ -18,13 +19,24 @@ import jxl.write.WritableWorkbook;
 import com.articulo.dto.GrupoDTO;
 import com.articulo.modules.GrupoServiceRemote;
 
-
-
 @ManagedBean
 @RequestScoped
 public class GrupoForm {
 	@EJB
 	private GrupoServiceRemote gService;
+	
+	private List<GrupoDTO>  filteredGrus;
+	
+	
+	public List<GrupoDTO> getFilteredGrus() {
+		return filteredGrus;
+	}
+
+
+	public void setFilteredGrus(List<GrupoDTO> filteredGrus) {
+		this.filteredGrus = filteredGrus;
+	}
+
 
 	public Collection<GrupoDTO> getGrupos() {
 		return gService.listAll();
@@ -54,7 +66,8 @@ public class GrupoForm {
         
         Collection<GrupoDTO> grupoList = gService.listAll();
         
-        for (int i=1;i<=grupoList.size();i++){
+     
+        int i=1;
         	
         for (GrupoDTO gdto: grupoList){
         
@@ -62,9 +75,10 @@ public class GrupoForm {
         	  s.addCell(new Label(0, i, gdto.getCodGrupo().toString()));
               s.addCell(new Label(1, i, gdto.getNomGrupo()));
               s.addCell(new Label(2, i, gdto.getDesGrupo()));
+              i+=1;
         	
         }
-        }
+        
         
         
         w.write();

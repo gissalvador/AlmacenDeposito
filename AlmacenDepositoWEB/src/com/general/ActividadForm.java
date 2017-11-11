@@ -19,14 +19,13 @@ public class ActividadForm {
 	@EJB
 	private ActividadServiceRemote aService;
 	
-	private List<ArticuloDTO>  filteredActs;
-	
-	
-	public List<ArticuloDTO> getFilteredActs() {
+	private List<ActividadDTO>  filteredActs;
+		
+	public List<ActividadDTO> getFilteredActs() {
 		return filteredActs;
 	}
 
-	public void setFilteredActs(List<ArticuloDTO> filteredActs) {
+	public void setFilteredActs(List<ActividadDTO> filteredActs) {
 		this.filteredActs = filteredActs;
 	}
 

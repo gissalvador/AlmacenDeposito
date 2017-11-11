@@ -18,6 +18,7 @@ public class GrupoDTOFactory {
 		result.setCodGrupo(grupo.getCodGrupo());
 		result.setNomGrupo(grupo.getNomGrupo());
 		result.setDesGrupo(grupo.getDescGrupo());
+		result.setUrl("http://localhost:8080/AlmacenDepositoWEB/general/grupo/"+grupo.getNomGrupo()+".jpg");
 				
 		return result;
 	}

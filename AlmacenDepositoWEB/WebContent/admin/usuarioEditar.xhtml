@@ -21,19 +21,19 @@
 				<h:outputText value="Nombre" />
 				<h:inputText id="nombre"
 					value="#{actualizarUsuarioForm.usuarioEditado.nombre}" />
-				<h:message for="nombre" />
+				<p:message for="nombre" />
 
 				<h:outputText value="Email" />
 				<h:inputText id="email"
 					value="#{actualizarUsuarioForm.usuarioEditado.email}" />
-				<h:message for="email" />
+				<p:message for="email" />
 
 				<h:outputText value="Inicio vigencia" />
 				<h:inputText id="inicioVigencia"
 					value="#{actualizarUsuarioForm.usuarioEditado.inicioVigencia}">
 					<f:convertDateTime pattern="dd/MM/yyyy" />
 				</h:inputText>
-				<h:message for="inicioVigencia" />
+				<p:message for="inicioVigencia" />
 
 				<h:outputText value="Roles Habilitados" />
 				<h:selectManyCheckbox id="roles"
@@ -43,7 +43,7 @@
 						value="#{actualizarUsuarioForm.getRolesDisponibles()}" var="r"
 						itemValue="#{r}" itemLabel="#{r}" />
 				</h:selectManyCheckbox>
-				<h:message for="roles" />
+				<p:message for="roles" />
 
 			</h:panelGrid>
 			<h:messages />

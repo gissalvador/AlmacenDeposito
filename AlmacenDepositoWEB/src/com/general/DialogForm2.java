@@ -14,6 +14,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.faces.context.FacesContext;
 
 import com.articulo.dto.ArticuloDTO;
+import com.articulo.dto.MaterialDTO;
 import com.institucional.dto.ActividadDTO;
 import com.institucional.dto.EmpleadoDTO;
 import com.institucional.dto.ProveedorDTO;
@@ -39,6 +40,17 @@ public class DialogForm2 {
 	private String codLote;
 
 	private String nroComprobante;
+	
+	private Integer mat;
+	
+	
+	public Integer getMat() {
+		return mat;
+	}
+
+	public void setMat(Integer mat) {
+		this.mat = mat;
+	}
 
 	public String getNroComprobante() {
 		return nroComprobante;
@@ -102,6 +114,20 @@ public class DialogForm2 {
 
 	public void setArticulo(ArticuloDTO articulo) {
 		this.articulo = articulo;
+	}
+	
+	public void seleccionarFilaM(MaterialDTO mate) throws IOException {
+		
+		System.out.println(mate.getCodMaterial());
+		
+		this.setMat(mate.getCodMaterial());
+
+		
+		System.out.println(mat);
+				
+		ExternalContext ec = FacesContext.getCurrentInstance().getExternalContext();
+		ec.redirect(ec.getRequestContextPath() + "/general/dialog2.xhtml");
+
 	}
 
 	public void seleccionarFila2(ArticuloDTO art) throws IOException {

@@ -27,25 +27,25 @@
                                 <h:inputText id="login" label="Login:"
                                              required="true"
                                              value="#{registrarUsuarioForm.usuarioEditado.login}" />
-                                <h:message for="login"/>
+                                <p:message for="login"/>
                                 
                                 <h:outputLabel value="Contraseña:" for="contrasenia1"/>
                                 <h:inputText id="contrasenia1" label="Contraseña: "
                                              required="true"
                                              value="#{registrarUsuarioForm.plainTextPassword}" />
-                                <h:message for="contrasenia1"/>
+                                <p:message for="contrasenia1"/>
                                 
                                 <h:outputLabel value="Repetir Contraseña:" for="contrasenia2"/>
                                 <h:inputText id="contrasenia2" label="Repetir Contraseña: "
                                              required="true"
                                             value="#{registrarUsuarioForm.plainTextPassword2}"/>
-                                <h:message for="contrasenia2" />
+                                <p:message for="contrasenia2" />
                                 
                                 <h:outputLabel value="Email:" for="email"/>
                                 <h:inputText id="email" label="Email"
                                              required="true"
                                              value="#{registrarUsuarioForm.usuarioEditado.email}" />
-                                <h:message for="email" />
+                                <p:message for="email" />
                                 
                                  <h:outputLabel value="Inicio Vigencia:" for="inicioVigencia"/>
                                  <p:calendar id="inicioVigencia"
@@ -53,13 +53,13 @@
                                             showOn="button"
                                             navigator="true"/>
                                 <h:outputLabel />                                
-                                <h:message for="inicioVigencia" />
+                                <p:message for="inicioVigencia" />
                                 
                                 <h:outputLabel value="Roles Habilitados" for="roles"/>
                                 <h:selectManyCheckbox id="roles" value="#{registrarUsuarioForm.usuarioEditado.roles}" layout="pageDirection">
 									<f:selectItems value="#{registrarUsuarioForm.getRolesDisponibles()}" var="r"  itemValue="#{r}" itemLabel="#{r}" />			
 								</h:selectManyCheckbox>
-								<h:message for="roles"/>
+								<p:message for="roles"/>
 
                               
                             </h:panelGrid>
@@ -79,7 +79,7 @@
                                <br/>     
                             <h:panelGrid columns="2" columnClasses="rightalign-bold,normal">
                                 
-                                <h:outputLabel value="Almacen: " />
+                                <h:outputLabel value="Almacén: " />
                                 <h:outputText value="#{movSalida.movSalida.almacen}" />
                                  <h:outputLabel value="Actividad: " />
                                 <h:outputText value="#{movSalida.movSalida.actividad}" />
@@ -87,7 +87,7 @@
                                 <h:outputText value="#{movSalida.movSalida.fechaSalida}" />
                                 <h:outputLabel value="Número de Solicitud: " />
                                 <h:outputText value="#{movSalida.movSalida.nroSolicitud}" />
-                                <h:outputLabel value="LEGAJO: " />
+                                <h:outputLabel value="Legajo: " />
                                 <h:outputText value="#{movSalida.movSalida.legajo}" />
                                 <h:outputLabel value="Observaciones: " />
                                 <h:outputText value="#{movSalida.movSalida.observaciones}" />
@@ -103,7 +103,7 @@
                                             #{detalle.cantidad}
                                     </h:column>
                                     <h:column>
-                                        <f:facet name="header">C. Articulo</f:facet>
+                                        <f:facet name="header">C. Artículo</f:facet>
                                             #{detalle.codArticulo}
                                     </h:column>
                                                                        
@@ -113,7 +113,7 @@
                                <br/>  
                                
                               <p align="right"><h:commandButton value="Guardar" action="#{movSalida.crearMovimiento}" update="msgs"/> </p>
-                              <h:commandButton value="Volver a Indice" action="/index.xhtml" immediate="true" />
+                              <h:commandButton value="Volver al Índice" action="/index.xhtml" immediate="true" />
 
                               
                               <p:messages id="msgs" showDetail="true"/> 

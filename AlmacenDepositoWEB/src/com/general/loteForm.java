@@ -17,7 +17,6 @@ import jxl.write.WritableSheet;
 import jxl.write.WritableWorkbook;
 
 import com.movimiento.module.LoteServiceRemote;
-import com.articulo.dto.ArticuloDTO;
 import com.movimiento.dto.LoteDTO;
 
 /**
@@ -33,15 +32,15 @@ public class loteForm {
 	@EJB
 	private LoteServiceRemote loteService;
 
-	private List<ArticuloDTO> filteredLots;
+	private List<LoteDTO> filteredLots;
 
 	private LoteDTO loteDTO;
 		
-	public List<ArticuloDTO> getFilteredLots() {
+	public List<LoteDTO> getFilteredLots() {
 		return filteredLots;
 	}
 
-	public void setFilteredLots(List<ArticuloDTO> filteredLots) {
+	public void setFilteredLots(List<LoteDTO> filteredLots) {
 		this.filteredLots = filteredLots;
 	}
 

@@ -21,12 +21,18 @@
 						
 						<h:outputText value="Password" />
 						<h:inputSecret id="j_password" value="#{authentication.password}" />
+						<br/>
+						
+						<br/>
 					</h:panelGrid>
 					    <h:messages />
 					<h:panelGrid columns="2">
 						<h:commandButton value="Login" action="#{authentication.login}" />
 						<h:commandButton value="Volver" action="/index.xhtml" />
 					</h:panelGrid>
+							
+						<br/>
+						<h:link value="Olvide mi contraseña" outcome="/general/RecuperarClave.xhtml" />
 				</h:form>
 			</h:panelGroup>
 			<h:panelGroup  rendered="#{not empty request.userPrincipal}">

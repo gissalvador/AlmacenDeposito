@@ -31,7 +31,7 @@
 								required="true"
 								value="#{confTipoMovOrigen.tipoMovOrigenDTO.nomTMovOrigen}" />
 							<h:outputLabel />
-							<h:message for="nomTipoMovOrigen" />
+							<p:message for="nomTipoMovOrigen" />
 
 							<h:outputLabel value="Tipo de Persona Relacionada:" for="tp" />
 							<h:inputText id="tp" label="Tipo Persona Relacionada:"
@@ -39,7 +39,7 @@
 								value="#{confTipoMovOrigen.tipoMovOrigenDTO.nroTipoPersona}" />
 							<h:commandButton value="Buscar"
 								onclick="window.open('/AlmacenDepositoWEB/general/tipoPersona.xhtml')" />
-							<h:message for="tp" />
+							<p:message for="tp" />
 
 
 
@@ -52,7 +52,7 @@
 						<br />
 						<br />
 
-						<h:commandButton value="Volver a Indice" action="/index.xhtml"
+						<h:commandButton value="Volver al Índice" action="/index.xhtml"
 							immediate="true" />
 						<br />
 
@@ -84,7 +84,7 @@
 						<br />
 
 
-						<h:commandButton value="Volver a Indice" action="/index.xhtml"
+						<h:commandButton value="Volver al Índice" action="/index.xhtml"
 							immediate="true" />
 					</p:tab>
 				</p:wizard>

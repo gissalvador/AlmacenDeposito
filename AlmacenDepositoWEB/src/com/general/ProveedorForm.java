@@ -20,15 +20,14 @@ public class ProveedorForm {
 	@EJB
 	private ProveedorServiceRemote pService;
 	
-	private List<ArticuloDTO>  filteredPros;
+	private List<ProveedorDTO>  filteredPros;
 	
-	
-	public List<ArticuloDTO> getFilteredPros() {
+	public List<ProveedorDTO> getFilteredPros() {
 		return filteredPros;
 	}
 
 
-	public void setFilteredPros(List<ArticuloDTO> filteredPros) {
+	public void setFilteredPros(List<ProveedorDTO> filteredPros) {
 		this.filteredPros = filteredPros;
 	}
 

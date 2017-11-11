@@ -58,6 +58,7 @@ public class MovSalidaFactory {
 			detalleDTO.setLote(detalleMS.getLote().getCodLote());
 			detalleDTO.setCantidad(detalleMS.getCantidadMS());
 			detalleDTO.setUniTotal(detalleMS.getImporteUnitarioMS()*detalleMS.getCantidadMS());
+			detalleDTO.setPparcial(detalleMS.getLote().getArticulo().getPartidaparcial().getNroPParcial());
 			
 			total+= detalleDTO.getUniTotal();
 			

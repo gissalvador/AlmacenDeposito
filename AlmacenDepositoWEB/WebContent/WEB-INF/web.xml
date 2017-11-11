@@ -1,19 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://java.sun.com/xml/ns/javaee" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd" id="WebApp_ID" version="3.0">
-  <display-name>AlmacenDepositoWEB</display-name>
-  <welcome-file-list>
-    <welcome-file>index.xhtml</welcome-file>
-  </welcome-file-list>
-  <servlet>
-    <servlet-name>Faces Servlet</servlet-name>
-    <servlet-class>javax.faces.webapp.FacesServlet</servlet-class>
-    <load-on-startup>1</load-on-startup>
-  </servlet>
-  <servlet-mapping>
-    <servlet-name>Faces Servlet</servlet-name>
-    <url-pattern>/faces/*</url-pattern>
-  </servlet-mapping>
-  <servlet-mapping>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns="http://java.sun.com/xml/ns/javaee"
+	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd"
+	id="WebApp_ID" version="3.0">
+	<display-name>AlmacenDepositoWEB</display-name>
+	<welcome-file-list>
+		<welcome-file>index.xhtml</welcome-file>
+	</welcome-file-list>
+	<servlet>
+		<servlet-name>Faces Servlet</servlet-name>
+		<servlet-class>javax.faces.webapp.FacesServlet</servlet-class>
+		<load-on-startup>1</load-on-startup>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>Faces Servlet</servlet-name>
+		<url-pattern>/faces/*</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
 		<servlet-name>Faces Servlet</servlet-name>
 		<url-pattern>*.xhtml</url-pattern>
 	</servlet-mapping>
@@ -25,23 +28,32 @@
 		<servlet-name>Faces Servlet</servlet-name>
 		<url-pattern>*.faces</url-pattern>
 	</servlet-mapping>
-  <context-param>
-    <description>State saving method: 'client' or 'server' (=default). See JSF Specification 2.5.2</description>
-    <param-name>javax.faces.STATE_SAVING_METHOD</param-name>
-    <param-value>client</param-value>
-  </context-param>
-  <context-param>
-    <param-name>javax.servlet.jsp.jstl.fmt.localizationContext</param-name>
-    <param-value>resources.application</param-value>
-  </context-param>
-  <listener>
-    <listener-class>com.sun.faces.config.ConfigureListener</listener-class>
-  </listener>
-    <context-param>
-    <param-name>primefaces.THEME</param-name>
-    <param-value>bluesky</param-value>
-  </context-param>
-   <!-- Configuracion de Acceso a Paginas -->
+	<context-param>
+		<description>State saving method: 'client' or 'server' (=default). See JSF Specification 2.5.2</description>
+		<param-name>javax.faces.STATE_SAVING_METHOD</param-name>
+		<param-value>client</param-value>
+	</context-param>
+	<context-param>
+		<param-name>javax.servlet.jsp.jstl.fmt.localizationContext</param-name>
+		<param-value>resources.application</param-value>
+	</context-param>
+	<listener>
+		<listener-class>com.sun.faces.config.ConfigureListener</listener-class>
+	</listener>
+	<context-param>
+		<param-name>primefaces.THEME</param-name>
+		<param-value>bluesky</param-value>
+	</context-param>
+
+	<filter>
+		<filter-name>PrimeFaces FileUpload Filter</filter-name>
+		<filter-class>org.primefaces.webapp.filter.FileUploadFilter</filter-class>
+	</filter>
+	<filter-mapping>
+		<filter-name>PrimeFaces FileUpload Filter</filter-name>
+		<servlet-name>Faces Servlet</servlet-name>
+	</filter-mapping>
+	<!-- Configuracion de Acceso a Paginas -->
 	<security-constraint>
 		<web-resource-collection>
 			<web-resource-name>Accesos ADMIN</web-resource-name>
@@ -56,7 +68,7 @@
 			<role-name>ADMIN</role-name>
 		</auth-constraint>
 	</security-constraint>
-	
+
 	<security-constraint>
 		<web-resource-collection>
 			<web-resource-name>Accesos ENC</web-resource-name>
@@ -69,7 +81,7 @@
 			<role-name>ENC</role-name>
 		</auth-constraint>
 	</security-constraint>
-	
+
 	<security-constraint>
 		<web-resource-collection>
 			<web-resource-name>Accesos TEC</web-resource-name>
@@ -82,13 +94,13 @@
 			<role-name>TEC</role-name>
 		</auth-constraint>
 	</security-constraint>
-	
+
 	<security-constraint>
 		<web-resource-collection>
 			<web-resource-name>Accesos ADMINISTRATIVO</web-resource-name>
 			<url-pattern>/administracion/*</url-pattern>
 			<url-pattern>/admin/*</url-pattern>
-			
+
 		</web-resource-collection>
 		<auth-constraint>
 			<role-name>ADMINISTRATIVO</role-name>
@@ -99,13 +111,13 @@
 			<web-resource-name>Accesos JEFES</web-resource-name>
 			<url-pattern>/reportes/*</url-pattern>
 			<url-pattern>/admin/*</url-pattern>
-			
+
 		</web-resource-collection>
 		<auth-constraint>
 			<role-name>JEFES</role-name>
 		</auth-constraint>
 	</security-constraint>
-	
+
 	<security-constraint>
 		<web-resource-collection>
 			<web-resource-name>Compartidos ADMIN y USER</web-resource-name>
@@ -120,7 +132,8 @@
 		</auth-constraint>
 	</security-constraint>
 
-	<!-- La configuracion de las paginas que corresponden para login y error de login -->
+	<!-- La configuracion de las paginas que corresponden para login y error 
+		de login -->
 	<login-config>
 		<auth-method>FORM</auth-method>
 		<form-login-config>
@@ -148,8 +161,8 @@
 	<security-role>
 		<role-name>JEFES</role-name>
 	</security-role>
-	
-  
-  
-  
+
+
+
+
 </web-app>

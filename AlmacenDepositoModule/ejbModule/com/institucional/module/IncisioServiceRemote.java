@@ -13,4 +13,6 @@ public interface IncisioServiceRemote {
 
 	Collection<IncisoDTO> listAll();
 
+	Collection<IncisoDTO> listRepPresupuesto();
+
 }

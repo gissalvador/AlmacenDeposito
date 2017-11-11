@@ -24,7 +24,7 @@
 
 						<h:panelGrid columns="4">
 
-							<h:outputLabel value="* Almacen:" for="almacen" />
+							<h:outputLabel value="* Almacén:" for="almacen" />
 							<p:selectOneMenu id="almacen" required="true"
 								value="#{movAjustar.almacen}">
 								<f:selectItem itemLabel="Selecionar una opción" itemValue="" />
@@ -32,7 +32,7 @@
 									style="width:200px" />
 							</p:selectOneMenu>
 							<h:outputLabel />
-							<h:message for="almacen" />
+							<p:message for="almacen" />
 
 							<h:outputLabel value="* Código Lote:" for="codLote" />
 							<h:inputText size="20" id="codLote" label="Código Lote:"
@@ -40,7 +40,7 @@
 							<p:commandButton onclick="PF('dlgl').show();" type="button"
 								icon="ui-icon-search" />
 							<h:outputLabel />
-							<h:message for="codLote" />
+							<p:message for="codLote" />
 
 
 						</h:panelGrid>
@@ -48,7 +48,7 @@
 						<br />
 						<h:panelGrid columns="2">
 							<br />
-							<h:commandButton value="Buscar lote"
+							<h:commandButton value="Buscar Lote"
 								action="#{movAjustar.buscarLote()}" update="msgs" />
 						</h:panelGrid>
 
@@ -61,7 +61,7 @@
 
 
 
-							<h2>Detalle Lotes</h2>
+							<h2>Detalle Lote</h2>
 
 							<p:dataTable id="loteTable" border="1" value="#{movAjustar.lote}"
 								var="lote" editable="true">
@@ -79,11 +79,11 @@
                                            #{lote.codLote}
 	                            </p:column>
 								<p:column>
-									<f:facet name="header">Id Articulo</f:facet>    				
+									<f:facet name="header">Id Artículo</f:facet>    				
 	                                           #{lote.articuloID}
 	                            </p:column>
 								<p:column>
-									<f:facet name="header">Articulo</f:facet>
+									<f:facet name="header">Artículo</f:facet>
 	                                		    #{lote.articulo}
 	                                            
 	                             </p:column>
@@ -106,7 +106,7 @@
 	                            </p:column>
 
 								<p:column>
-									<f:facet name="header">Stock Almacen</f:facet>    				
+									<f:facet name="header">Stock Almacén</f:facet>    				
 	                                           #{lote.stockAlmacen}
 	                            </p:column>
 
@@ -150,25 +150,25 @@
 
 							<h:panelGrid columns="4" >
 
-								<h:outputLabel value="* Fecha Ajuste" for="fechaAjuste" />
+								<h:outputLabel value="* Fecha Ajuste: " for="fechaAjuste" />
 								<p:calendar id="fechaAjuste"
 									value="#{movAjustar.movAjustar.fechaIngreso}" showOn="button"
 									navigator="true" />
 								<h:outputLabel />
-								<h:message for="fechaAjuste" />
+								<p:message for="fechaAjuste" />
 
-								<h:outputLabel value="* LEGAJO" for="legajo" />
-								<h:inputText id="legajo" label="LEGAJO"
+								<h:outputLabel value="* Legajo: " for="legajo" />
+								<h:inputText id="legajo" label="Legajo"
 									value="#{movAjustar.movAjustar.cuitlegajo}" />
 								<p:commandButton onclick="PF('dlge').show();" type="button"
 									icon="ui-icon-search" />
-								<h:message for="legajo" />
+								<p:message for="legajo" />
 
-								<h:outputLabel value="Observaciones" for="observaciones" />
+								<h:outputLabel value="Observaciones: " for="observaciones" />
 								<h:inputTextarea id="observaciones" label="Observaciones"
 									value="#{movAjustar.movAjustar.observaciones}" />
 								<h:outputLabel />
-								<h:message for="observaciones" />
+								<p:message for="observaciones" />
 
 							</h:panelGrid>
 
@@ -186,11 +186,11 @@
                                            #{dme.lote}
                             </p:column>
 								<p:column>
-									<f:facet name="header">Id Articulo</f:facet>    				
+									<f:facet name="header">Id Artículo</f:facet>    				
                                            #{dme.codArticulo}
                             </p:column>
 								<p:column>
-									<f:facet name="header">Articulo</f:facet>
+									<f:facet name="header">Artículo</f:facet>
                                 		    #{dme.nomArticulo}
                                             
                              </p:column>
@@ -221,25 +221,25 @@
 
 							<h:panelGrid columns="4" >
 
-								<h:outputLabel value="* Fecha Ajuste" for="fechaAjusteSalida" />
+								<h:outputLabel value="* Fecha Ajuste: " for="fechaAjusteSalida" />
 								<p:calendar id="fechaAjusteSalida"
 									value="#{movAjustar.movAjustarFaltante.fechaSalida}"
 									showOn="button" navigator="true" />
 								<h:outputLabel />
-								<h:message for="fechaAjusteSalida" />
+								<p:message for="fechaAjusteSalida" />
 								
-								<h:outputLabel value="* LEGAJO" for="legajoSalida" />
-								<h:inputText id="legajoSalida" label="LEGAJO"
+								<h:outputLabel value="* Legajo: " for="legajoSalida" />
+								<h:inputText id="legajoSalida" label="Legajo: "
 									value="#{movAjustar.movAjustarFaltante.legajo}" />
 								<p:commandButton onclick="PF('dlge').show();" type="button"
 									icon="ui-icon-search" />
-								<h:message for="legajoSalida" />
+								<p:message for="legajoSalida" />
 
-								<h:outputLabel value="Observaciones" for="observacionesSalida" />
+								<h:outputLabel value="Observaciones: " for="observacionesSalida" />
 								<h:inputTextarea id="observacionesSalida" label="Observaciones"
 									value="#{movAjustar.movAjustarFaltante.observaciones}" />
 								<h:outputLabel />
-								<h:message for="observacionesSalida" />
+								<p:message for="observacionesSalida" />
 
 							</h:panelGrid>
 
@@ -257,11 +257,11 @@
                                            #{dmaf.lote}
                             </p:column>
 								<p:column>
-									<f:facet name="header">Id Articulo</f:facet>    				
+									<f:facet name="header">Id Artículo</f:facet>    				
                                            #{dmaf.codArticulo}
                             </p:column>
 								<p:column>
-									<f:facet name="header">Articulo</f:facet>
+									<f:facet name="header">Artículo</f:facet>
                                 		    #{dmaf.nomArticulo}
                                             
                              </p:column>
@@ -301,11 +301,11 @@
                                            #{lote.codLote}
 	                            </p:column>
 								<p:column>
-									<f:facet name="header">Id Articulo</f:facet>    				
+									<f:facet name="header">Id Artículo</f:facet>    				
 	                                           #{lote.articuloID}
 	                            </p:column>
 								<p:column>
-									<f:facet name="header">Articulo</f:facet>
+									<f:facet name="header">Artículo</f:facet>
 	                                		    #{lote.articulo}
 	                                            
 	                             </p:column>
@@ -328,7 +328,7 @@
 	                            </p:column>
 
 								<p:column>
-									<f:facet name="header">Stock Almacen</f:facet>    				
+									<f:facet name="header">Stock Almacén</f:facet>    				
 	                                           #{lote.stockAlmacen}
 	                            </p:column>
 
@@ -338,7 +338,7 @@
 
 						<br />
 						<br />
-						<p:commandButton value="Cancel"
+						<p:commandButton value="Cancelar"
 							action="#{movAjustares.cancelar()}" immediate="true" />
 
 
@@ -356,16 +356,16 @@
 
 								<f:facet name="header">
 									<p:outputPanel>
-										<h:outputText value="Buscar en todos los campos: " />
+										<h:outputText value="Buscar en Todos los Campos: " />
 										<p:inputText id="globalFilter"
 											onkeyup="PF('empsTable').filter()" style="width:150px"
-											placeholder="Ingrese busqueda" />
+											placeholder="Ingrese búsqueda" />
 									</p:outputPanel>
 								</f:facet>
 
 
 								<p:column headerText="Seleccionar">
-									<p:commandButton icon="ui-icon-check" title="seleccionar"
+									<p:commandButton icon="ui-icon-search" title="seleccionar"
 										actionListener="#{movAjustar.seleccionarFilaEmp(e)}" />
 
 								</p:column>
@@ -381,7 +381,7 @@
 									<h:outputText value="#{e.nomPersona}" />
 								</p:column>
 
-								<p:column headerText="C.U.I.L." filterBy="#{e.cuil}"
+								<p:column headerText="CUIL" filterBy="#{e.cuil}"
 									filterMatchMode="contains">
 									<h:outputText value="#{e.cuil}" />
 								</p:column>
@@ -410,15 +410,15 @@
 
 								<f:facet name="header">
 									<p:outputPanel>
-										<h:outputText value="Buscar en todos los campos: " />
+										<h:outputText value="Buscar en Todos los Campos: " />
 										<p:inputText id="globalFilter"
 											onkeyup="PF('lotsTable').filter()" style="width:150px"
-											placeholder="Ingrese busqueda" />
+											placeholder="Ingrese búsqueda" />
 									</p:outputPanel>
 								</f:facet>
 
 								<p:column headerText="Seleccionar">
-									<p:commandButton icon="ui-icon-check" title="seleccionar"
+									<p:commandButton icon="ui-icon-search" title="seleccionar"
 										actionListener="#{movAjustar.seleccionarFilaLot(l)}" />
 
 								</p:column>
@@ -428,13 +428,13 @@
 									<h:outputText value="#{l.codLote}" />
 								</p:column>
 
-								<p:column headerText="Articulo Id" filterBy="#{l.articuloID}"
+								<p:column headerText="Artículo Id" filterBy="#{l.articuloID}"
 									filterMatchMode="contains">
 									<h:outputText value="#{l.articuloID}">
 									</h:outputText>
 								</p:column>
 
-								<p:column headerText="Articulo" filterBy="#{l.articulo}"
+								<p:column headerText="Artículo" filterBy="#{l.articulo}"
 									filterMatchMode="contains">
 									<h:outputText value="#{l.articulo}" />
 								</p:column>
@@ -442,11 +442,6 @@
 								<p:column headerText="Actividad Nro."
 									filterBy="#{l.actividadID}" filterMatchMode="contains">
 									<h:outputText value="#{l.actividadID}" />
-								</p:column>
-
-								<p:column headerText="Stock Actual" filterBy="#{l.stockActual}"
-									filterMatchMode="contains">
-									<h:outputText value="#{l.stockActual}" />
 								</p:column>
 
 								<p:column headerText="Marca" filterBy="#{l.marString}"
@@ -480,7 +475,7 @@
 
 							<h:panelGrid columns="2" columnClasses="rightalign-bold,normal">
 
-								<h:outputLabel value="Almacen: " />
+								<h:outputLabel value="Almacén: " />
 								<h:outputText value="#{movAjustar.movAjustar.almString}" />
 								<h:outputLabel value="Actividad: " />
 								<h:outputText value="#{movAjustar.movAjustar.actString}" />
@@ -507,11 +502,11 @@
                                            #{dme.lote}
                             </p:column>
 								<p:column>
-									<f:facet name="header">Id Articulo</f:facet>    				
+									<f:facet name="header">Id Artículo</f:facet>    				
                                            #{dme.codArticulo}
                             </p:column>
 								<p:column>
-									<f:facet name="header">Articulo</f:facet>
+									<f:facet name="header">Artículo</f:facet>
                                 		    #{dme.nomArticulo}
                                             
                              </p:column>
@@ -542,7 +537,7 @@
 
 							<h:panelGrid columns="2" columnClasses="rightalign-bold,normal">
 
-								<h:outputLabel value="Almacen: " />
+								<h:outputLabel value="Almacén: " />
 								<h:outputText
 									value="#{movAjustar.movAjustarFaltante.nomAlmacen}" />
 								<h:outputLabel value="Actividad: " />
@@ -571,11 +566,11 @@
                                            #{dmaf.lote}
                             </p:column>
 								<p:column>
-									<f:facet name="header">Id Articulo</f:facet>    				
+									<f:facet name="header">Id Artículo</f:facet>    				
                                            #{dmaf.codArticulo}
                             </p:column>
 								<p:column>
-									<f:facet name="header">Articulo</f:facet>
+									<f:facet name="header">Artículo</f:facet>
                                 		    #{dmaf.nomArticulo}
                                             
                              </p:column>
@@ -611,11 +606,11 @@
                                            #{lote.codLote}
 	                            </p:column>
 								<p:column>
-									<f:facet name="header">Id Articulo</f:facet>    				
+									<f:facet name="header">Id Artículo</f:facet>    				
 	                                           #{lote.articuloID}
 	                            </p:column>
 								<p:column>
-									<f:facet name="header">Articulo</f:facet>
+									<f:facet name="header">Artículo</f:facet>
 	                                		    #{lote.articulo}
 	                                            
 	                             </p:column>
@@ -638,7 +633,7 @@
 	                            </p:column>
 
 								<p:column>
-									<f:facet name="header">Stock Almacen</f:facet>    				
+									<f:facet name="header">Stock Almacén</f:facet>    				
 	                                           #{lote.stockAlmacen}
 	                            </p:column>
 
@@ -655,13 +650,13 @@
 
 							</p:commandButton>
 						</p>
-						<p:commandButton value="Volver a Indice" action="/index.xhtml"
+						<p:commandButton value="Volver al Índice" action="/index.xhtml"
 							immediate="true" />
 
 						<p:messages id="mgs" showDetail="true" />
 						<br />
 						<br />
-						<p:commandButton value="Cancel" action="#{movAjustar.cancelar()}"
+						<p:commandButton value="Cancelar" action="#{movAjustar.cancelar()}"
 							immediate="true" />
 
 					</p:tab>

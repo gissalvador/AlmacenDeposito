@@ -41,12 +41,12 @@
 								icon="ui-icon-search" />
 							<p:message for="codMovSalida" />
 
-							<h:outputLabel value="* LEGAJO" for="cuitlegajo" />
+							<h:outputLabel value="* Legajo" for="cuitlegajo" />
 							<h:inputText id="cuitlegajo" label="LEGAJO"
 								value="#{movDevolucion.movDevolucion.cuitlegajo}" />
 							<p:commandButton onclick="PF('dlge').show();" type="button"
 								icon="ui-icon-search" />
-							<h:message for="cuitlegajo" />
+							<p:message for="cuitlegajo" />
 
 							<h:outputLabel value="Observaciones" for="observaciones" />
 							<h:inputTextarea id="observaciones" label="Observaciones"
@@ -88,11 +88,11 @@
                                            #{ddto.lote}
                             </p:column>
 								<p:column>
-									<f:facet name="header">Id Articulo</f:facet>    				
+									<f:facet name="header">Id Artículo</f:facet>    				
                                            #{ddto.codArticulo}
                             </p:column>
 								<p:column>
-									<f:facet name="header">Articulo</f:facet>
+									<f:facet name="header">Artículo</f:facet>
                                 		    #{ddto.nomArticulo}
                                             
                              </p:column>
@@ -159,11 +159,11 @@
                                            #{dme.lote}
                             </p:column>
 								<p:column>
-									<f:facet name="header">Id Articulo</f:facet>    				
+									<f:facet name="header">Id Artículo</f:facet>    				
                                            #{dme.codArticulo}
                             </p:column>
 								<p:column>
-									<f:facet name="header">Articulo</f:facet>
+									<f:facet name="header">Artículo</f:facet>
                                 		    #{dme.nomArticulo}
                                             
                              </p:column>
@@ -189,7 +189,7 @@
 
 						<br />
 						<br />
-						<p:commandButton value="Cancel"
+						<p:commandButton value="Cancelar"
 							action="#{movDevoluciones.cancelar()}" immediate="true" />
 
 						<p:dialog header="Buscar" widgetVar="dlgms" resizable="false">
@@ -205,15 +205,15 @@
 
 								<f:facet name="header">
 									<p:outputPanel>
-										<h:outputText value="Buscar en todos los campos: " />
+										<h:outputText value="Buscar en Todos los Campos: " />
 										<p:inputText id="globalFilter"
 											onkeyup="PF('mossTable').filter()" style="width:150px"
-											placeholder="Ingrese busqueda" />
+											placeholder="Ingrese búsqueda" />
 									</p:outputPanel>
 								</f:facet>
 
 								<p:column headerText="Seleccionar">
-									<p:commandButton icon="ui-icon-check" title="seleccionar"
+									<p:commandButton icon="ui-icon-search" title="seleccionar"
 										actionListener="#{movDevolucion.seleccionarFilaMov(ms)}" />
 
 								</p:column>
@@ -230,7 +230,7 @@
 									</h:outputText>
 								</p:column>
 
-								<p:column headerText="Almacen" filterBy="#{ms.nomAlmacen}"
+								<p:column headerText="Almacén" filterBy="#{ms.nomAlmacen}"
 									filterMatchMode="contains">
 									<h:outputText value="#{ms.nomAlmacen}" />
 								</p:column>
@@ -274,37 +274,37 @@
 
 								<f:facet name="header">
 									<p:outputPanel>
-										<h:outputText value="Buscar en todos los campos: " />
+										<h:outputText value="Buscar en Todos los Campos: " />
 										<p:inputText id="globalFilter"
 											onkeyup="PF('empsTable').filter()" style="width:150px"
-											placeholder="Ingrese busqueda" />
+											placeholder="Ingrese búsqueda" />
 									</p:outputPanel>
 								</f:facet>
 
 
 								<p:column headerText="Seleccionar">
-									<p:commandButton icon="ui-icon-check" title="seleccionar"
+									<p:commandButton icon="ui-icon-search" title="seleccionar"
 										actionListener="#{movDevolucion.seleccionarFilaEmp(e)}" />
 
 								</p:column>
 
 
-								<p:column headerText="Legajo:" filterBy="#{e.legajo}"
+								<p:column headerText="Legajo" filterBy="#{e.legajo}"
 									filterMatchMode="contains">
 									<h:outputText value="#{e.legajo}" />
 								</p:column>
 
-								<p:column headerText="Nombre: " filterBy="#{e.nomPersona}"
+								<p:column headerText="Nombre " filterBy="#{e.nomPersona}"
 									filterMatchMode="contains">
 									<h:outputText value="#{e.nomPersona}" />
 								</p:column>
 
-								<p:column headerText="C.U.I.L." filterBy="#{e.cuil}"
+								<p:column headerText="CUIL" filterBy="#{e.cuil}"
 									filterMatchMode="contains">
 									<h:outputText value="#{e.cuil}" />
 								</p:column>
 
-								<p:column headerText="Unidad Organica: "
+								<p:column headerText="Unidad Organica"
 									filterBy="#{e.uOrganica}" filterMatchMode="contains">
 									<h:outputText value="#{e.uOrganica}" />
 								</p:column>
@@ -321,7 +321,7 @@
 						<br />
 						<h:panelGrid columns="2" columnClasses="rightalign-bold,normal">
 
-							<h:outputLabel value="Almacen: " />
+							<h:outputLabel value="Almacén: " />
 							<h:outputText value="#{movDevolucion.movDevolucion.almString}" />
 							<h:outputLabel value="Actividad: " />
 							<h:outputText value="#{movDevolucion.movDevolucion.actString}" />
@@ -352,11 +352,11 @@
                                            #{dme.lote}
                             </p:column>
 							<p:column>
-								<f:facet name="header">Id Articulo</f:facet>    				
+								<f:facet name="header">Id Artículo</f:facet>    				
                                            #{dme.codArticulo}
                             </p:column>
 							<p:column>
-								<f:facet name="header">Articulo</f:facet>
+								<f:facet name="header">Artículo</f:facet>
                                 		    #{dme.nomArticulo}
                                             
                              </p:column>
@@ -386,13 +386,13 @@
 
 							</p:commandButton>
 						</p>
-						<p:commandButton value="Volver a Indice" action="/index.xhtml"
+						<p:commandButton value="Volver al Índice" action="/index.xhtml"
 							immediate="true" />
 
 						<p:messages id="mgs" showDetail="true" />
 						<br />
 						<br />
-						<p:commandButton value="Cancel"
+						<p:commandButton value="Cancelar"
 							action="#{movDevolucion.cancelar()}" immediate="true" />
 
 					</p:tab>

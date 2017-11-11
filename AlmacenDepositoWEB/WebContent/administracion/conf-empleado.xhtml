@@ -25,13 +25,13 @@
 							<h:outputLabel value="Nombre:" for="nombre" />
 							<h:inputText style="text-transform:capitalize" id="nombre"
 								label="Nombre:" required="true" value="#{confEmpleado.nombre}" />
-							<h:message for="nombre" />
+							<p:message for="nombre" />
 
 							<h:outputLabel value="Apellido:" for="apellido" />
 							<h:inputText id="apellido" label="Apellido:" required="true"
 								value="#{confEmpleado.apellido}"
 								onblur="value=value.toUpperCase()" />
-							<h:message for="apellido" />
+							<p:message for="apellido" />
 
 							<h:outputLabel value="Legajo:" for="legajo" />
 							<h:inputText id="legajo" label="Legajo:" required="true"
@@ -39,7 +39,7 @@
 								validatorMessage="Legajo: Escriba un legajo valido. Ejemplo: 17369">
 								<f:validateLength minimum="4" maximum="5" />
 							</h:inputText>
-							<h:message for="legajo" />
+							<p:message for="legajo" />
 
 							<h:outputLabel value="CUIL:" for="cuil" />
 							<h:inputText id="cuil" label="CUIL:" required="true"
@@ -47,32 +47,32 @@
 								validatorMessage="CUIL: Escriba un C.U.I.L. valido. Ejemplo: 30546660210">
 								<f:validateLength minimum="11" maximum="11" />
 							</h:inputText>
-							<h:message for="cuil" />
+							<p:message for="cuil" />
 
 
 							<h:outputLabel value="Teléfono: " for="telefono" />
 							<h:inputText id="telefono" label="Teléfono:" required="true"
 								value="#{confEmpleado.empleadoDTO.telefono}" />
-							<h:message for="telefono" />
+							<p:message for="telefono" />
 
 							<h:outputLabel value="Celular: " for="celular" />
 							<h:inputText id="celular" label="Celular:"
 								value="#{confEmpleado.empleadoDTO.celular}" />
-							<h:message for="celular" />
+							<p:message for="celular" />
 
-							<h:outputLabel value="Mail: " for="mail" />
+							<h:outputLabel value="Email: " for="mail" />
 							<h:inputText id="mail" label="Mail:" required="false"
 								value="#{confEmpleado.empleadoDTO.mail}"
 								onblur="value=value.toLowerCase()"
-								validatorMessage="E-Mail: Escriba un mail valido. Ejemplo: adarleatomos@cnea.gov.ar">
+								validatorMessage="Email: Escriba un mail valido. Ejemplo: sgadtic@cnea.gov.ar">
 								<f:validateRegex pattern="(.+@.+\.[a-zA-Z]+)?" />
 							</h:inputText>
-							<h:message for="mail" />
+							<p:message for="mail" />
 
 							<h:outputLabel value="Domicilio: " for="domicilio" />
 							<h:inputText id="domicilio" label="Domicilio:" required="true"
 								value="#{confEmpleado.empleadoDTO.domicilio}" />
-							<h:message for="domicilio" />
+							<p:message for="domicilio" />
 
 							<p:outputLabel value="Unidad Organica:"	for="uorganica" />
 							<p:selectOneMenu id="uorganica"  required="true"
@@ -80,13 +80,13 @@
 								<f:selectItem itemLabel="Selecionar una opción" itemValue="" />
 								<f:selectItems value="#{confUnidadOrganica.options}" style="width:80px" />
 							</p:selectOneMenu>
-							<h:message for="uorganica" />
+							<p:message for="uorganica" />
 
 							<h:outputLabel value="Número de Responsable: "
 								for="nroResponsable" />
 							<h:inputText id="nroResponsable" label="Número de Responsable: "
 								value="#{confEmpleado.empleadoDTO.conResPatriminial}" />
-							<h:message for="nroResponsable" />
+							<p:message for="nroResponsable" />
 
 
 
@@ -99,7 +99,7 @@
 						<br />
 						<br />
 
-						<h:commandButton value="Volver a Indice" action="/index.xhtml"
+						<h:commandButton value="Volver al Índice" action="/index.xhtml"
 							immediate="true" />
 						<br />
 
@@ -154,7 +154,7 @@
 
 						<br />
 
-						<h:commandButton value="Volver a Indice" action="/index.xhtml"
+						<h:commandButton value="Volver al Índice" action="/index.xhtml"
 							immediate="true" />
 
 						<br />

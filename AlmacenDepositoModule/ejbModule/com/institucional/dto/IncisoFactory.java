@@ -21,6 +21,8 @@ public class IncisoFactory {
 			result.setInciso(inciso.getInciso());
 			result.setNomInciso(inciso.getNomInciso());
 			result.setNroInciso(inciso.getNroInciso());
+			result.setMovEntrada(0f);
+			result.setMovSalida(0f);
 			
 			
 			for(PPrincipal pprincipal: inciso.getPprincipalId()){
@@ -30,6 +32,8 @@ public class IncisoFactory {
 				pprincipalDTO.setCodPPrincipal(pprincipal.getCodPPrincipal());
 				pprincipalDTO.setNomPPrincipal(pprincipal.getNomPPrincipal());
 				pprincipalDTO.setNroPPrincipal(pprincipal.getNroPPrincipal());
+				pprincipalDTO.setMovEntrada(0f);
+				pprincipalDTO.setMovSalida(0f);
 				
 				for(PParcial pparcial: pprincipal.getPparcialId()){
 					
@@ -38,6 +42,8 @@ public class IncisoFactory {
 					pparcialDTO.setCodPParcial(pparcial.getCodPParcial());
 					pparcialDTO.setNroPParcial(pparcial.getNroPParcial());
 					pparcialDTO.setNomClasificacion(pparcial.getNomClasificacion());	
+					pparcialDTO.setMovEntrada(0f);
+					pparcialDTO.setMovSalida(0f);
 					
 					pprincipalDTO.addDetalle(pparcialDTO);
 					
